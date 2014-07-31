@@ -1,7 +1,7 @@
-LuckyCrates for MineCraft
+Ipsum Gaming Commons
 ====
 
-Providing All Your crates and Rewards
+Providing All you need to create mini games and plugins
 ----
 
 ```
