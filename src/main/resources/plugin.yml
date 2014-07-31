@@ -1,0 +1,5 @@
+name: Ipsum
+main: com.relicum.ipsum.Ipsum
+author: Relicum
+version: ${project.version}
+description: Game API
