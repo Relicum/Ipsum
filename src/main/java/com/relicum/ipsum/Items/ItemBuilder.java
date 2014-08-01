@@ -13,6 +13,9 @@ import org.bukkit.material.MaterialData;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.enchantments.Enchantment.DAMAGE_ALL;
+import static org.bukkit.enchantments.Enchantment.KNOCKBACK;
+
 /**
  * Base ItemBuilder uses standard ItemMeta
  */
@@ -76,6 +79,7 @@ public class ItemBuilder implements GenericItem {
         this.metaType = type;
         this.material = mat;
         this.amount = i;
+
         if (type.equals(MetaType.ITEM_META))
             this.setItemMeta();
 
@@ -193,7 +197,8 @@ public class ItemBuilder implements GenericItem {
         Validate.notNull(ench, "Enchant can not be null");
         Validate.notNull(level, "Enchant level can not be null");
 
-        enchantments.add(new Enchant(ench, level, false));
+
+        enchantments.add(Enchant.builder().enchantment(KNOCKBACK).level(20).build());
         return this;
     }
 
@@ -208,7 +213,7 @@ public class ItemBuilder implements GenericItem {
     @Override
     public ItemBuilder addUnsafeEnchantment(Enchantment ench, int level) {
 
-        enchantments.add(new Enchant(ench, level, true));
+        enchantments.add(Enchant.builder().enchantment(DAMAGE_ALL).level(20).build());
         return this;
     }
 
@@ -236,7 +241,7 @@ public class ItemBuilder implements GenericItem {
         if (enchantments != null) {
             for (Enchant enchant : enchantments) {
 
-                getItemMeta().addEnchant(enchant.getEnchantment(), enchant.getLevel(), true);
+                //getItemMeta().addEnchant(enchant.getEnchantment(), enchant.getLevel(), true);
 
             }
         }
