@@ -17,27 +17,23 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
     /**
      * Instantiates a new Item builder.
      *
-     * @param mat  the {@link org.bukkit.Material} the item is made from.
-     * @param i    the amount of items in the final ItemStack
+     * @param material  the {@link org.bukkit.Material} the item is made from.
+     * @param amount    the amount of items in the final ItemStack
      * @param type
      */
-    public ItemBuilder(Material mat, int i, MetaType type) {
-        this.material = mat;
-        this.metaType = type;
-        this.amount = i;
+    public ItemBuilder(Material material, int amount, MetaType type) {
+        super(material, amount, type);
         setItemMeta();
     }
 
     /**
      * Instantiates a new Item builder.
      *
-     * @param mat  the {@link org.bukkit.Material} the item is made from.
+     * @param material  the {@link org.bukkit.Material} the item is made from.
      * @param type the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
      */
-    public ItemBuilder(Material mat, MetaType type) {
-        this.material = mat;
-        this.metaType = type;
-
+    public ItemBuilder(Material material, MetaType type) {
+        super(material, type);
         setItemMeta();
     }
 
@@ -45,7 +41,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
      * Sets item meta.
      */
     @Override
-    public void setItemMeta() {
+    protected void setItemMeta() {
         meta = Bukkit.getItemFactory().getItemMeta(getMaterial());
     }
 
@@ -54,6 +50,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
      *
      * @return the item stack
      */
+    @Override
     public ItemStack build() {
         System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
         setStack(new ItemStack(getMaterial(), getAmount()));

@@ -4,6 +4,7 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -16,19 +17,18 @@ import org.bukkit.inventory.meta.SkullMeta;
 public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
 
     private SkullMeta meta;
+    private SkullType skullType;
 
     /**
      * Instantiates a new SkullMetaAdapter builder.
      *
-     * @param mat  the {@link org.bukkit.Material} the item is made from.
-     * @param i    the amount of items in the final ItemStack
-     * @param type
+     * @param material the {@link org.bukkit.Material} the item is made from.
+     * @param amount   the amount of items in the final ItemStack
+     * @param type     the type of skull {@link org.bukkit.SkullType}
      */
-    public SkullMetaAdapter(Material mat, int i, MetaType type) {
-        this.material = mat;
-        this.metaType = type;
-        this.amount = i;
-
+    public SkullMetaAdapter(Material material, int amount, SkullType type) {
+        super(material, amount, MetaType.SKULL_ITEM);
+        skullType = type;
         this.setItemMeta();
 
 
@@ -37,29 +37,30 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
     /**
      * Instantiates a new SkullMetaAdapter builder.
      *
-     * @param mat  the {@link org.bukkit.Material} the item is made from.
-     * @param type the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
+     * @param material the {@link org.bukkit.Material} the item is made from.
+     * @param type     the type of skull {@link org.bukkit.SkullType}
      */
-    public SkullMetaAdapter(Material mat, MetaType type) {
-
-        this.material = mat;
-        this.metaType = type;
-
+    public SkullMetaAdapter(Material material, SkullType type) {
+        super(material, MetaType.SKULL_ITEM);
+        skullType = type;
         this.setItemMeta();
-
-
     }
 
 
     /**
-     * Sets item meta.
+     * Sets item meta to {@link org.bukkit.inventory.meta.SkullMeta}
      */
     @Override
-    public void setItemMeta() {
+    protected void setItemMeta() {
         meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.SKULL_ITEM);
     }
 
 
+    /**
+     * Gets  skull item meta.
+     *
+     * @return the item meta as {@link org.bukkit.inventory.meta.SkullMeta}
+     */
     public SkullMeta getItemMeta() {
 
         return this.meta;
@@ -67,9 +68,9 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
 
 
     /**
-     * Gets owner.
+     * Gets skull owner.
      *
-     * @return the owner
+     * @return the owner of the skull
      */
     public String getOwner() {
         return meta.getOwner();
@@ -99,14 +100,24 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
         return getItemMeta().hasOwner();
     }
 
+    /**
+     * Build Skull item stack.
+     *
+     * @return the {@link org.bukkit.inventory.ItemStack}
+     */
     @Override
     public ItemStack build() {
         System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
-        setStack(new ItemStack(getMaterial(), 1, (byte) 3));
 
-        // if((Short)getDurability() != null){
-        //      getStack().setDurability(getDurability());
-        // }
+        setStack(new ItemStack(getMaterial(), getAmount(), (byte) skullType.ordinal()));
+
+
+        //  if ((Short) getDurability() != null) {
+        //
+        //      if (getDurability() != 0) {
+        //          getStack().setDurability(getDurability());
+        //      }
+        //  }
 
         if (getDisplayName() != null)
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getDisplayName()));
@@ -129,4 +140,12 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
     }
 
 
+    /**
+     * Gets skullType.
+     *
+     * @return Value of skullType.
+     */
+    public SkullType getSkullType() {
+        return skullType;
+    }
 }

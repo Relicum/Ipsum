@@ -5,9 +5,18 @@ Providing All you need to create mini games and plugins
 ----
 
 ```
-THIS PLUGIN IS COMMERCIAL, AS ALLOWED BY THE GPL3 LICENSE GRANT BY THE BUKKIT API.
-I WILL OF COURSE USE GPL3 TO LICENCE MY PLUGIN TO MEET THE TERMS OF THE BUKKIT API GPL3
+Currently working on Item generation.
 ```
+
+Example of building a named Player Skull. Easy !!
+---
+
+```java
+    ItemStack stack = SimpleItemFactory.getSkullBuilder(1, SkullType.PLAYER)
+                    .setOwner("Relicum")
+                    .build();
+```
+
 
 Designed and Built by Relicum
 -----

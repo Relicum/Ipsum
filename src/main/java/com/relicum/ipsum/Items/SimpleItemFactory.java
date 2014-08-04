@@ -1,6 +1,7 @@
 package com.relicum.ipsum.Items;
 
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 
 /**
  * SimpleItemFactory Single entry point to build any item or collections of items.
@@ -18,10 +19,10 @@ public class SimpleItemFactory {
             return new ItemBuilder(material, amount, type);
     }
 
-    public static SkullMetaAdapter getSkullBuilder(Material material, int amount, MetaType type) {
+    public static SkullMetaAdapter getSkullBuilder(int amount, SkullType type) {
 
 
-        return new SkullMetaAdapter(material, 1, type);
+        return new SkullMetaAdapter(Material.SKULL_ITEM, amount, type);
 
     }
 }

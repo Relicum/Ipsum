@@ -24,7 +24,7 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
 
     protected int amount = 1;
 
-    protected short durability = -999;
+    protected short durability;
 
     protected String displayName;
 
@@ -37,42 +37,41 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
     protected MetaType metaType;
 
 
-
-/*
-    *//**
+    /**
      * Instantiates a new Item builder.
      *
      * @param mat  the {@link org.bukkit.Material} the item is made from.
      * @param type the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
-     *//*
+     */
     public AbstractItemBuilder(Material mat, MetaType type) {
         Validate.notNull(mat, "Item material can not be null");
         this.material = mat;
-
         this.metaType = type;
     }
 
-    *//**
-     * Instantiates a new Item builder.
+
+    /**
+     * Instantiates a new Item Builder
      *
-     * @param mat the {@link org.bukkit.Material} the item is made from.
-     * @param i   the amount of items in the final ItemStack
-     *//*
-    public AbstractItemBuilder(Material mat, int i, MetaType type) {
+     * @param mat the {@link org.bukkit.Material} of the Item
+     * @param amount the amount of items in the stack
+     * @param type the Meta type of the item {@link com.relicum.ipsum.Items.MetaType} provides the options.
+     */
+    public AbstractItemBuilder(Material mat, int amount, MetaType type) {
         Validate.notNull(mat, "Item material can not be null");
-        Validate.notNull(i, "Item amount can not be null");
+        Validate.notNull(amount, "Item amount can not be null");
 
         this.metaType = type;
         this.material = mat;
-        this.amount = i;
+        this.amount = amount;
 
-    }*/
+    }
 
 
     /**
-     * Sets item meta.
+     * Sets item meta that this item will use
      */
-    public abstract void setItemMeta();
+    protected abstract void setItemMeta();
 
     /**
      * Build item stack.

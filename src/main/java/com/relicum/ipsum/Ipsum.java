@@ -5,6 +5,7 @@ import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,8 +13,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import static org.bukkit.Material.SKULL_ITEM;
 
 
 /**
@@ -57,16 +56,15 @@ public class Ipsum extends JavaPlugin implements Listener {
         System.out.println(item.toString());
 
         try {
-            this.item2 = SimpleItemFactory.getSkullBuilder(SKULL_ITEM, 1, MetaType.SKULL_ITEM)
+            this.item2 = SimpleItemFactory.getSkullBuilder(1, SkullType.PLAYER)
                     .setOwner("Relicum")
                     .addEnchantment(Enchant.builder().enchantment(Enchantment.DURABILITY).level(3).force(false).build())
                     .build();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         System.out.println(item2.toString());
-
-
     }
 
     @EventHandler
