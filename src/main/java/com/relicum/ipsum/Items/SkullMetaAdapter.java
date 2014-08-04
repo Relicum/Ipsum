@@ -1,19 +1,21 @@
 package com.relicum.ipsum.Items;
 
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
- * SkullMetaAdapter is used to add in the options in SkullMeta directly into the ItemBuilder.
+ * SkullMetaAdapter is used to add in the options in SkullMeta directly into the AbstractItemBuilder.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class SkullMetaAdapter extends ItemBuilder implements Builder {
+public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
 
-    public SkullMeta itemMeta;
+    private SkullMeta meta;
 
     /**
      * Instantiates a new SkullMetaAdapter builder.
@@ -23,8 +25,12 @@ public class SkullMetaAdapter extends ItemBuilder implements Builder {
      * @param type
      */
     public SkullMetaAdapter(Material mat, int i, MetaType type) {
-        super(mat, i, type);
-        setItemMeta();
+        this.material = mat;
+        this.metaType = type;
+        this.amount = i;
+
+        this.setItemMeta();
+
 
     }
 
@@ -35,23 +41,52 @@ public class SkullMetaAdapter extends ItemBuilder implements Builder {
      * @param type the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
      */
     public SkullMetaAdapter(Material mat, MetaType type) {
-        super(mat, type);
+
+        this.material = mat;
+        this.metaType = type;
+
         this.setItemMeta();
+
+
     }
 
+
+    /**
+     * Sets item meta.
+     */
     @Override
     public void setItemMeta() {
-        this.itemMeta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.SKULL_ITEM);
+        meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.SKULL_ITEM);
     }
 
-    @Override
+
     public SkullMeta getItemMeta() {
 
-        return this.itemMeta;
+        return this.meta;
     }
 
+
+    /**
+     * Gets owner.
+     *
+     * @return the owner
+     */
     public String getOwner() {
-        return itemMeta.getOwner();
+        return meta.getOwner();
+    }
+
+    /**
+     * Sets the owner of the skull.
+     *
+     * @param owner the owner
+     * @return the instance of itself so methods can be chained
+     * @throws Exception if there was a problem setting the skull owner
+     */
+    public SkullMetaAdapter setOwner(String owner) throws Exception {
+        Validate.notNull(owner, "Owner can not be null when setting the owner");
+        if (!meta.setOwner(owner))
+            throw new Exception("Error while trying to set Skull items owner");
+        return this;
     }
 
     /**
@@ -64,18 +99,33 @@ public class SkullMetaAdapter extends ItemBuilder implements Builder {
         return getItemMeta().hasOwner();
     }
 
-    /**
-     * Sets the owner of the skull.
-     *
-     * @param owner the owner
-     * @return the instance of itself so methods can be chained
-     * @throws Exception if there was a problem setting the skull owner
-     */
-    public ItemBuilder setOwner(String owner) throws Exception {
-        Validate.notNull(owner, "Owner can not be null when setting the owner");
-        if (!getItemMeta().setOwner(owner))
-            throw new Exception("Error while trying to set Skull items owner");
-        return this;
+    @Override
+    public ItemStack build() {
+        System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
+        setStack(new ItemStack(getMaterial(), 1, (byte) 3));
+
+        // if((Short)getDurability() != null){
+        //      getStack().setDurability(getDurability());
+        // }
+
+        if (getDisplayName() != null)
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getDisplayName()));
+
+        if (getLore() != null)
+            meta.setLore(getLore());
+
+        if (getEnchantments() != null) {
+            for (Enchant enchant : getEnchantments()) {
+
+                meta.addEnchant(enchant.enchantment(), enchant.level(), enchant.force());
+
+            }
+        }
+
+
+        getStack().setItemMeta(meta);
+
+        return getStack();
     }
 
 

@@ -13,24 +13,15 @@ import org.bukkit.Material;
 public class SimpleItemFactory {
 
 
-    public ItemBuilder getItemBuilder(Material material, int amount, MetaType type) {
-
-
-        if (type.equals(MetaType.ITEM_META)) {
+    public static ItemBuilder getItemBuilder(Material material, int amount, MetaType type) {
 
             return new ItemBuilder(material, amount, type);
+    }
+
+    public static SkullMetaAdapter getSkullBuilder(Material material, int amount, MetaType type) {
 
 
-        } else {
-
-            if (type.equals(MetaType.SKULL_ITEM)) {
-
-                return (SkullMetaAdapter) new SkullMetaAdapter(material, amount, type);
-            }
-
-        }
-
-        return new ItemBuilder(material, type);
+        return new SkullMetaAdapter(material, 1, type);
 
     }
 }

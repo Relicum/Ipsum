@@ -1,8 +1,6 @@
 package com.relicum.ipsum.Items;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.List;
 /**
  * The interface that has the generic methods for setting properties that most items use.
  */
-public interface GenericItem extends Builder {
+public interface GenericItem {
 
 
     /**
@@ -19,7 +17,7 @@ public interface GenericItem extends Builder {
      * @param material the material
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setMaterial(Material material);
+    public GenericItem setMaterial(Material material);
 
     /**
      * Sets amount. This is the number of Items the {@link org.bukkit.inventory.ItemStack} contains.
@@ -27,7 +25,7 @@ public interface GenericItem extends Builder {
      * @param i the number of items
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setAmount(int i);
+    public GenericItem setAmount(int i);
 
     /**
      * Sets durability and also data value for things like Wool.
@@ -35,7 +33,7 @@ public interface GenericItem extends Builder {
      * @param durability or data value.
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setDurability(Short durability);
+    public GenericItem setDurability(Short durability);
 
 
     /**
@@ -44,7 +42,7 @@ public interface GenericItem extends Builder {
      * @param name the name
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setDisplayName(String name);
+    public GenericItem setDisplayName(String name);
 
     /**
      * Sets item lores as a list of string.
@@ -60,7 +58,7 @@ public interface GenericItem extends Builder {
      * @param line the line
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setLore(String line);
+    public GenericItem setLore(String line);
 
     /**
      * Sets material data.
@@ -68,33 +66,25 @@ public interface GenericItem extends Builder {
      * @param materialData the material data
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem setMaterialData(MaterialData materialData);
+    public GenericItem setMaterialData(MaterialData materialData);
+
 
     /**
      * Add enchantment.
      *
-     * @param ench  the ench
-     * @param level the level
+     * @param enchant the enchant
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem addEnchantment(Enchantment ench, int level);
+    public GenericItem addEnchantment(Enchant enchant);
 
 
     /**
      * Add unsafe enchantment.
      *
-     * @param ench  the ench
-     * @param level the level
+     * @param enchant the enchant
      * @return the instance of itself so methods can be chained
      */
-    public abstract GenericItem addUnsafeEnchantment(Enchantment ench, int level);
+    public GenericItem addUnsafeEnchantment(Enchant enchant);
 
-
-    /**
-     * Build item stack.
-     *
-     * @return the item stack
-     */
-    public abstract ItemStack build();
 
 }

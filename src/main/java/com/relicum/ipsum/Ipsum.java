@@ -1,5 +1,6 @@
 package com.relicum.ipsum;
 
+import com.relicum.ipsum.Items.Enchant;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 import org.bukkit.ChatColor;
@@ -12,6 +13,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static org.bukkit.Material.SKULL_ITEM;
+
 
 /**
  * The type Ipsum.
@@ -21,7 +24,18 @@ public class Ipsum extends JavaPlugin implements Listener {
 
     private static Ipsum instance;
     private ItemStack item;
+    private ItemStack item2;
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
+    public static Ipsum getInstance() {
+
+        return instance;
+
+    }
 
     /**
      * On enable.
@@ -33,26 +47,34 @@ public class Ipsum extends JavaPlugin implements Listener {
         instance = this;
         getServer().getPluginManager().registerEvents(this, this);
 
-        this.item = new SimpleItemFactory().getItemBuilder(Material.BAKED_POTATO, 1, MetaType.ITEM_META)
-                .setDisplayName("&6Chris Lutte")
+        this.item = SimpleItemFactory.getItemBuilder(Material.BAKED_POTATO, 1, MetaType.ITEM_META)
                 .setLore("&aWe have one line of lore")
-                .addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 20)
-                .addUnsafeEnchantment(Enchantment.KNOCKBACK, 20)
+                .setDisplayName("&6Chris Lutte")
+                .addUnsafeEnchantment(Enchant.builder().enchantment(Enchantment.DAMAGE_ALL).level(20).force(true).build())
+                .addUnsafeEnchantment(Enchant.builder().enchantment(Enchantment.KNOCKBACK).level(20).force(true).build())
                 .build();
 
         System.out.println(item.toString());
+
+        try {
+            this.item2 = SimpleItemFactory.getSkullBuilder(SKULL_ITEM, 1, MetaType.SKULL_ITEM)
+                    .setOwner("Relicum")
+                    .addEnchantment(Enchant.builder().enchantment(Enchantment.DURABILITY).level(3).force(false).build())
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(item2.toString());
 
 
     }
 
     @EventHandler
     public void pj(PlayerJoinEvent e) {
-        if (!e.getPlayer().getInventory().containsAtLeast(this.item, 1)) {
-            e.getPlayer().getInventory().setItem(0, this.item.clone());
-        }
 
-        e.getPlayer().setCanPickupItems(false);
-        e.getPlayer().saveData();
+        e.getPlayer().getInventory().setItem(0, this.item.clone());
+        e.getPlayer().getInventory().setItem(1, this.item2.clone());
+
 
     }
 
@@ -70,17 +92,6 @@ public class Ipsum extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
 
-
-    }
-
-    /**
-     * Gets instance.
-     *
-     * @return the instance
-     */
-    public static Ipsum getInstance() {
-
-        return instance;
 
     }
 }

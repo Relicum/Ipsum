@@ -1,6 +1,6 @@
 package com.relicum.ipsum.Items;
 
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
@@ -34,7 +34,7 @@ public abstract class FallingBase implements FallingBuilder {
      */
     @Override
     public FallingBuilder setFallingMaterial(Material material) {
-        Validate.notNull(material, "The material for the faling block can not be null");
+        Validate.notNull(material, "The material for the falling block can not be null");
         this.fallingMaterial = material;
         return this;
     }

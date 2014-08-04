@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
  * @author Relicum
  * @version 0.0.1
  */
-public interface Builder {
+public interface OBuilder {
 
     /**
      * Build item stack.
