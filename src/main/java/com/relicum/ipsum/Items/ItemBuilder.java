@@ -55,6 +55,9 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
         System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
         setStack(new ItemStack(getMaterial(), getAmount()));
 
+        if ((Short) getDurability() != null) {
+            getStack().setDurability(getDurability());
+        }
 
         if (getDisplayName() != null)
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getDisplayName()));

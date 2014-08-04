@@ -4,6 +4,7 @@ import com.relicum.ipsum.Items.Enchant;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.enchantments.Enchantment;
@@ -24,6 +25,7 @@ public class Ipsum extends JavaPlugin implements Listener {
     private static Ipsum instance;
     private ItemStack item;
     private ItemStack item2;
+    private ItemStack item3;
 
     /**
      * Gets instance.
@@ -65,6 +67,14 @@ public class Ipsum extends JavaPlugin implements Listener {
         }
 
         System.out.println(item2.toString());
+
+        this.item3 = SimpleItemFactory.getColorArmorBuilder(Material.LEATHER_CHESTPLATE, 1)
+                .setColor(Color.BLUE)
+                .setDisplayName("&6Rels Blue Chest")
+                .setLore("&aRelicums Chest Plate")
+                .addUnsafeEnchantment(Enchant.builder().enchantment(Enchantment.PROTECTION_ENVIRONMENTAL).level(3).force(true).build())
+                .build();
+        System.out.println(item3.toString());
     }
 
     @EventHandler
@@ -72,6 +82,8 @@ public class Ipsum extends JavaPlugin implements Listener {
 
         e.getPlayer().getInventory().setItem(0, this.item.clone());
         e.getPlayer().getInventory().setItem(1, this.item2.clone());
+        e.getPlayer().getInventory().setItem(2, this.item3.clone());
+
 
 
     }

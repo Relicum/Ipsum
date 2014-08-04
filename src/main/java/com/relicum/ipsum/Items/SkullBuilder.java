@@ -9,24 +9,25 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
- * SkullMetaAdapter is used to add in the options in SkullMeta directly into the AbstractItemBuilder.
+ * SkullBuilder is used to build all types of Skulls.
+ * This should be called using the {@link com.relicum.ipsum.Items.SimpleItemFactory#getSkullBuilder}
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
+public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
 
     private SkullMeta meta;
     private SkullType skullType;
 
     /**
-     * Instantiates a new SkullMetaAdapter builder.
+     * Instantiates a new SkullBuilder
      *
      * @param material the {@link org.bukkit.Material} the item is made from.
      * @param amount   the amount of items in the final ItemStack
      * @param type     the type of skull {@link org.bukkit.SkullType}
      */
-    public SkullMetaAdapter(Material material, int amount, SkullType type) {
+    public SkullBuilder(Material material, int amount, SkullType type) {
         super(material, amount, MetaType.SKULL_ITEM);
         skullType = type;
         this.setItemMeta();
@@ -35,12 +36,12 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
     }
 
     /**
-     * Instantiates a new SkullMetaAdapter builder.
+     * Instantiates a new SkullBuilder
      *
      * @param material the {@link org.bukkit.Material} the item is made from.
      * @param type     the type of skull {@link org.bukkit.SkullType}
      */
-    public SkullMetaAdapter(Material material, SkullType type) {
+    public SkullBuilder(Material material, SkullType type) {
         super(material, MetaType.SKULL_ITEM);
         skullType = type;
         this.setItemMeta();
@@ -83,7 +84,7 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
      * @return the instance of itself so methods can be chained
      * @throws Exception if there was a problem setting the skull owner
      */
-    public SkullMetaAdapter setOwner(String owner) throws Exception {
+    public SkullBuilder setOwner(String owner) throws Exception {
         Validate.notNull(owner, "Owner can not be null when setting the owner");
         if (!meta.setOwner(owner))
             throw new Exception("Error while trying to set Skull items owner");
@@ -111,14 +112,6 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
 
         setStack(new ItemStack(getMaterial(), getAmount(), (byte) skullType.ordinal()));
 
-
-        //  if ((Short) getDurability() != null) {
-        //
-        //      if (getDurability() != 0) {
-        //          getStack().setDurability(getDurability());
-        //      }
-        //  }
-
         if (getDisplayName() != null)
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getDisplayName()));
 
@@ -132,7 +125,6 @@ public class SkullMetaAdapter extends AbstractItemBuilder<SkullMetaAdapter> {
 
             }
         }
-
 
         getStack().setItemMeta(meta);
 

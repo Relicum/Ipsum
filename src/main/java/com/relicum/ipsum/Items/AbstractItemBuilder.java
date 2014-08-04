@@ -2,6 +2,7 @@ package com.relicum.ipsum.Items;
 
 import lombok.ToString;
 import org.apache.commons.lang.Validate;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -10,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name: AbstractItemBuilder.java Created: 02 August 2014
+ * AbstractItemBuilder implements all the methods from {@link com.relicum.ipsum.Items.GenericItem} .
+ * <p>This class should not be initiated or extended unless creating new item builders.
+ * <p>See {@link com.relicum.ipsum.Items.SimpleItemFactory} for the item builders that you can use.
  *
  * @author Relicum
  * @version 0.0.1
@@ -154,7 +157,7 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
     @Override
     public T setLore(String line) {
         Validate.notNull(line, "Item Lores line can not be null");
-        this.lore.add(line);
+        this.lore.add(ChatColor.translateAlternateColorCodes('&', line));
         return (T) this;
     }
 

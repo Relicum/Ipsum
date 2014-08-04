@@ -17,6 +17,18 @@ Example of building a named Player Skull. Easy !!
                     .build();
 ```
 
+Example of building a blue leather chest plate. Easy !!
+---
+Includes custom display name, custom lore and adding an Enchantment.
+
+```java
+    ItemStack stack = SimpleItemFactory.getColorArmorBuilder(Material.LEATHER_CHESTPLATE,1)
+                .setColor(Color.BLUE)
+                .setDisplayName("&6Rels Blue Chest")
+                .setLore("&aRelicums Chest Plate")
+                .addUnsafeEnchantment(Enchant.builder().enchantment(Enchantment.PROTECTION_ENVIRONMENTAL).level(3).force(true).build())
+                .build();
+```
 
 Designed and Built by Relicum
 -----
