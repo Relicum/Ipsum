@@ -1,6 +1,8 @@
 package com.relicum.ipsum;
 
+import com.relicum.ipsum.Configuration.ConfigManager;
 import com.relicum.ipsum.Items.SimpleItemFactory;
+import com.relicum.ipsum.Utils.WorldGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -10,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Ipsum extends JavaPlugin {
 
     private SimpleItemFactory simpleItemFactory;
+    private ConfigManager configManager;
 
     private static Ipsum instance;
 
@@ -44,6 +47,24 @@ public class Ipsum extends JavaPlugin {
 
     }
 
+    /**
+     * Get config manager.
+     *
+     * @return the {@link com.relicum.ipsum.Configuration.ConfigManager}
+     */
+    public ConfigManager getConfigManager() {
+        if (configManager == null) {
+            configManager = new ConfigManager(this);
+        }
+
+        return configManager;
+    }
+
+    /**
+     * Gets simple item factory.
+     *
+     * @return the {@link com.relicum.ipsum.Items.SimpleItemFactory}
+     */
     public SimpleItemFactory getSimpleItemFactory() {
         if (simpleItemFactory == null) {
             simpleItemFactory = new SimpleItemFactory(this);
@@ -51,5 +72,11 @@ public class Ipsum extends JavaPlugin {
 
         return simpleItemFactory;
 
+    }
+
+    @Override
+    public WorldGenerator getDefaultWorldGenerator(String worldName, String id) {
+
+        return new WorldGenerator();
     }
 }

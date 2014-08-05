@@ -5,7 +5,17 @@ Providing All you need to create mini games and plugins
 ----
 
 ```
-Currently working on Item generation.
+Currently working on Commands and World generation.
+```
+
+Example of creating new void world. Easy !!
+---
+
+```java
+    WorldMaker worldMaker = new WorldMaker(this);
+    WorldCreator worldCreator = worldMaker.getWorldCreator("Relicum");
+    worldCreator.generator("LuckyCrates");
+    World world = worldCreator.createWorld();
 ```
 
 Example of building a named Player Skull. Easy !!
