@@ -2,6 +2,7 @@ package com.relicum.ipsum.Items;
 
 import org.bukkit.Material;
 import org.bukkit.SkullType;
+import org.bukkit.plugin.Plugin;
 
 /**
  * SimpleItemFactory Single entry point to build any item or collections of items.
@@ -13,9 +14,13 @@ import org.bukkit.SkullType;
  */
 public class SimpleItemFactory {
 
-    private SimpleItemFactory() {
+    private Plugin plugin;
 
+    public SimpleItemFactory(Plugin plugin) {
+
+        this.plugin = plugin;
     }
+
 
     /**
      * Gets item builder.
@@ -25,9 +30,9 @@ public class SimpleItemFactory {
      * @param type     the {@link com.relicum.ipsum.Items.MetaType} of the item
      * @return the {@link com.relicum.ipsum.Items.ItemBuilder} used to build standard items.
      */
-    public static ItemBuilder getItemBuilder(Material material, int amount, MetaType type) {
+    public ItemBuilder getItemBuilder(Material material, int amount, MetaType type) {
 
-            return new ItemBuilder(material, amount, type);
+        return new ItemBuilder(material, amount, type);
     }
 
     /**
@@ -37,7 +42,7 @@ public class SimpleItemFactory {
      * @param type   the {@link org.bukkit.SkullType} used to determine the skull to build.
      * @return the {@link com.relicum.ipsum.Items.SkullBuilder} to build the skull.
      */
-    public static SkullBuilder getSkullBuilder(int amount, SkullType type) {
+    public SkullBuilder getSkullBuilder(int amount, SkullType type) {
 
 
         return new SkullBuilder(Material.SKULL_ITEM, amount, type);
@@ -51,7 +56,7 @@ public class SimpleItemFactory {
      * @param amount   the amount of items in the stack
      * @return the {@link com.relicum.ipsum.Items.ColorArmorBuilder} to build colored armor.
      */
-    public static ColorArmorBuilder getColorArmorBuilder(Material material, int amount) {
+    public ColorArmorBuilder getColorArmorBuilder(Material material, int amount) {
 
         return new ColorArmorBuilder(material, amount, MetaType.COLORED_ARMOR);
     }
