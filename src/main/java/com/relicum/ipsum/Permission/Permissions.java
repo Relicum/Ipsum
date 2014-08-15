@@ -18,33 +18,23 @@
 
 package com.relicum.ipsum.Permission;
 
-import java.util.List;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
 /**
- * The interface Permissible.
+ * Name: Permissions.java Created: 05 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
+public class Permissions extends Permission {
+    public Permissions(String[] name, String description, PermissionDefault defaultValue) {
+        super(name[0], description, defaultValue);
+        this.addParent(name[1], true);
+    }
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
-
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
+    public Permissions(String name, String description, PermissionDefault defaultValue, String parent) {
+        super(name, description, defaultValue);
+        this.addParent(parent, true);
+    }
 }

@@ -1,3 +1,21 @@
+/*
+ * Ipsum is a rapid development API for Minecraft, developer by Relicum
+ * Copyright (C) 2014.  Chris Lutte
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.relicum.ipsum.Commands;
 
 import org.bukkit.Bukkit;
@@ -11,6 +29,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Name: SimpleCommand.java Created: 05 August 2014
@@ -22,15 +41,13 @@ import java.util.List;
 public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginIdentifiableCommand {
 
     private Plugin plugin;
-    private String name;
+    //private String name;
     private List<String> aliases = new ArrayList<>();
 
-    public SimpleCommand(String name, List<String> aliasess, Plugin plugin) {
+    public SimpleCommand(List<String> aliasess, Plugin plugin) {
         this.plugin = plugin;
-        this.name = name;
-        for (String aliase : aliasess) {
-            this.aliases.add(aliase);
-        }
+
+        this.aliases.addAll(aliasess.stream().collect(Collectors.toList()));
 
         if (!getClass().isAnnotationPresent(CmdInfo.class)) {
             try {
@@ -41,7 +58,7 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
             }
 
         }
-        registerCommand(name);
+        //registerCommand(getCmdName());
 
     }
 
@@ -58,15 +75,15 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         boolean success = false;
 
-        if (!plugin.isEnabled()) {
+        if (!getPlugin().isEnabled()) {
             try {
-                throw new CommandException("Unhandled exception while executing command " + command + "in plugin " + plugin.getDescription().getFullName() + ": plugin is not enabled!");
+                throw new CommandException("Unhandled exception while executing command " + command + "in plugin " + getPlugin().getDescription().getFullName() + ": plugin is not enabled!");
             } catch (Throwable ex) {
                 ex.printStackTrace();
             }
 
         }
-        if (!sender.hasPermission(getPermission())) {
+        if (!sender.hasPermission(getPermission()) && !sender.isOp()) {
             sender.sendMessage(getPermissionMessage());
             return true;
         }
@@ -84,7 +101,7 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         try {
             success = onCommand(sender, command, args);
         } catch (Throwable ex) {
-            throw new CommandException("Unhandled exception executing command '" + command.getName() + "' in plugin " + plugin.getDescription().getFullName(), ex);
+            throw new CommandException("Unhandled exception executing command '" + command.getName() + "' in plugin " + getPlugin().getDescription().getFullName(), ex);
         }
 
         if ((!success) && (getUsage().length() > 0)) {
@@ -100,6 +117,12 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
 
     public abstract boolean onCommand(CommandSender sender, Command command, String[] args);
 
+    /**
+     * Gets parent permission just get this to return the parent permission for the command
+     *
+     * @return the parent permission
+     */
+    public abstract String getParentPermission();
 
     /**
      * Requests a list of possible completions for a command argument.
@@ -185,15 +208,6 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         return getCommandInfo().subCommand();
     }
 
-    /**
-     * Gets plugin.
-     *
-     * @return the plugin
-     */
-    @Override
-    public Plugin getPlugin() {
-        return plugin;
-    }
 
     /**
      * Gets permission message.
@@ -222,7 +236,7 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
      */
     @Override
     public String getCmdName() {
-        return this.name;
+        return getCommandInfo().name();
     }
 
     /**
@@ -269,17 +283,16 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
      * Returns an instance of Command object setup For the command name you give
      * it.
      *
-     * @param name String
      * @return PluginCommand
      */
-    public PluginCommand getCommand(String name) {
+    public PluginCommand getCommand() {
 
         PluginCommand command = null;
         try {
             Constructor c = PluginCommand.class.getDeclaredConstructor(new Class[]{String.class, Plugin.class});
             c.setAccessible(true);
 
-            command = (PluginCommand) c.newInstance(name, plugin);
+            command = (PluginCommand) c.newInstance(getCmdName().toLowerCase(), plugin);
             //command = (PluginCommand) c.newInstance(new Object[]{name , plugin});
         } catch (SecurityException | IllegalArgumentException | IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
@@ -288,10 +301,13 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         return command;
     }
 
-    public boolean registerCommand(String name) {
+
+    public boolean registerCommand() {
+
+        //   Ipsum.getInstance().getPermissionManager().registerPermission(this.getPermission(), this.getDescription(), getParentPermission(), PermissionDefault.OP);
 
         CommandMap cmp = getCommandMap();
-        PluginCommand cd = getCommand(name.toLowerCase());
+        PluginCommand cd = getCommand();
         cd.setPermissionMessage(this.getPermissionMessage());
 
         cd.setDescription(this.getDescription());
@@ -301,7 +317,6 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         cd.setTabCompleter(this);
         cd.setLabel(this.getLabel());
         cd.setPermission(this.getPermission());
-
         if (cmp.register("", cd)) {
             System.out.println("Command: /" + this.getLabel() + " has successfully been registered");
 

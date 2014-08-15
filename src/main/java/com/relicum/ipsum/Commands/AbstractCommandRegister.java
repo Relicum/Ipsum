@@ -1,0 +1,73 @@
+/*
+ * Ipsum is a rapid development API for Minecraft, developer by Relicum
+ * Copyright (C) 2014.  Chris Lutte
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.relicum.ipsum.Commands;
+
+import com.relicum.ipsum.Permission.PermissionManager;
+import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Name: AbstractCommandRegister.java Created: 05 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
+ */
+public abstract class AbstractCommandRegister<T extends JavaPlugin> {
+
+    private Map<String, SimpleCommand> commandMap = new HashMap<>();
+
+    private T plugin;
+
+    public AbstractCommandRegister(T plug) {
+
+        this.plugin = plug;
+
+
+    }
+
+    public T getPlugin() {
+        return plugin;
+    }
+
+    public abstract PermissionManager permissionManager();
+
+    public void registerCommand(SimpleCommand command) {
+
+        if (permissionManager().registerPermission(command.getPermission(), command.getDescription(), command.getParentPermission(), PermissionDefault.OP)) {
+            System.out.println("Successfully created new permission " + command.getPermission() + " with parent permission " + command.getParentPermission());
+        } else {
+            System.out.println("Error creating new Permission");
+        }
+
+        command.registerCommand();
+
+
+        commandMap.put(command.getCmdName(), command);
+
+    }
+
+    public void clearAllCommands() {
+
+        this.commandMap.clear();
+    }
+
+}

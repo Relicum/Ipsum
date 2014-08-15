@@ -16,35 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
-
-import java.util.List;
-
 /**
- * The interface Permissible.
+ * Stores sub packages of groups of pre implemented commands what relate to each other.
+ * <p>This is intended to allow Modules to be created in Ipsum what has a group of pre implemented commands
+ * for example World Management will soon be its own module. If you need world management in your plugin you just register to
+ * use the World Management module which comes with a group of ready to use commands eg a "group" of commands.
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
-
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
-}
+package com.relicum.ipsum.Commands.Group;

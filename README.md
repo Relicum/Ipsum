@@ -5,6 +5,11 @@ Providing All you need to create mini games and plugins
 ----
 
 ```
+Compiled in Java 1.8 to make use of all the new features.
+This means it will only work if you compile any plugins made using Ipsum with Java 1.8
+```
+
+```
 Currently working on Commands and World generation.
 ```
 

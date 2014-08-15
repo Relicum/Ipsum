@@ -16,35 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
+package com.relicum.ipsum.Configuration;
 
-import java.util.List;
+import lombok.*;
+import net.cubespace.Yamler.Config.Config;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 /**
- * The interface Permissible.
+ * Name: Loc.java Created: 06 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class Loc extends Config {
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
+    private int X;
+    private int Y;
+    private int Z;
+    private float yaw;
+    private float pitch;
+    private String world;
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
+    @Override
+    public String toString() {
 
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
+        return world + "," + X + "," + Y + "," + Z + "," + yaw + "," + pitch;
+    }
+
+    public Location getLocation() {
+        return new Location(Bukkit.getWorld(world), X, Y, Z, yaw, pitch);
+    }
 }

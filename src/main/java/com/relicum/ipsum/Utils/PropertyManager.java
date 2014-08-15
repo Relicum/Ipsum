@@ -16,35 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
+package com.relicum.ipsum.Utils;
 
-import java.util.List;
+import java.util.Properties;
 
 /**
- * The interface Permissible.
+ * Name: PropertyManager.java Created: 09 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
+public class PropertyManager {
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
+    private Properties properties;
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
+    public PropertyManager() {
 
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
+        properties = new Properties();
+
+    }
 }

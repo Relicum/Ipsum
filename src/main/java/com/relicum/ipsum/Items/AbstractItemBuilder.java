@@ -1,3 +1,21 @@
+/*
+ * Ipsum is a rapid development API for Minecraft, developer by Relicum
+ * Copyright (C) 2014.  Chris Lutte
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.relicum.ipsum.Items;
 
 import lombok.ToString;
@@ -50,15 +68,16 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
         Validate.notNull(mat, "Item material can not be null");
         this.material = mat;
         this.metaType = type;
+
     }
 
 
     /**
      * Instantiates a new Item Builder
      *
-     * @param mat the {@link org.bukkit.Material} of the Item
+     * @param mat    the {@link org.bukkit.Material} of the Item
      * @param amount the amount of items in the stack
-     * @param type the Meta type of the item {@link com.relicum.ipsum.Items.MetaType} provides the options.
+     * @param type   the Meta type of the item {@link com.relicum.ipsum.Items.MetaType} provides the options.
      */
     public AbstractItemBuilder(Material mat, int amount, MetaType type) {
         Validate.notNull(mat, "Item material can not be null");

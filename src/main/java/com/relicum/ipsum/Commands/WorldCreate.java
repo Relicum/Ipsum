@@ -18,73 +18,74 @@
 
 package com.relicum.ipsum.Commands;
 
+import com.relicum.ipsum.Configuration.Worlds;
+import com.relicum.ipsum.Ipsum;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Random;
 
 /**
- * WorldTP is a simple command to TP from world to world.
- * <p><strong>tp</strong> can also be used as an aliases. You do not specify the location in the world it will
- * Automatically TP you to the worlds default spawn.
- * <p>At a later data I will add in options to specify where in the world to TP to.
- * Using the tab key will scroll through the avaiable worlds you can TP to.
+ * Name: WorldCreate.java Created: 05 August 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-@CmdInfo(name = "worldtp", description = "Teleport to different worlds",
-        usage = "/<command> <world>", label = "worldtp", permission = "worldtp.use", minArgs = 1, maxArgs = 1, playerOnly = true, subCommand = false)
-public class WorldTP extends SimpleCommand {
+@CmdInfo(name = "worldcreate", description = "Used to create new worlds", usage = "/<command> <name>", label = "WorldCreate", permission = "worldcreate.use", minArgs = 1, maxArgs = 1, playerOnly = true, subCommand = false)
+public class WorldCreate extends SimpleCommand {
 
-    private List<String> WORLDS = new ArrayList<>();
     private Plugin plugin;
 
-    public WorldTP(List<String> aliasess, Plugin plugin) {
+    public WorldCreate(List<String> aliasess, Plugin plugin) {
         super(aliasess, plugin);
         this.plugin = plugin;
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::updateList, 120l);
-
     }
-
-    public void updateList() {
-        WORLDS.addAll(getPlugin().getServer().getWorlds().stream().map(World::getName).collect(toList()));
-        getPlugin().getLogger().info("Worlds should now of loaded into world TP list");
-    }
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String[] args) {
-        Player player = (Player) sender;
 
-        String wname = args[0];
-        World world1;
-
-        world1 = Bukkit.getWorld(wname);
-
-        if (world1 != null) {
-            world1.getSpawnLocation().getChunk().load();
-            player.sendMessage(ChatColor.GREEN + "Please wait you are being teleported to " + wname);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), () ->
-                    player.teleport(world1.getSpawnLocation()), 10l);
-
-            return true;
-
-        } else {
-            player.sendMessage(ChatColor.RED + "That world does not exist can teleport you there");
+        if (Bukkit.getWorld(args[0]) != null) {
+            sender.sendMessage(ChatColor.RED + "Error: world with that name already exists");
             return true;
         }
+        Random random = new Random();
 
+        long n = random.nextLong();
+
+        Worlds worlds = new Worlds(plugin, args[0]);
+        ((Ipsum) plugin).getConfigManager().initConfig(args[0], worlds);
+        worlds.setName(args[0]);
+        worlds.setSeed(n);
+        worlds.setGenerator("LuckyCrates");
+        WorldCreator worldCreator = new WorldCreator(args[0]);
+        worldCreator.seed(n)
+                .generateStructures(worlds.getGenerateStructures())
+                .environment(worlds.getEnvironment())
+                .type(worlds.getWorldType())
+                .generator(worlds.getGenerator());
+
+        try {
+            worldCreator.createWorld();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), () -> {
+            if (Bukkit.getWorld(args[0]) != null)
+
+                sender.sendMessage(ChatColor.GREEN + "New World Created Successfully");
+            else {
+                sender.sendMessage(ChatColor.RED + "Error creating new world");
+            }
+        }, 60l);
+
+
+        return true;
     }
 
     /**
@@ -110,12 +111,7 @@ public class WorldTP extends SimpleCommand {
      */
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-
-        if (args.length == 1) {
-            return StringUtil.copyPartialMatches(args[0], WORLDS, new ArrayList<>(WORLDS.size()));
-        }
-
-        return Collections.emptyList();
+        return null;
     }
 
     /**

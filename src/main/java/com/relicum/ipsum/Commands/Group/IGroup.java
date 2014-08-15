@@ -16,35 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
+package com.relicum.ipsum.Commands.Group;
 
-import java.util.List;
+import org.bukkit.ChatColor;
 
 /**
- * The interface Permissible.
+ * Name: IGroup.java Created: 06 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
+public interface IGroup {
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
+    public void addStandardPrefix(String prefix);
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
+    public void addAltPrefix(String prefix);
 
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
+    public void addAdminPrefix(String prefix);
+
+    public void addErrorPrefix(String prefix);
+
+    public void addStandardMessageColor(ChatColor color);
+
+    public void addAltMessageColor(ChatColor color);
+
+    public void addErrorMessageColor(ChatColor color);
+
+    public void addAdminMessageColor(ChatColor color);
+
+    public void addNewPlaceHolder(String name, String placeHolder);
+
+
+    public void addHighlightColorAndStyle(ChatColor... styles);
 }

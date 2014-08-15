@@ -16,35 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
-
-import java.util.List;
-
 /**
- * The interface Permissible.
+ * Commands details with all aspects of commands from creating, sub commands, extend help, registering commands.
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
-
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
-}
+package com.relicum.ipsum.Commands;

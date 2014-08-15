@@ -16,35 +16,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
+package com.relicum.ipsum.Commands.Group;
 
-import java.util.List;
+import org.bukkit.ChatColor;
 
 /**
- * The interface Permissible.
+ * Name: IPrefix.java Created: 06 August 2014
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
+public interface IPrefix {
 
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
 
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
+    public IPrefix setLeftChar(String leftChar);
+
+    public IPrefix setLeftColor(ChatColor leftColor);
+
+    public IPrefix setLeftStyle(ChatColor leftStyle);
+
+    public IPrefix setMiddleChars(String middleChars);
+
+    public IPrefix setAltMiddleChars(String altMiddleChars);
+
+    public IPrefix setMiddleColor(ChatColor middleColor);
+
+    public IPrefix setMiddleStyle(ChatColor middleStyle);
+
+    public IPrefix setRightChar(String rightChar);
+
+    public IPrefix setRightColor(ChatColor rightColor);
+
+    public IPrefix setRightStyle(ChatColor rightStyle);
+
 }

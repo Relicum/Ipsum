@@ -16,35 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
-
-import java.util.List;
-
 /**
- * The interface Permissible.
+ * Package containing various Utility class and functions.
+ *
+ * <p>Helps to speed up development by having access to class's that preform functions that are used
+ * regularly in creating plugins. This saves having to code them separately for each plugin.
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
-
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
-}
+package com.relicum.ipsum.Utils;

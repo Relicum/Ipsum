@@ -16,35 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Permission;
-
-import java.util.List;
-
 /**
- * The interface Permissible.
+ * Item and blocks classes includes builders and management classes.
+ * <p>To create items see {@link com.relicum.ipsum.Items.SimpleItemFactory} which allows you to quickly
+ * create items applying any property or settings using a fluent builder which returns an instance of the
+ * item or block as an {@link org.bukkit.inventory.ItemStack}
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface Permissible {
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final String permission);
-
-    /**
-     * Has permission.
-     *
-     * @param permission the permission
-     * @return the boolean
-     */
-    public boolean hasPermission(final Permission permission);
-
-    /**
-     * Gets permissions.
-     *
-     * @return the permissions
-     */
-    public List<Permission> getPermissions();
-}
+package com.relicum.ipsum.Items;
