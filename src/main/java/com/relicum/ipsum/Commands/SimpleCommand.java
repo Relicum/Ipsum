@@ -29,25 +29,48 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Name: SimpleCommand.java Created: 05 August 2014
+ * All commands need to extend this class as well as adding the annotation {@link com.relicum.ipsum.Commands.CmdInfo} to the class.
+ * <p>The {@link com.relicum.ipsum.Commands.CmdInfo} annotation has the following values which you must supply values for
+ * all of them.
+ * <p>
+ * <p>
+ * <ol>
+ * <li><strong>name</strong>: The name of the command</li>
+ * <li><strong>description</strong>: A description of the command (Used in Bukkit Help)</li>
+ * <li><strong>usage</strong>: Command usage eg <tt>"/command [args]"</tt></li>
+ * <li><strong>label</strong>: The label of the command</li>
+ * <li><strong>permission</strong>: The permission to use the command</li>
+ * <li><strong>minArgs</strong>: The minimum number of arguments</li>
+ * <li><strong>maxArgs</strong>: The maximum number of arguments</li>
+ * <li><strong>playerOnly</strong>: True if command is run by players only. False for console or player</li>
+ * <li><strong>subCommand</strong>: True if this is a sub command (Still in development)</li>
+ * </ol>
  *
  * @author Relicum
  * @version 0.0.1
  */
 
 public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginIdentifiableCommand {
+    public boolean debug = false;
+    public Plugin plugin;
 
-    private Plugin plugin;
-    //private String name;
-    private List<String> aliases = new ArrayList<>();
+    public List<String> aliases = new ArrayList<>();
 
+    /**
+     * Instantiates a new Simple command.
+     *
+     * @param aliasess the aliasess the command can use.
+     * @param plugin   the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
+     */
     public SimpleCommand(List<String> aliasess, Plugin plugin) {
         this.plugin = plugin;
+        for (String s : aliasess) {
 
-        this.aliases.addAll(aliasess.stream().collect(Collectors.toList()));
+            this.aliases.add(s);
+        }
+        //  this.aliases.addAll(aliasess.stream().collect(Collectors.toList()));
 
         if (!getClass().isAnnotationPresent(CmdInfo.class)) {
             try {
@@ -58,12 +81,47 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
             }
 
         }
-        //registerCommand(getCmdName());
+
 
     }
 
     /**
-     * Executes the given command, returning its success
+     * Instantiates a new Simple command with the option of turning debugging on.
+     * <p>Default debugging is false, meaning it is set to off
+     *
+     * @param aliasess the aliasess the command can use.
+     * @param plugin   the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
+     * @param debug    set to true to turn on debugging, default it is set to false
+     */
+    public SimpleCommand(List<String> aliasess, Plugin plugin, boolean debug) {
+        this.plugin = plugin;
+        this.debug = debug;
+
+        this.plugin = plugin;
+        for (String s : aliasess) {
+
+            this.aliases.add(s);
+        }
+
+        //this.aliases.addAll(aliasess.stream().collect(Collectors.toList()));
+
+        if (!getClass().isAnnotationPresent(CmdInfo.class)) {
+            try {
+                throw new CommandException("no annotations found");
+            } catch (CommandException e) {
+                e.printStackTrace();
+
+            }
+
+        }
+
+
+    }
+
+    /**
+     * Executes the given command, returning its success.
+     * <p>You do not need to alter this method. There is an abstract method you need to
+     * impliment where you command logic goes.
      *
      * @param sender  Source of the command
      * @param command Command which was executed
@@ -115,6 +173,16 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
 
     }
 
+    /**
+     * Add your command logic to this method.
+     * <p>No checks for permissions, number of arguments, if its a player only command is required in this method.
+     * All of these checks will have already been done before this method is run.
+     *
+     * @param sender  the sender
+     * @param command the command {@link org.bukkit.command.Command}
+     * @param args    the string array of command arguments.
+     * @return the {@link java.lang.Boolean} true on success, false if there are errors.
+     */
     public abstract boolean onCommand(CommandSender sender, Command command, String[] args);
 
     /**
@@ -250,8 +318,31 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
     }
 
 
+    /**
+     * Gets command info annotation {@link com.relicum.ipsum.Commands.CmdInfo}
+     *
+     * @return the {@link com.relicum.ipsum.Commands.CmdInfo} class
+     */
     public CmdInfo getCommandInfo() {
         return getClass().getAnnotation(CmdInfo.class);
+    }
+
+    /**
+     * Set debug.
+     *
+     * @param b the {@link java.lang.Boolean} true to enable debugging, default debugging is false.
+     */
+    public void setDebug(boolean b) {
+        this.debug = b;
+    }
+
+    /**
+     * Check if debugging is enabled.
+     *
+     * @return true if debugging is enabled, false and it is disabled
+     */
+    public boolean isDebug() {
+        return this.debug;
     }
 
 
@@ -273,7 +364,7 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
             commandMap = (CommandMap) f.get(Bukkit.getServer());
 
         } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-            e.printStackTrace();
+            if (isDebug()) e.printStackTrace();
         }
 
         return commandMap;
@@ -293,18 +384,22 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
             c.setAccessible(true);
 
             command = (PluginCommand) c.newInstance(getCmdName().toLowerCase(), plugin);
-            //command = (PluginCommand) c.newInstance(new Object[]{name , plugin});
+
         } catch (SecurityException | IllegalArgumentException | IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
+            if (isDebug()) e.printStackTrace();
         }
 
         return command;
     }
 
 
+    /**
+     * Register the command.
+     *
+     * @return true if successful, false if there were errors
+     */
     public boolean registerCommand() {
 
-        //   Ipsum.getInstance().getPermissionManager().registerPermission(this.getPermission(), this.getDescription(), getParentPermission(), PermissionDefault.OP);
 
         CommandMap cmp = getCommandMap();
         PluginCommand cd = getCommand();
@@ -318,12 +413,12 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         cd.setLabel(this.getLabel());
         cd.setPermission(this.getPermission());
         if (cmp.register("", cd)) {
-            System.out.println("Command: /" + this.getLabel() + " has successfully been registered");
+            if (isDebug()) System.out.println("Command: /" + this.getLabel() + " has successfully been registered");
 
             return true;
         }
 
-        System.out.println("Error registering command");
+        System.out.println("Error registering Command: /" + this.getLabel());
         return false;
     }
 }

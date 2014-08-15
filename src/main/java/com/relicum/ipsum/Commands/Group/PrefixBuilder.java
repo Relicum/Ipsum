@@ -22,13 +22,10 @@ import org.bukkit.ChatColor;
 
 /**
  * <strong>PrefixBuilder</strong> make message prefixes fast and effective, allowing your plugin messages to be standardized.
- * <p>
  * <p>Instantiate a new instance of the PrefixBuilder and chaining the methods one after the other.
  * When happy cal the createPrefix method and this will automatically build a new instance of the {@link com.relicum.ipsum.Commands.Group.Prefix}
  * object. Just can be further customised and then registered with the message manager.
- * <p>
  * <p>There is no restrictions on the number of prefixes you have. All prefixes will automatically be stored to hard disk.
- * <p>
  * <p>So you never have to worry about losing work.
  *
  * @author Relicum

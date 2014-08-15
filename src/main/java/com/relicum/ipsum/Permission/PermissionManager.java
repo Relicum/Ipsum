@@ -56,11 +56,12 @@ public class PermissionManager {
      * @return the {@link java.lang.Boolean} true if successfully added, false if there is an error
      */
     public boolean registerPermission(String name, String description, String parent, PermissionDefault permissionDefault) {
+
         try {
             pm.addPermission(new Permissions(name, description, permissionDefault, parent));
 
             return true;
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

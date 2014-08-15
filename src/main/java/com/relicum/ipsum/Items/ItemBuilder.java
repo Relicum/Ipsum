@@ -37,7 +37,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
      *
      * @param material the {@link org.bukkit.Material} the item is made from.
      * @param amount   the amount of items in the final ItemStack
-     * @param type
+     * @param type     the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
      */
     public ItemBuilder(Material material, int amount, MetaType type) {
         super(material, amount, type);

@@ -26,16 +26,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Name: AbstractCommandRegister.java Created: 05 August 2014
+ * Abstract command register.
+ * <p>Extend this class to create a new command register.
  *
- * @author Relicum
- * @version 0.0.1
  */
 public abstract class AbstractCommandRegister<T extends JavaPlugin> {
 
-    private Map<String, SimpleCommand> commandMap = new HashMap<>();
+    public Map<String, SimpleCommand> commandMap = new HashMap<>();
 
-    private T plugin;
+    public T plugin;
 
     public AbstractCommandRegister(T plug) {
 

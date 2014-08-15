@@ -21,14 +21,14 @@ package com.relicum.ipsum.Commands;
 import java.lang.annotation.*;
 
 /**
- * Name: CmdInfo.java Created: 05 August 2014
+ * CmdInfo this needs to be applied to all classes that extend {@link com.relicum.ipsum.Commands.SimpleCommand}.
  *
  * @author Relicum
  * @version 0.0.1
  */
+@Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
 public @interface CmdInfo {
 
     public String name();

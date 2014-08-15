@@ -44,7 +44,7 @@ import static java.util.stream.Collectors.toList;
  * @version 0.0.1
  */
 @CmdInfo(name = "worldtp", description = "Teleport to different worlds",
-        usage = "/<command> <world>", label = "worldtp", permission = "worldtp.use", minArgs = 1, maxArgs = 1, playerOnly = true, subCommand = false)
+        usage = "/<command> <world>", label = "worldtp", permission = "lucky.admin.worldtp.use", minArgs = 1, maxArgs = 1, playerOnly = true, subCommand = false)
 public class WorldTP extends SimpleCommand {
 
     private List<String> WORLDS = new ArrayList<>();
@@ -94,7 +94,7 @@ public class WorldTP extends SimpleCommand {
      */
     @Override
     public String getParentPermission() {
-        return "ipsum.admin";
+        return "lucky.admin.*";
     }
 
     /**
