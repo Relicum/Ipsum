@@ -33,9 +33,8 @@ import java.util.List;
 /**
  * All commands need to extend this class as well as adding the annotation {@link com.relicum.ipsum.Commands.CmdInfo} to the class.
  * <p>The {@link com.relicum.ipsum.Commands.CmdInfo} annotation has the following values which you must supply values for
- * all of them.
- * <p>
- * <p>
+ * all of them.</p>
+ * <p> Command Details
  * <ol>
  * <li><strong>name</strong>: The name of the command</li>
  * <li><strong>description</strong>: A description of the command (Used in Bukkit Help)</li>
@@ -48,10 +47,10 @@ import java.util.List;
  * <li><strong>subCommand</strong>: True if this is a sub command (Still in development)</li>
  * </ol>
  *
+ *
  * @author Relicum
  * @version 0.0.1
  */
-
 public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginIdentifiableCommand {
     public boolean debug = false;
     public Plugin plugin;

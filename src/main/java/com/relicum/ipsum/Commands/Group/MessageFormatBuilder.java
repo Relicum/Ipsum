@@ -94,7 +94,7 @@ public class MessageFormatBuilder implements IMessageFormat<MessageFormatBuilder
         return this;
     }
 
-    public DefaultMessage createMessage() {
+    public com.relicum.ipsum.Commands.Group.DefaultMessage createMessage() {
 
         return new DefaultMessage(messageColor, errorMessageColor, highlighterColor, adminColor, prefix);
     }

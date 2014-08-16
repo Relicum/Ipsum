@@ -77,4 +77,9 @@ public class SimpleItemFactory {
         return new ColorArmorBuilder(material, amount, MetaType.COLORED_ARMOR);
     }
 
+
+    public SetOfArmorBuilder getSetOfArmourBuilder(ArmourMaterials materials) {
+
+        return new SetOfArmorBuilder(materials, 1, MetaType.ITEM_META);
+    }
 }

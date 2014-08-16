@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Utils;
 
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -33,6 +34,15 @@ public class PropertyManager {
     public PropertyManager() {
 
         properties = new Properties();
+        properties.setProperty("join.message.standard.1", "Hello player hope you are well");
+        properties.setProperty("join.message.standard.2", "Hiya player hope you are good");
+        properties.setProperty("join.message.standard.3", "Hello arse hope you are well");
+        properties.setProperty("join.message.standard.4", "Hello gamer hope you are well");
+        properties.setProperty("join.message.standard.5", "Hello player hope you are die happy");
 
+
+        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+            System.out.println(entry.getKey().toString() + " = " + entry.getValue().toString());
+        }
     }
 }

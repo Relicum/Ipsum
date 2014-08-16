@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.9-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -101,7 +101,7 @@
                 <configuration>
                     <charset>UTF-8</charset>
                     <links>
-                        <link>http://jd.bukkit.org/dev/apidocs/</link>
+                        <link>http://jd.bukkit.org/dev/apidocs/overview-summary.html</link>
                     </links>
                     <linksource>true</linksource>
                     <outputDirectory>${project.build.outputDirectory}/apidocs</outputDirectory>
@@ -122,6 +122,12 @@
         <repository>
             <id>relicum-snapshot</id>
             <url>http://repository-relicum.forge.cloudbees.com/snapshot/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <dependencies>
@@ -177,6 +183,7 @@
             <groupId>org.codemine</groupId>
             <artifactId>jchat</artifactId>
             <version>1.0.2-SNAPSHOT</version>
+            <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>

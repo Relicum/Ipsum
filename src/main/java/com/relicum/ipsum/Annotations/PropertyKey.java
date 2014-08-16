@@ -28,6 +28,7 @@ import java.lang.annotation.*;
  * it as an error. The annotation is also used to provide completion in string literals
  * passed as parameters.
  *
+ *
  * @author max
  */
 @Documented
