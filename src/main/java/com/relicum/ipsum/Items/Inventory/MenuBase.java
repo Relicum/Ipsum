@@ -16,34 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
-
-
-import org.bukkit.plugin.java.JavaPlugin;
+package com.relicum.ipsum.Items.Inventory;
 
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * Name: MenuBase.java Created: 17 August 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
-
-    private JavaPlugin javaPlugin;
-
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
-
-    }
-
-
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
-    }
-
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
-    }
-
-
+@SuppressWarnings("WeakerAccess")
+public class MenuBase {
 }

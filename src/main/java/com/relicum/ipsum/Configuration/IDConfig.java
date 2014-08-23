@@ -16,34 +16,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
+package com.relicum.ipsum.Configuration;
 
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.Properties;
 
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * Simple Interface for any class that needs to add messages settings to the Global message file.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
+public interface IDConfig {
 
-    private JavaPlugin javaPlugin;
+    Properties property = new Properties();
 
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
+    /**
+     * Add property.
+     *
+     * @param key   the key
+     * @param value the value
+     */
+    default void addProperty(String key, String value) {
+        property.setProperty(key, value);
 
     }
 
+    /**
+     * Remove property.
+     *
+     * @param key the key
+     */
+    default void removeProperty(String key) {
 
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
+        property.remove(key);
     }
 
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
+
+    /**
+     * Gets property object
+     *
+     * @return Value of property.
+     */
+    static Properties getProperty() {
+        return property;
     }
-
-
 }

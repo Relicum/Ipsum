@@ -16,34 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
-
+package com.relicum.ipsum.Actions;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * Name: DoubleJump.java Created: 20 August 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
-
-    private JavaPlugin javaPlugin;
-
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
-
-    }
+public interface DoubleJump<T extends JavaPlugin> {
 
 
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
-    }
+    void setPlugin(T plugin);
 
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
-    }
-
-
+    T getPlugin();
 }

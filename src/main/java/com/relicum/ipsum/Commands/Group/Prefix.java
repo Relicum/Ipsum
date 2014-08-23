@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Commands.Group;
 
+import com.google.common.base.Objects;
 import org.bukkit.ChatColor;
 
 /**
@@ -84,5 +85,24 @@ public class Prefix {
      */
     public String getAltPrefix() {
         return altPrefix;
+    }
+
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("leftChars", leftChars)
+                .add("leftColor", leftColor)
+                .add("leftStyle", leftStyle)
+                .add("middleChars", middleChars)
+                .add("altMiddleChar", altMiddleChar)
+                .add("middleColor", middleColor)
+                .add("middleStyle", middleStyle)
+                .add("rightChars", rightChars)
+                .add("rightColor", rightColor)
+                .add("rightStyle", rightStyle)
+                .add("prefix", prefix)
+                .add("altPrefix", altPrefix)
+                .toString();
     }
 }

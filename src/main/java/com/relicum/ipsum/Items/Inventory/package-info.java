@@ -16,34 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
-
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * Manages all types of Inventory including the ability to make different types of GUI menus.
+ *
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
-
-    private JavaPlugin javaPlugin;
-
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
-
-    }
-
-
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
-    }
-
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
-    }
-
-
-}
+package com.relicum.ipsum.Items.Inventory;

@@ -20,6 +20,7 @@ package com.relicum.ipsum.Utils;
 
 import net.minecraft.util.com.google.common.collect.Maps;
 import org.apache.commons.lang.Validate;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
@@ -32,6 +33,30 @@ import java.util.Map;
 public class LocaleManager {
 
     private Map<String, String> resources = Maps.newHashMap();
+    private JavaPlugin plugin;
+    private String messageBundle = "MessagesBundle.properties";
+    private String localeBundle = "MessagesBundle_en_GB.properties";
+
+    public LocaleManager(JavaPlugin plug, String messageBundle, String localeBundle) {
+        this.plugin = plug;
+        Validate.notNull(messageBundle, "Path to message resource bundle can not be null");
+        Validate.notNull(localeBundle, "Path to locale message resource bundle can not be null");
+
+        saveResource(messageBundle, true);
+        saveResource(localeBundle, true);
+
+    }
+
+    public LocaleManager(JavaPlugin plug) {
+        this.plugin = plug;
+    }
+
+
+    public void saveResource(String path, boolean overwrite) {
+
+        plugin.saveResource(path, true);
+
+    }
 
 
     /**
@@ -78,5 +103,46 @@ public class LocaleManager {
      */
     public Map<String, String> getResources() {
         return resources;
+    }
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
+
+
+    /**
+     * Gets localeBundle.
+     *
+     * @return Value of localeBundle.
+     */
+    public String getLocaleBundle() {
+        return localeBundle;
+    }
+
+    /**
+     * Gets messageBundle.
+     *
+     * @return Value of messageBundle.
+     */
+    public String getMessageBundle() {
+        return messageBundle;
+    }
+
+    /**
+     * Sets new localeBundle.
+     *
+     * @param localeBundle New value of localeBundle.
+     */
+    public void setLocaleBundle(String localeBundle) {
+        this.localeBundle = localeBundle;
+    }
+
+    /**
+     * Sets new messageBundle.
+     *
+     * @param messageBundle New value of messageBundle.
+     */
+    public void setMessageBundle(String messageBundle) {
+        this.messageBundle = messageBundle;
     }
 }

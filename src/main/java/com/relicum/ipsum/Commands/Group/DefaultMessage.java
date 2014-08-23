@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Commands.Group;
 
+import com.google.common.base.Objects;
 import org.bukkit.ChatColor;
 
 /**
@@ -90,5 +91,17 @@ public class DefaultMessage {
      */
     public ChatColor getAdminColor() {
         return adminColor;
+    }
+
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("messageColor", messageColor)
+                .add("errorMessageColor", errorMessageColor)
+                .add("highlighterColor", highlighterColor)
+                .add("adminColor", adminColor)
+                .add("prefix", prefix)
+                .toString();
     }
 }

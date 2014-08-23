@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Utils;
 
+import java.io.*;
 import java.util.Map;
 import java.util.Properties;
 
@@ -30,19 +31,93 @@ import java.util.Properties;
 public class PropertyManager {
 
     private Properties properties;
+    private Writer writer;
+    private Reader reader;
+    private String file;
 
-    public PropertyManager() {
+
+    public PropertyManager(String file) {
+        this.file = file;
+
 
         properties = new Properties();
+
+        try {
+            readFromFile(file);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+        /*
         properties.setProperty("join.message.standard.1", "Hello player hope you are well");
         properties.setProperty("join.message.standard.2", "Hiya player hope you are good");
         properties.setProperty("join.message.standard.3", "Hello arse hope you are well");
         properties.setProperty("join.message.standard.4", "Hello gamer hope you are well");
         properties.setProperty("join.message.standard.5", "Hello player hope you are die happy");
-
+         */
 
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
             System.out.println(entry.getKey().toString() + " = " + entry.getValue().toString());
+        }
+
+
+    }
+
+    public void writeToFile() {
+        this.writeToFile(file);
+    }
+
+    public void writeToFile(String file) {
+
+        try {
+            writer = new FileWriter(file);
+            properties.store(writer, "My Comments");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void readFromFile() throws Throwable {
+        try {
+            this.readFromFile(file);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Read from all the properties from file.
+     *
+     * @param file the full path to the properties file you want to read from
+     */
+    public void readFromFile(String file) throws Throwable {
+
+        try {
+            reader = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            throw new Throwable(e.getMessage(), e.getCause());
+        }
+
+        try {
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

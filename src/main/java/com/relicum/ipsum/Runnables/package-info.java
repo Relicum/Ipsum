@@ -16,34 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
-
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * The Runnables packages contains a selection of useful scheduled and repeating tasks.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
-
-    private JavaPlugin javaPlugin;
-
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
-
-    }
-
-
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
-    }
-
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
-    }
-
-
-}
+package com.relicum.ipsum.Runnables;

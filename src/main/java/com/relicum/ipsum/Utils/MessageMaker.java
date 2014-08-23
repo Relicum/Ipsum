@@ -16,34 +16,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Minecraft;
+package com.relicum.ipsum.Utils;
 
+import com.relicum.ipsum.Annotations.NonNls;
+import org.bukkit.util.Vector;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
- * Name: PluginHelper.java Created: 15 August 2014
+ * This is used to add all your plugin messages to which can then be organised and stored for Multi Lang.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class PluginHelper {
+public class MessageMaker {
+    Vector min = new Vector(1, 5, 9);
+    Vector max = new Vector(4, 76, 9);
+    @NonNls
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
 
-    private JavaPlugin javaPlugin;
 
-    public PluginHelper(JavaPlugin plug) {
-        this.javaPlugin = plug;
+    public static void test() {
+
 
     }
 
-
-    public JavaPlugin getPlugin() {
-        return javaPlugin;
+    public boolean isAABB(Vector vector) {
+        return vector.isInAABB(min, max);
     }
-
-    public <T extends JavaPlugin> T getPlugin(Class<T> plugin) {
-        return plugin.cast(this.getPlugin());
-    }
-
 
 }

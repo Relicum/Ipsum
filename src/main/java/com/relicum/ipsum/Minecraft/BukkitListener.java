@@ -18,8 +18,11 @@
 
 package com.relicum.ipsum.Minecraft;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * BukkitListener is a self registering Bukkit Listener.
@@ -30,15 +33,44 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Relicum
  * @version 0.0.1
  */
-public abstract class BukkitListener extends PluginHelper implements Listener {
+public abstract class BukkitListener<T extends JavaPlugin> implements Listener {
+
+    public T plugin;
+
 
     /**
-     * Instantiates a new Bukkit listener.
+     * Instantiates a new BukkitListener.
      *
-     * @param plugin the instance of main Plugins class
+     * @param plugin the plugin
      */
-    public BukkitListener(JavaPlugin plugin) {
-        super(plugin);
-        this.getPlugin().getServer().getPluginManager().registerEvents(this, this.getPlugin());
+    public BukkitListener(T plugin) {
+        this.plugin = plugin;
+        Bukkit.getServer().getPluginManager().registerEvents(this, getJavaPlugin());
+
+    }
+
+    /**
+     * Gets java plugin.
+     *
+     * @return the java plugin
+     */
+    public T getJavaPlugin() {
+        return this.plugin;
+    }
+
+    /**
+     * Update the specified players inventory on the next tick.
+     *
+     * @param player the {@link org.bukkit.entity.Player} who's inventory is to be updated
+     */
+    public void updateInventory(Player player) {
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                player.updateInventory();
+            }
+        }.runTask(getJavaPlugin());
+
     }
 }
