@@ -37,12 +37,22 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Name: LocUtils.java Created: 06 August 2014
+ * LocUtils contains a selection of static methods for converting {@link com.relicum.ipsum.Configuration.Loc} and {@link com.relicum.ipsum.Configuration.BlockLoc} to various types.
+ * <p>This class also contains various other methods for calculating collections of locations. Or collections of {@link org.bukkit.entity.Player} or {@link org.bukkit.entity.Entity}
+ * from a given location.
  *
  * @author Relicum
  * @version 0.0.1
  */
 public class LocUtils {
+
+
+    /**
+     * Used to stop the class from being instantiated
+     */
+    private LocUtils() {
+
+    }
 
     /**
      * Convert a Bukkit Location to a Loc object.

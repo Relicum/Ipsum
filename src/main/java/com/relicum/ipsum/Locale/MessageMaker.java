@@ -16,49 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Configuration;
-
-
-import java.util.Properties;
+package com.relicum.ipsum.Locale;
 
 /**
- * Simple Interface for any class that needs to add messages settings to the Global message file.
+ * This is used to add all your plugin messages to which can then be organised and stored for Multi Lang.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public interface IDConfig {
-
-    Properties property = new Properties();
-
-    /**
-     * Add property.
-     *
-     * @param key   the key
-     * @param value the value
-     */
-    default void addProperty(String key, String value) {
-        property.setProperty(key, value);
-
-    }
-
-    /**
-     * Remove property.
-     *
-     * @param key the key
-     */
-    default void removeProperty(String key) {
-
-        property.remove(key);
-    }
+public class MessageMaker {
 
 
-    /**
-     * Gets property object
-     *
-     * @return Value of property.
-     */
-    static Properties getProperty() {
-        return property;
-    }
+
+
+
+
 }

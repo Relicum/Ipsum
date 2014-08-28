@@ -70,7 +70,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
      */
     @Override
     public ItemStack build() {
-        System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
+
         setStack(new ItemStack(getMaterial(), getAmount()));
 
         if ((Short) getDurability() != null) {

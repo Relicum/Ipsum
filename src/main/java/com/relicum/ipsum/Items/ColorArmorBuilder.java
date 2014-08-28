@@ -89,7 +89,7 @@ public class ColorArmorBuilder extends AbstractItemBuilder<ColorArmorBuilder> {
      */
     @Override
     public ItemStack build() {
-        System.out.println("Mat is " + getMaterial().name() + " and amount is " + getAmount());
+
         setStack(new ItemStack(getMaterial(), getAmount()));
 
 

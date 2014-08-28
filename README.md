@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.10-SNAPSHOT
+Ipsum Gaming Commons 1.0.12-SNAPSHOT
 ====
 
 Providing All you need to create mini games and plugins
@@ -10,7 +10,7 @@ This means it will only work if you compile any plugins made using Ipsum with Ja
 ```
 
 ```
-Currently working on Commands and World generation.
+Currently working on automated multi language support.
 ```
 
 Example of creating new void world. Easy !!

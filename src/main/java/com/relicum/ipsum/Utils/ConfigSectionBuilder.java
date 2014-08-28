@@ -18,32 +18,32 @@
 
 package com.relicum.ipsum.Utils;
 
-import com.relicum.ipsum.Annotations.NonNls;
-import org.bukkit.util.Vector;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
+import org.apache.commons.lang.Validate;
+import org.bukkit.configuration.ConfigurationSection;
 
 /**
- * This is used to add all your plugin messages to which can then be organised and stored for Multi Lang.
+ * ConfigSectionBuilder is WIP
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class MessageMaker {
-    Vector min = new Vector(1, 5, 9);
-    Vector max = new Vector(4, 76, 9);
-    @NonNls
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+public class ConfigSectionBuilder {
 
+    private ConfigurationSection section;
 
-    public static void test() {
-
+    public ConfigSectionBuilder(ConfigurationSection cs) {
+        Validate.notNull(cs);
+        this.section = cs;
 
     }
 
-    public boolean isAABB(Vector vector) {
-        return vector.isInAABB(min, max);
-    }
 
+    /**
+     * Gets ConfigurationSection
+     *
+     * @return the ConfigurationSection
+     */
+    public ConfigurationSection getSection() {
+        return section;
+    }
 }
