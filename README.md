@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.12-SNAPSHOT
+Ipsum Gaming Commons 1.0.13-SNAPSHOT
 ====
 
 Providing All you need to create mini games and plugins

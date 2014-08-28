@@ -45,6 +45,7 @@ public interface IDMessage {
      */
     public Properties getProperties();
 
+
     /**
      * Add new plugin message to the plugin store.
      * <p>If you want to add color to the message standard minecraft color formatting using the prefix of <strong>&amp;</strong>

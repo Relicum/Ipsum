@@ -22,6 +22,7 @@ import com.relicum.ipsum.io.PropertyIO;
 import org.apache.commons.lang.Validate;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -110,6 +111,18 @@ public class PluginMessages implements IDMessage, PropertyIO {
         addMessage("default.debug.color", "&d");
 
 
+    }
+
+    /**
+     * Add message settings from a map see {@link com.relicum.ipsum.Commands.Group.DefaultFormat}.
+     *
+     * @param map the containing the keys and values for the default settings
+     */
+    public void addMessagesFromMap(Map<String, String> map) {
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            addMessage(entry.getKey(), entry.getValue());
+        }
     }
 
     /**
