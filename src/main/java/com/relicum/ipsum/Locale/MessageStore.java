@@ -97,4 +97,38 @@ public class MessageStore implements IDMessage {
 
         addMessage("command." + command.toLowerCase() + ".message." + key, message);
     }
+
+    /**
+     * Add game broadcast message
+     *
+     * @param key     the unique key for the message
+     * @param message the broadcast message
+     */
+    public void addGameBroadcast(String key, String message) {
+        Validate.notNull(key);
+        Validate.notNull(message);
+
+        addMessage("game.broadcast." + key.toLowerCase(), message);
+    }
+
+    /**
+     * Add game player message that is sent to a single player only.
+     *
+     * @param key     the unique key for the message.
+     * @param message the message the player will receive.
+     */
+    public void addGamePlayerMessage(String key, String message) {
+        Validate.notNull(key);
+        Validate.notNull(message);
+
+        addMessage("game.player.message." + key.toLowerCase(), message);
+    }
+
+    public void logGameMessage(String key, String message) {
+        Validate.notNull(key);
+        Validate.notNull(message);
+
+        addMessage("game.message.log." + key.toLowerCase(), message);
+
+    }
 }

@@ -79,6 +79,17 @@ public class RankMap {
         }
     }
 
+    /**
+     * Get the color format of the selected rank
+     *
+     * @param ranks the {@link com.relicum.ipsum.Configuration.GameRanks} to return the color format
+     * @return the ranks color formatting as a {@link org.bukkit.ChatColor}
+     */
+    public static ChatColor getFormat(GameRanks ranks) {
+
+        return rankMap.get(ranks);
+    }
+
     protected static boolean rankValid(GameRanks rank) {
 
         return rankMap.containsKey(rank);

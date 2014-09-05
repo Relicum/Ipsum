@@ -44,6 +44,15 @@ public interface IMFormat {
     public IMFormat setDefaultColor(String defaultColor);
 
     /**
+     * Sets alternative color.
+     *
+     * @param altColor the alternative color
+     * @return the instance of itself for Chaining methods
+     */
+    public IMFormat setAltColor(String altColor);
+
+
+    /**
      * Sets error color.
      *
      * @param errorColor the error color

@@ -60,9 +60,15 @@ public class PropertyManager {
         properties = new Properties();
     }
 
+
     /**
-     * Instantiates a new Property Manager.
-     * Creates an empty property list.
+     * Instantiates a new Property manager.
+     * Creates a property list from the settings in the specified file.
+     *
+     * @param devMode the dev mode
+     * @param path    the path
+     * @param locale  the locale
+     * @throws IOException the iO exception
      */
     public PropertyManager(boolean devMode, String path, Locale locale) throws IOException {
         Validate.notNull(path, "The path to the directory when in development mode can not be null");

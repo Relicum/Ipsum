@@ -22,6 +22,7 @@ import com.relicum.ipsum.io.PropertyIO;
 import org.apache.commons.lang.Validate;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
 
@@ -70,7 +71,7 @@ public class PluginMessages implements IDMessage, PropertyIO {
      * @param path the path of the file to load. The file must be an instance of a {@link java.util.Properties} file.
      * @throws IOException the {@link java.io.IOException} if there was a error loading the file, including if the file location was not vaild.
      */
-    public PluginMessages(String path) throws IOException {
+    public PluginMessages(Path path) throws IOException {
         Validate.notNull(path);
         mess = readFromFile(path);
     }

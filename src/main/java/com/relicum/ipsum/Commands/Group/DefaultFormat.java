@@ -44,6 +44,7 @@ public class DefaultFormat implements IMFormat {
         format.put("default.color.error", "&c");
         format.put("default.color.admin", "&2");
         format.put("default.color.broadcast", "&6");
+        format.put("default.color.alt", "&3");
         format.put("default.message.error", "An unknown error has occured please check the log for details");
         format.put("default.message.noperms", "Sorry you do not have permission to do that");
         format.put("default.debug.prefix", "&b[&4IPSUM-DEBUG&b]&r ");
@@ -74,6 +75,19 @@ public class DefaultFormat implements IMFormat {
     public IMFormat setDefaultColor(String defaultColor) {
         Validate.notNull(defaultColor);
         format.put("default.color.normal", defaultColor);
+        return this;
+    }
+
+    /**
+     * Sets alternative color.
+     *
+     * @param altColor the alternative color
+     * @return the instance of itself for Chaining methods
+     */
+    @Override
+    public IMFormat setAltColor(String altColor) {
+        Validate.notNull(altColor);
+        format.put("default.color.alt", altColor);
         return this;
     }
 

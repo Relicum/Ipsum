@@ -20,10 +20,22 @@ package com.relicum.ipsum.io;
 
 import org.apache.commons.lang.Validate;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.CodeSource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * PropertyIO is a simple iterface to read and write from and to {@link java.util.Properties} files.
@@ -43,91 +55,82 @@ public interface PropertyIO {
     /**
      * Return a {@link java.util.Properties} read from the specified string file path.
      *
-     * @param path the {@link String } name of the file to read the properties from.
+     * @param path the {@link java.nio.file.Path } path of the file to read the properties from.
+     * @return the {@link java.util.Properties} instance.
      * @throws IOException the {@link java.io.IOException} if the file was not found or there were problems reading from it.
      */
-    default Properties readFromFile(String path) throws IOException {
+    default Properties readFromFile(Path path) throws IOException {
 
         Validate.notNull(path);
 
-        File file = new File(path);
-
-        if (!file.exists())
-            throw new FileNotFoundException("File at " + path + " was not found");
-
-        Reader reader = null;
-        Properties properties = new Properties();
-
-        try {
-            reader = new FileReader(file);
-            properties.load(reader);
-        } catch (IOException e) {
-            Logger.getLogger("minecraft").log(Level.SEVERE, e.getMessage(), e.getCause());
-            throw e;
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
-
-        return properties;
+        return readFromFile(path.toFile());
     }
 
     /**
      * Return a {@link java.util.Properties} read from the specified string file path.
      *
-     * @param file the {@link String } name of the file to read the properties from.
+     * @param file the {@link java.nio.file.Path } name of the file to read the properties from.
+     * @return the {@link java.util.Properties} instance.
      * @throws IOException the {@link java.io.IOException} if the file was not found or there were problems reading from it.
      */
     default Properties readFromFile(File file) throws IOException {
 
         Validate.notNull(file);
 
-        if (!file.exists())
+        if (Files.exists(file.toPath()))
             throw new FileNotFoundException("File at " + file.getPath() + " was not found");
 
-        Reader reader = null;
         Properties properties = new Properties();
-
         try {
-            reader = new FileReader(file);
-            properties.load(reader);
+
+            properties.load(Files.newBufferedReader(file.toPath(), Charset.defaultCharset()));
         } catch (IOException e) {
-            Logger.getLogger("minecraft").log(Level.SEVERE, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             throw e;
-        } finally {
-            if (reader != null)
-                reader.close();
         }
+
         return properties;
     }
 
 
     /**
-     * Write the properties object to the specified string file path.
+     * Write the properties object to the specified string destination.
      *
-     * @param properties an instance of a {@link java.util.Properties} object.
-     * @param path       the string file path that the properties will be written to.
-     * @param message    the message that is included in the header of properties files.
-     * @throws IOException an {@link java.io.IOException} if their was a problem writing to the file.
+     * @param properties the properties
+     * @param path       the path
+     * @param message    the message
+     * @throws IOException the iO exception
      */
     default void writeToFile(Properties properties, String path, String message) throws IOException {
         Validate.notNull(properties);
         Validate.notNull(path);
         Validate.notNull(message);
         System.out.println(path);
-        Writer writer = null;
+        writeToFile(properties, Paths.get(path), message);
+    }
+
+    /**
+     * Write the properties object to the specified string file path.
+     *
+     * @param properties an instance of a {@link java.util.Properties} object.
+     * @param path       the  {@link java.nio.file.Path} that the properties will be written to.
+     * @param message    the message that is included in the header of properties files.
+     * @throws IOException an {@link java.io.IOException} if their was a problem writing to the file.
+     */
+    default void writeToFile(Properties properties, Path path, String message) throws IOException {
+        Validate.notNull(properties);
+        Validate.notNull(path);
+        Validate.notNull(message);
+        System.out.println(path);
+
+        Files.deleteIfExists(path);
 
         try {
-            writer = new FileWriter(checkFile(path));
-            properties.store(writer, message);
+
+            properties.store(Files.newBufferedWriter(path, Charset.defaultCharset()), message);
         } catch (IOException e) {
-            Logger.getLogger("minecraft").log(Level.SEVERE, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             throw e;
-        } finally {
-            if (writer != null) {
-                writer.flush();
-                writer.close();
-            }
         }
 
 
@@ -146,31 +149,30 @@ public interface PropertyIO {
         Validate.notNull(file);
         Validate.notNull(message);
 
-        Writer writer = null;
-
-        boolean b;
-        b = file.exists();
-        if (!b) {
-
-            try {
-                b = file.createNewFile();
-                if (!b)
-                    throw new RuntimeException("Can not create file at " + file.getPath());
-                writer = new FileWriter(file);
-                properties.store(writer, message);
-            } catch (IOException e) {
-                Logger.getLogger("minecraft").log(Level.SEVERE, e.getMessage(), e.getCause());
-                throw e;
-            } finally {
-                if (writer != null) {
-                    writer.flush();
-                    writer.close();
-                }
-            }
-        }
+        writeToFile(properties, file.toPath(), message);
 
     }
 
+
+    /**
+     * Create a new directory including any sub directories that is required.
+     *
+     * @param file the {@link java.nio.file.Path} of the file or directory
+     * @throws RuntimeException if an error occured when trying to create the directory
+     */
+    default void createDirectories(Path file) throws RuntimeException {
+        Validate.notNull(file);
+
+        Path parent = file.getParent();
+
+        try {
+            Files.createDirectories(parent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
     /**
      * Check if file exists at the give string path, if it does not, creates a new file and returns that.
@@ -186,11 +188,48 @@ public interface PropertyIO {
         try {
             tmp.createNewFile();
         } catch (IOException e) {
-            Logger.getLogger("minecraft").log(Level.SEVERE, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             throw e;
         }
 
         return tmp;
+    }
+
+    /**
+     * Gets all files in jar.
+     *
+     * @param clazz the clazz
+     * @return the list of files and paths in jar
+     */
+    default List<String> getAllFilesInJar(Class<?> clazz) {
+
+        List<String> list = new ArrayList<>();
+        CodeSource src = clazz.getProtectionDomain().getCodeSource();
+        if (src != null) {
+            try {
+                URL jar = src.getLocation();
+                ZipInputStream zip = new ZipInputStream(jar.openStream());
+                while (true) {
+                    ZipEntry e = zip.getNextEntry();
+                    if (e == null)
+                        break;
+                    String name = e.getName();
+                    if (name.contains(".properties")) {
+                        list.add(name);
+                        System.out.println(name);
+                    }
+
+                }
+                zip.close();
+                jar = null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        return list;
     }
 
 }
