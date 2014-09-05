@@ -25,7 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- * Name: SetOfArmorBuilder.java Created: 16 August 2014
+ * SetOfArmorBuilder builds a complete set of armor all items are from the same Material and have the same properties and enchantments etc.
  *
  * @author Relicum
  * @version 0.0.1

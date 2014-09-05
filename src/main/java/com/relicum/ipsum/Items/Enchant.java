@@ -23,7 +23,7 @@ import lombok.experimental.Builder;
 import org.bukkit.enchantments.Enchantment;
 
 /**
- * The type Enchant.
+ * Used to build a simple enchant using a built in builder.
  */
 @Accessors(fluent = true)
 @Builder

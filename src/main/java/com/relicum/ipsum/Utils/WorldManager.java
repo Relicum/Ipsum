@@ -25,6 +25,7 @@ import lombok.Setter;
 import org.bukkit.*;
 import org.bukkit.block.BlockState;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,12 +104,12 @@ public class WorldManager {
      *
      * @param plug the instance of your plugins main class
      */
-    public WorldManager(Plugin plug) {
+    public WorldManager(Plugin plug, ConfigManager configManager) {
 
         this.plugin = plug;
 
         createDirectory();
-        configManager = new ConfigManager(plugin);
+        this.configManager = configManager;
         configManager.putWorlds(getWorldConfigs());
 
         delayedWorldLoad();
@@ -164,26 +165,48 @@ public class WorldManager {
 
         List<String> list = configManager.getEnabled();
         if (list == null) {
+            System.out.println("There are no worlds to load");
             getPlugin().getLogger().warning("There were no worlds to load");
             return;
         }
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), new Runnable() {
+        new BukkitRunnable() {
+
             int c = 0;
+
             int t = list.size() - 1;
 
+            /**
+             * When an object implementing interface <code>Runnable</code> is used
+             * to create a thread, starting the thread causes the object's
+             * <code>run</code> method to be called in that separately executing
+             * thread.
+             * <p>
+             * The general contract of the method <code>run</code> is that it may
+             * take any action whatsoever.
+             *
+             * @see Thread#run()
+             */
             @Override
             public void run() {
-                if (c > t)
-                    return;
-                if (configManager.getWorld(list.get(c)).getFirstTime()) {
 
+                if (c > t) {
+                    System.out.println("Load load repeating task ended num " + c);
+                    cancel();
+                    return;
+                }
+
+                if (configManager.getWorld(list.get(c)).getFirstTime()) {
+                    System.out.println("rst time load loading num " + c);
                     configManager.getWorld(list.get(c)).setFirstTime(false);
                     applyNewWorldSettings(list.get(c));
-                } else
+                } else {
+                    System.out.println("Normal world loading num " + c);
                     loadWorld(list.get(c));
+                }
                 c++;
+
             }
-        }, 60l, 40l);
+        }.runTaskTimer(getPlugin(),60l,40l);
 
 
     }

@@ -47,24 +47,25 @@ import java.util.List;
  * <li><strong>subCommand</strong>: True if this is a sub command (Still in development)</li>
  * </ol>
  *
- *
  * @author Relicum
  * @version 0.0.1
  */
 public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginIdentifiableCommand {
     public boolean debug = false;
     public Plugin plugin;
-
+    private String parentPermissions = "ipsum.admin";
     public List<String> aliases = new ArrayList<>();
 
     /**
      * Instantiates a new Simple command.
      *
-     * @param aliasess the aliasess the command can use.
-     * @param plugin   the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
+     * @param aliasess         the aliasess the command can use.
+     * @param plugin           the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
+     * @param parentPermission the parent permission for this command
      */
-    public SimpleCommand(List<String> aliasess, Plugin plugin) {
+    public SimpleCommand(List<String> aliasess, Plugin plugin, String parentPermission) {
         this.plugin = plugin;
+        this.setParentPermissions(parentPermission);
         for (String s : aliasess) {
 
             this.aliases.add(s);
@@ -88,14 +89,15 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
      * Instantiates a new Simple command with the option of turning debugging on.
      * <p>Default debugging is false, meaning it is set to off
      *
-     * @param aliasess the aliasess the command can use.
-     * @param plugin   the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
-     * @param debug    set to true to turn on debugging, default it is set to false
+     * @param aliasess         the aliasess the command can use.
+     * @param plugin           the {@link org.bukkit.plugin.Plugin} the command is to be registered under.
+     * @param parentPermission the parent permission for this command
+     * @param debug            set to true to turn on debugging, default it is set to false
      */
-    public SimpleCommand(List<String> aliasess, Plugin plugin, boolean debug) {
+    public SimpleCommand(List<String> aliasess, Plugin plugin, String parentPermission, boolean debug) {
         this.plugin = plugin;
         this.debug = debug;
-
+        this.setParentPermissions(parentPermission);
         this.plugin = plugin;
         for (String s : aliasess) {
 
@@ -189,7 +191,20 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
      *
      * @return the parent permission
      */
-    public abstract String getParentPermission();
+    //public abstract String getParentPermission();
+
+    /**
+     * Gets parent permissions just get this to return the parent permission for the command
+     *
+     * @return the parent permission
+     */
+    public final String getParentPermission() {
+        return parentPermissions;
+    }
+
+    public void setParentPermissions(String parentPermissions) {
+        this.parentPermissions = parentPermissions;
+    }
 
     /**
      * Requests a list of possible completions for a command argument.
@@ -420,4 +435,5 @@ public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginI
         System.out.println("Error registering Command: /" + this.getLabel());
         return false;
     }
+
 }

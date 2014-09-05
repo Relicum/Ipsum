@@ -18,8 +18,9 @@
 
 package com.relicum.ipsum.Commands;
 
+import com.relicum.ipsum.Configuration.ConfigManager;
 import com.relicum.ipsum.Configuration.Worlds;
-import com.relicum.ipsum.Ipsum;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
@@ -36,32 +37,36 @@ import java.util.Random;
  * @author Relicum
  * @version 0.0.1
  */
-@CmdInfo(name = "worldcreate", description = "Used to create new worlds", usage = "/<command> <name>", label = "WorldCreate", permission = "worldcreate.use", minArgs = 1, maxArgs = 1, playerOnly = true, subCommand = false)
+@CmdInfo(name = "worldcreate", description = "Used to create new worlds", usage = "/<command> <name> <generator>", label = "WorldCreate", permission = "worldcreate.use", minArgs = 2, maxArgs = 2, playerOnly = true, subCommand = false)
 public class WorldCreate extends SimpleCommand {
 
     private Plugin plugin;
+    private ConfigManager configManager;
 
-    public WorldCreate(List<String> aliasess, Plugin plugin) {
-        super(aliasess, plugin);
+    public WorldCreate(List<String> aliasess, Plugin plugin, String parentPerm, ConfigManager configManager) {
+        super(aliasess, plugin, parentPerm);
         this.plugin = plugin;
+        this.configManager = configManager;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String[] args) {
-
+        Validate.notNull(args[1]);
         if (Bukkit.getWorld(args[0]) != null) {
             sender.sendMessage(ChatColor.RED + "Error: world with that name already exists");
             return true;
         }
+
+
         Random random = new Random();
 
         long n = random.nextLong();
 
         Worlds worlds = new Worlds(plugin, args[0]);
-        ((Ipsum) plugin).getConfigManager().initConfig(args[0], worlds);
+        configManager.initConfig(args[0], worlds);
         worlds.setName(args[0]);
         worlds.setSeed(n);
-        worlds.setGenerator("LuckyCrates");
+        worlds.setGenerator(args[1]);
         WorldCreator worldCreator = new WorldCreator(args[0]);
         worldCreator.seed(n)
                 .generateStructures(worlds.getGenerateStructures())
@@ -86,16 +91,6 @@ public class WorldCreate extends SimpleCommand {
 
 
         return true;
-    }
-
-    /**
-     * Gets parent permission just get this to return the parent permission for the command
-     *
-     * @return the parent permission
-     */
-    @Override
-    public String getParentPermission() {
-        return "ipsum.admin";
     }
 
     /**

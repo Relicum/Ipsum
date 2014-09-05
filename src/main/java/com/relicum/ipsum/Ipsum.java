@@ -106,7 +106,7 @@ public class Ipsum extends JavaPlugin {
 
     public WorldManager getWorldManager() {
 
-        return new WorldManager(this);
+        return new WorldManager(this, getConfigManager());
     }
 
 

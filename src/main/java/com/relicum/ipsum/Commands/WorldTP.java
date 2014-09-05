@@ -50,8 +50,8 @@ public class WorldTP extends SimpleCommand {
     private List<String> WORLDS = new ArrayList<>();
     private Plugin plugin;
 
-    public WorldTP(List<String> aliasess, Plugin plugin) {
-        super(aliasess, plugin);
+    public WorldTP(List<String> aliasess, Plugin plugin, String parentPerm) {
+        super(aliasess, plugin, parentPerm);
         this.plugin = plugin;
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::updateList, 120l);
 
@@ -85,16 +85,6 @@ public class WorldTP extends SimpleCommand {
             return true;
         }
 
-    }
-
-    /**
-     * Gets parent permission just get this to return the parent permission for the command
-     *
-     * @return the parent permission
-     */
-    @Override
-    public String getParentPermission() {
-        return "lucky.admin.*";
     }
 
     /**

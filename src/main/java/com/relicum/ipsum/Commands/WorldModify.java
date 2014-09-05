@@ -18,8 +18,9 @@
 
 package com.relicum.ipsum.Commands;
 
-import com.relicum.ipsum.Ipsum;
+import com.relicum.ipsum.Configuration.ConfigManager;
 import com.relicum.ipsum.Utils.LocUtils;
+import com.relicum.ipsum.Utils.WorldManager;
 import net.cubespace.Yamler.Config.InvalidConfigurationException;
 import net.minecraft.util.com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
@@ -29,6 +30,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
 
@@ -48,16 +50,24 @@ import static java.util.stream.Collectors.toList;
         minArgs = 2, maxArgs = 6, playerOnly = true, subCommand = false)
 public class WorldModify extends SimpleCommand {
 
-    private Ipsum plugin;
+    private Plugin plugin;
+
+    private ConfigManager configManager;
+
+    private WorldManager worldManager;
+
     private List<String> WORLDS = Lists.newArrayList();
 
     private List<String> SET = Lists.newArrayList();
 
     private List<String> BOLL = Lists.newArrayList();
 
-    public WorldModify(List<String> aliasess, Plugin plugin) {
-        super(aliasess, plugin);
-        this.plugin = (Ipsum) plugin;
+    public WorldModify(List<String> aliasess, JavaPlugin plugin, String parentPerm, ConfigManager configManager, WorldManager worldManager) {
+        super(aliasess, plugin, parentPerm);
+        this.plugin = plugin;
+        this.configManager = configManager;
+        this.worldManager = worldManager;
+
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::updateList, 120l);
         addSET();
         addBOLL();
@@ -68,16 +78,16 @@ public class WorldModify extends SimpleCommand {
     public boolean onCommand(CommandSender sender, Command command, String[] args) {
 
         Player player = (Player) sender;
-
+        String world = args[0];
         if (args[1].equalsIgnoreCase("setspawn")) {
 
             player.getWorld().setSpawnLocation(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
             player.sendMessage(ChatColor.GREEN + "Spawn has successfully been set for world " + player.getWorld().getName() + " at " +
                     ChatColor.GOLD + "X = " + player.getLocation().getBlockX() + " Y = " + player.getLocation().getBlockY() + " Z = " + player.getLocation().getBlockZ());
+            configManager.getWorld(world).setSpawnLocation(LocUtils.locationToLoc(player.getLocation()));
 
-            plugin.getConfigManager().getWorld(player.getWorld().getName()).setSpawnLocation(LocUtils.locationToLoc(player.getLocation()));
             try {
-                plugin.getConfigManager().getWorld(player.getWorld().getName()).save();
+                configManager.getWorld(world).save();
             } catch (InvalidConfigurationException e) {
                 e.printStackTrace();
             }
@@ -92,13 +102,13 @@ public class WorldModify extends SimpleCommand {
 
             Bukkit.getWorld(args[0]).getPlayers().stream().forEach(p -> p.kickPlayer("Sorry this world is being unloaded"));
 
-            plugin.getConfigManager().getWorld(args[0]).setEnable(false);
+            configManager.getWorld(args[0]).setEnable(false);
 
             if (Bukkit.unloadWorld(args[0], true)) {
 
                 player.sendMessage(ChatColor.GREEN + "The world has been unloaded");
                 try {
-                    plugin.getConfigManager().getWorld(args[0]).save();
+                    configManager.getWorld(args[0]).save();
                 } catch (InvalidConfigurationException e) {
                     e.printStackTrace();
                 }
@@ -118,23 +128,23 @@ public class WorldModify extends SimpleCommand {
                 return true;
             }
 
-            if (plugin.getConfigManager().getWorld(args[0]) == null) {
+            if (configManager.getWorld(args[0]) == null) {
 
                 plugin.getLogger().warning("Unable to find world config for world " + args[0] + " will search the directory");
 
-                if (!plugin.getWorldManager().checkWorldHasConfig(args[0])) {
+                if (!worldManager.checkWorldHasConfig(args[0])) {
                     plugin.getLogger().severe("Unable to find world config for world " + args[0] + " so unable to load it");
                     player.sendMessage(ChatColor.RED + "Unable to find world config for world " + args[0] + " so unable to load it");
                     return true;
                 }
 
-                plugin.getWorldManager().loadWorld(args[0]);
+                worldManager.loadWorld(args[0]);
 
                 new BukkitRunnable() {
 
                     @Override
                     public void run() {
-                        if (plugin.getConfigManager().getWorld(args[0]) != null) {
+                        if (configManager.getWorld(args[0]) != null) {
 
                             player.sendMessage(ChatColor.GREEN + "Successfully load world " + ChatColor.GOLD + args[0]);
 
@@ -158,15 +168,15 @@ public class WorldModify extends SimpleCommand {
             }
 
             if (args[1].equalsIgnoreCase("monsters"))
-                plugin.getConfigManager().getWorld(player.getWorld().getName()).setMonsters(Boolean.valueOf(args[2].toLowerCase()));
+                configManager.getWorld(world).setMonsters(Boolean.valueOf(args[2].toLowerCase()));
             if (args[1].equalsIgnoreCase("animals"))
-                plugin.getConfigManager().getWorld(player.getWorld().getName()).setAnimals(Boolean.valueOf(args[2].toLowerCase()));
+                configManager.getWorld(world).setAnimals(Boolean.valueOf(args[2].toLowerCase()));
             if (args[1].equalsIgnoreCase("pvp"))
-                plugin.getConfigManager().getWorld(args[0]).setPvp(Boolean.valueOf(args[2].toLowerCase()));
+                configManager.getWorld(args[0]).setPvp(Boolean.valueOf(args[2].toLowerCase()));
 
             player.sendMessage(ChatColor.GREEN + args[1] + " has now been set to " + args[2] + " in world " + args[0]);
 
-            plugin.getConfigManager().saveAll();
+            configManager.saveAll();
 
             return true;
         }
@@ -181,15 +191,6 @@ public class WorldModify extends SimpleCommand {
         getPlugin().getLogger().info("Worlds should now of loaded into world TP list");
     }
 
-    /**
-     * Gets parent permission just get this to return the parent permission for the command
-     *
-     * @return the parent permission
-     */
-    @Override
-    public String getParentPermission() {
-        return "ipsum.admin";
-    }
 
     private void addSET() {
 
@@ -251,4 +252,6 @@ public class WorldModify extends SimpleCommand {
     public Plugin getPlugin() {
         return plugin;
     }
+
+
 }

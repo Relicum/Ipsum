@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.14-SNAPSHOT</version>
+    <version>1.0.15-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -91,7 +91,7 @@
                 <version>2.9.1</version>
                 <executions>
                     <execution>
-                        <id>non-aggregate</id>
+                        <id>aggregate</id>
                         <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>

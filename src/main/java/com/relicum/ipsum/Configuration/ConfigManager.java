@@ -109,7 +109,7 @@ public class ConfigManager {
      * @return the worlds
      */
     public Worlds getWorld(String name) {
-        //plugin.getLogger().info("Getting Worlds Config for " + name + ": " + worldsHashMap.get(name).toString());
+//        plugin.getLogger().info("Getting Worlds Config for " + name + ": " + worldsHashMap.get(name).toString());
 
         return worldsHashMap.get(name);
     }
@@ -167,7 +167,7 @@ public class ConfigManager {
      * Save all config files
      */
     public void saveAll() {
-
+        System.out.println("Starting save all");
         for (Map.Entry<String, Config> entry : configHashMap.entrySet()) {
 
             try {
@@ -180,11 +180,13 @@ public class ConfigManager {
             }
         }
         for (Map.Entry<String, Worlds> entry : worldsHashMap.entrySet()) {
-
+            System.out.println("Starting world saves");
             try {
                 entry.getValue().save();
+                System.out.println("Successfully saved " + entry.getKey());
                 plugin.getLogger().info("Successfully saved " + entry.getKey());
             } catch (InvalidConfigurationException e) {
+                System.out.println("Error saving world config files");
                 plugin.getLogger().severe("Error saving world config files");
                 throw new RuntimeException(e);
 
