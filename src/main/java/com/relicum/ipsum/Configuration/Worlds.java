@@ -70,7 +70,7 @@ public class Worlds extends Config {
     @Setter
     @Comment("World generator to use Ipsum has a build in void generator")
     @Path("world.defaults.generator")
-    private String generator = "Ipsum";
+    private String generator = "";
 
     @Getter
     @Setter

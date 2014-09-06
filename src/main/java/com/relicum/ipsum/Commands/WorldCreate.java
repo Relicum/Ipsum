@@ -72,9 +72,10 @@ public class WorldCreate extends SimpleCommand {
                 .generateStructures(worlds.getGenerateStructures())
                 .environment(worlds.getEnvironment())
                 .type(worlds.getWorldType())
-                .generator(worlds.getGenerator());
+                .generator(args[1]);
 
         try {
+            worlds.save();
             worldCreator.createWorld();
         } catch (Exception e) {
             throw new RuntimeException(e);

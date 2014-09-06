@@ -26,7 +26,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * ParticleEffect Library v1.4
@@ -258,7 +257,15 @@ public enum ParticleEffect {
         List<Player> players = new ArrayList<>();
         String name = center.getWorld().getName();
         double squared = range * range;
-        players.addAll(Bukkit.getOnlinePlayers().stream().filter(p -> p.getWorld().getName().equals(name) && p.getLocation().distanceSquared(center) <= squared).collect(Collectors.toList()));
+        //players.addAll(Bukkit.getOnlinePlayers().stream().filter(p -> p.getWorld().getName().equals(name) && p.getLocation().distanceSquared(center) <= squared).collect(Collectors.toList()));
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            if (player.getWorld().getName().equals(name) && player.getLocation().distanceSquared(center) <= squared) {
+                players.add(player);
+            }
+        }
+
         return players;
     }
 

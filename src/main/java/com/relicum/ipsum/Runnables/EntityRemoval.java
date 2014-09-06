@@ -18,8 +18,8 @@
 
 package com.relicum.ipsum.Runnables;
 
+import com.relicum.ipsum.Locale.I18N;
 import com.relicum.ipsum.Minecraft.ISender;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * EntityRemoval creates a repeating task that will mark a specified list of enities to be marked for removal.
+ * EntityRemoval creates a repeating task that will mark a specified list of entities for removal.
  *
  * @author Relicum
  * @version 0.0.1
@@ -72,8 +72,8 @@ public class EntityRemoval extends BukkitRunnable implements ISender {
 
     /**
      * Add entity you would like to be marked for removal.
-     * <p>The frequency of the actual removal is not entery specific.
-     * It is detirmined
+     * <p>The frequency of the actual removal is not entity specific.
+     * It is determined
      *
      * @param entity the entity
      */
@@ -125,7 +125,7 @@ public class EntityRemoval extends BukkitRunnable implements ISender {
 
                 nonRemovalCount++;
 
-                plugin.getServer().broadcastMessage(ChatColor.RED + "Removing arrows");
+                plugin.getServer().broadcastMessage(I18N.adminFormat(I18N.STRING("")));
 
                 plugin.getLogger().info("Successfully removed the marked entities");
             }

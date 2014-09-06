@@ -65,6 +65,23 @@ public class SimpleScoreBoardHandler implements IScoreboardManager {
     }
 
     /**
+     * Is board null
+     *
+     * @return {@link java.lang.Boolean} true if the board is null, false if the board is not
+     */
+    public boolean isBoardNull() {
+        try {
+            if (getScoreboard() != null) {
+                return false;
+            }
+        } catch (Exception ignored) {
+
+        }
+
+        return true;
+    }
+
+    /**
      * Gets scoreboard.
      *
      * @return the scoreboard
