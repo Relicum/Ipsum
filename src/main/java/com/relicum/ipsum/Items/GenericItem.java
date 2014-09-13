@@ -104,5 +104,4 @@ public interface GenericItem {
      */
     public GenericItem addUnsafeEnchantment(Enchant enchant);
 
-
 }

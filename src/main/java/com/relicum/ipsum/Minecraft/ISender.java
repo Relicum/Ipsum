@@ -40,7 +40,7 @@ public interface ISender {
      * @param message the message itself
      * @param subs    if the message has placeholders '%s' then you pass the strings in this varargs
      */
-    default void sendMessage(Player player, String message, String[] subs) {
+    default void sendMessage(Player player, String message, String... subs) {
         if (subs != null) {
             player.sendMessage(String.format(ChatColor.translateAlternateColorCodes('&', message), subs[0]));
         } else {
@@ -56,7 +56,7 @@ public interface ISender {
      * @param message the message
      * @param subs    the subs
      */
-    default void sendMessage(MessageType type, Player player, String message, String[] subs) {
+    default void sendMessage(MessageType type, Player player, String message, String... subs) {
 
         if (type.equals(MessageType.STANDARD)) {
             sendMessage(player, message, new String[]{"subs"});

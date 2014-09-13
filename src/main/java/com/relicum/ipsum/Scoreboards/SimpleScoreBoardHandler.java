@@ -153,7 +153,7 @@ public class SimpleScoreBoardHandler implements IScoreboardManager {
      */
     @Override
     public void removeEntry(Score score) {
-
+        getObjective().getScoreboard().resetScores(score.getEntry());
     }
 
     /**
@@ -164,6 +164,7 @@ public class SimpleScoreBoardHandler implements IScoreboardManager {
     @Override
     public void removeAllEntries(Objective objective) {
 
+
     }
 
     /**
@@ -171,6 +172,7 @@ public class SimpleScoreBoardHandler implements IScoreboardManager {
      */
     @Override
     public void removeAllEntries() {
+        getObjective().unregister();
 
     }
 
