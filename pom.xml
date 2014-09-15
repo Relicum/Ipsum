@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.22-SNAPSHOT</version>
+    <version>1.0.23-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -116,7 +116,11 @@
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>relicum-snapshot</id>
+            <id>org.apache</id>
+            <url>http://repository.apache.org/snapshots/</url>
+        </repository>
+        <repository>
+        <id>relicum-snapshot</id>
             <url>http://repository-relicum.forge.cloudbees.com/snapshot/</url>
             <releases>
                 <enabled>false</enabled>
@@ -150,6 +154,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
