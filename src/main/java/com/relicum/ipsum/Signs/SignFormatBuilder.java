@@ -18,8 +18,8 @@
 
 package com.relicum.ipsum.Signs;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import net.minecraft.util.org.apache.commons.lang3.builder.ToStringBuilder;
+import lombok.ToString;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 
 /**
@@ -28,6 +28,7 @@ import org.bukkit.ChatColor;
  * @author Relicum
  * @version 0.0.1
  */
+@ToString
 public class SignFormatBuilder {
 
 
@@ -125,16 +126,5 @@ public class SignFormatBuilder {
     }
 
 
-    /**
-     * To string.
-     *
-     * @return the string
-     */
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("lines", lines)
-                .toString();
-    }
 }
 

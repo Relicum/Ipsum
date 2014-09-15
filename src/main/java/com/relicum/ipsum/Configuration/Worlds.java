@@ -24,7 +24,6 @@ import net.cubespace.Yamler.Config.Comment;
 import net.cubespace.Yamler.Config.Config;
 import net.cubespace.Yamler.Config.ConfigSection;
 import net.cubespace.Yamler.Config.Path;
-import net.minecraft.util.com.google.common.collect.Maps;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldType;
@@ -235,7 +234,7 @@ public class Worlds extends Config {
     }
 
     public Map<String, Object> getWorldDefaults() {
-        Map<String, Object> map = Maps.newHashMap();
+        Map<String, Object> map = new HashMap<>();
 
         map.putAll(defaults);
 

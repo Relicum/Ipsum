@@ -22,7 +22,6 @@ import com.relicum.ipsum.Configuration.ConfigManager;
 import com.relicum.ipsum.Utils.LocUtils;
 import com.relicum.ipsum.Utils.WorldManager;
 import net.cubespace.Yamler.Config.InvalidConfigurationException;
-import net.minecraft.util.com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -56,11 +55,11 @@ public class WorldModify extends SimpleCommand {
 
     private WorldManager worldManager;
 
-    private List<String> WORLDS = Lists.newArrayList();
+    private List<String> WORLDS = new ArrayList<>();
 
-    private List<String> SET = Lists.newArrayList();
+    private List<String> SET = new ArrayList<>();
 
-    private List<String> BOLL = Lists.newArrayList();
+    private List<String> BOLL = new ArrayList<>();
 
     public WorldModify(List<String> aliasess, JavaPlugin plugin, String parentPerm, ConfigManager configManager, WorldManager worldManager) {
         super(aliasess, plugin, parentPerm);

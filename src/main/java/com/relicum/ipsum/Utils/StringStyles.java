@@ -18,8 +18,8 @@
 
 package com.relicum.ipsum.Utils;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import net.minecraft.util.org.apache.commons.lang3.text.StrBuilder;
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.text.StrBuilder;
 import org.bukkit.ChatColor;
 
 /**
@@ -41,7 +41,7 @@ public class StringStyles {
      */
     public static String fullLine(final ChatColor color, final ChatColor color2, final ChatColor style, char character) {
 
-        StrBuilder sb = new StrBuilder();
+        StringBuilder sb = new StringBuilder();
         boolean t = true;
         for (int i = 0; i < 53; i++) {
             if (t) {
