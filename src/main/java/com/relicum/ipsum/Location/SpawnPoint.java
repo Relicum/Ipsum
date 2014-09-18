@@ -20,6 +20,8 @@ package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
 
+import java.lang.reflect.Type;
+
 /**
  * SpawnPoint is a fully working class that represents a single Minecraft {@link org.bukkit.Location} .
  * <p>You can require a different implementation look at {@link com.relicum.ipsum.Location.ExtendedPoint} or
@@ -76,5 +78,13 @@ public class SpawnPoint extends PointInstance {
         this.setPitch(0.0f);
     }
 
+    /**
+     * Get type.
+     *
+     * @return the type
+     */
+    public Type getType() {
 
+        return this.getClass();
+    }
 }

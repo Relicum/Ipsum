@@ -18,12 +18,13 @@
 
 package com.relicum.ipsum.Game;
 
-import com.relicum.ipsum.Configuration.Loc;
+import com.relicum.ipsum.Location.PointsGroup;
+import com.relicum.ipsum.Location.SpawnCollection;
+import com.relicum.ipsum.Location.SpawnPoint;
 import com.relicum.ipsum.Scoreboards.SimpleScoreBoardHandler;
 import com.relicum.ipsum.Utils.CustomSound;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -42,9 +43,8 @@ public abstract class AbstractGame {
 
     private GameState state;
 
-    private Loc spawnLocation;
+    private SpawnCollection<String, String, SpawnPoint> spawnLocations = new SpawnCollection<>();
 
-    private Loc endSpawn;
 
     private Map<UUID, Gamer> gamers = new HashMap<>();
 
@@ -99,6 +99,7 @@ public abstract class AbstractGame {
         }
     }
 
+
     /**
      * This state is used to setup and load a game, when complete players should be able to join the game.
      * <p>You should update the {@link com.relicum.ipsum.Game.GameState} to <strong>WAITING</strong> once everything is
@@ -152,7 +153,7 @@ public abstract class AbstractGame {
     public void addPlayerToGame(Gamer playerData) {
         Validate.notNull(playerData);
         //playerData.setScore(scoreBoardHandler.getObjective().getScore(ChatColor.GOLD + playerData.getName()));
-        playerData.setNextSpawn(getSpawnLocation());
+
         gamers.put(playerData.getPlayer().getUniqueId(), playerData);
 
 
@@ -161,7 +162,7 @@ public abstract class AbstractGame {
 
     public void removePlayer(UUID uuid) {
         gamers.get(uuid).deleteScore();
-        gamers.get(uuid).teleportPlayer(endSpawn.getLocation());
+
         gamers.remove(uuid);
     }
 
@@ -170,15 +171,7 @@ public abstract class AbstractGame {
         return gamers.containsKey(uuid);
     }
 
-    /**
-     * Get game spawn location.
-     *
-     * @return the spawn location where all players start {@link org.bukkit.Location}
-     */
-    public Location getSpawnLocation() {
 
-        return this.spawnLocation.getLocation();
-    }
 
 
     /**
@@ -208,16 +201,6 @@ public abstract class AbstractGame {
         return this.plugin;
     }
 
-
-    /**
-     * Sets spawn location.
-     *
-     * @param spawnLocation the spawn location
-     */
-    public void setSpawnLocation(Loc spawnLocation) {
-        this.spawnLocation = spawnLocation;
-    }
-
     public void runCountdown(String message, String startMessage) {
 
         countDown = new BukkitRunnable() {
@@ -244,4 +227,45 @@ public abstract class AbstractGame {
             }
         }.runTaskTimer(plugin, 200l, 20l);
     }
+
+    /**
+     * Sets the SpawnCollection {@link com.relicum.ipsum.Location.SpawnCollection} object.
+     * <p>This is most like only set if you deserialize the entire object, this method allow you to add all the games spawns
+     * at once.
+     *
+     * @param spawnLocations new instance of {@link com.relicum.ipsum.Location.SpawnCollection} to set.
+     */
+    public void setSpawnLocations(SpawnCollection<String, String, SpawnPoint> spawnLocations) {
+        this.spawnLocations = spawnLocations;
+    }
+
+    /**
+     * Get the SpawnCollection object {@link com.relicum.ipsum.Location.SpawnCollection}
+     *
+     * @return the SpawnLocation Collection
+     */
+    public SpawnCollection<String, String, SpawnPoint> getSpawnLocations() {
+        return spawnLocations;
+    }
+
+    /**
+     * Add PointsGroup {@link com.relicum.ipsum.Location.PointsGroup} to the Collection of spawn groups {@link com.relicum.ipsum.Location.SpawnCollection}
+     *
+     * @param group      the name used to identify the PointsGroup
+     * @param spawnGroup the {@link com.relicum.ipsum.Location.PointsGroup} that is to be added
+     */
+    public void addSpawnGroup(String group, PointsGroup<String, SpawnPoint> spawnGroup) {
+        this.spawnLocations.addPointsGroup(group, spawnGroup);
+    }
+
+    /**
+     * Get a Points group from the collection
+     *
+     * @param group the name used to identify the PointsGroup
+     * @return the points group {@link com.relicum.ipsum.Location.PointsGroup}
+     */
+    public PointsGroup<String, SpawnPoint> getSpawnGroup(String group) {
+        return spawnLocations.getGroup(group);
+    }
+
 }

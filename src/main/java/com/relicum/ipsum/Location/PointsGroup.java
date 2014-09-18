@@ -32,7 +32,7 @@ import java.util.stream.Stream;
  */
 public class PointsGroup<K, V extends Locateable> {
 
-    private Map<K, V> spawns = new HashMap<>();
+    private Map<K, V> spawnGroup = new HashMap<>();
 
     /**
      * Instantiates object to hold a collection of points.
@@ -61,7 +61,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public boolean containsKey(K key) {
 
-        return this.spawns.containsKey(key);
+        return this.spawnGroup.containsKey(key);
     }
 
     /**
@@ -72,7 +72,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public boolean containsValue(V point) {
 
-        return this.spawns.containsValue(point);
+        return this.spawnGroup.containsValue(point);
     }
 
 
@@ -85,7 +85,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public boolean putIfAbsent(K key, V point) {
         try {
-            this.spawns.putIfAbsent(key, point);
+            this.spawnGroup.putIfAbsent(key, point);
             return true;
         } catch (Exception e) {
             return false;
@@ -101,7 +101,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public V remove(K key) {
 
-        return this.spawns.remove(key);
+        return this.spawnGroup.remove(key);
     }
 
     /**
@@ -112,7 +112,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public V get(K key) {
 
-        return this.spawns.get(key);
+        return this.spawnGroup.get(key);
     }
 
     /**
@@ -122,7 +122,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public Stream<V> getStream() {
 
-        return this.spawns.values().stream();
+        return this.spawnGroup.values().stream();
     }
 
     /**
@@ -132,7 +132,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public java.util.Set<Map.Entry<K, V>> entrySet() {
 
-        return this.spawns.entrySet();
+        return this.spawnGroup.entrySet();
     }
 
     /**
@@ -140,7 +140,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public void clear() {
 
-        this.spawns.clear();
+        this.spawnGroup.clear();
     }
 
     /**
@@ -150,7 +150,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public List<V> getPointsList() {
 
-        return spawns.values().stream().collect(Collectors.toList());
+        return spawnGroup.values().stream().collect(Collectors.toList());
     }
 
     /**
@@ -173,7 +173,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public Map<K, V> getPointGroup() {
 
-        return this.spawns;
+        return this.spawnGroup;
     }
 
     /**
@@ -183,6 +183,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public int size() {
 
-        return this.spawns.size();
+        return this.spawnGroup.size();
     }
+
 }
