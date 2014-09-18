@@ -18,11 +18,10 @@
 
 package com.relicum.ipsum.Location;
 
-import com.google.common.collect.Lists;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -151,7 +150,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public List<V> getPointsList() {
 
-        return Lists.newArrayList(spawns.values());
+        return spawns.values().stream().collect(Collectors.toList());
     }
 
     /**
