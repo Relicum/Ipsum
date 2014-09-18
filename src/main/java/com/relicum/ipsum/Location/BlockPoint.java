@@ -16,57 +16,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
+package com.relicum.ipsum.Location;
 
+import com.relicum.ipsum.Utils.MathUtils;
 import org.apache.commons.lang.Validate;
 
 /**
- * AbstractPoint a low memory object for holding Minecraft {@link org.bukkit.Location} .
- * <p>Just extend this class and impliment the {@link #toLocationStr()} method. This is used to create a actual
- * location object when needed.
+ * BlockPoint stores an instance of a minecraft block location.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public abstract class AbstractPoint implements ExtendedPoint {
+public class BlockPoint implements Point, Locateable {
 
-    private double X;
-    private double Y;
-    private double Z;
-    private float yaw;
-    private float pitch;
+    private int X;
+    private int Y;
+    private int Z;
     private String world;
 
-    public AbstractPoint() {
-
-    }
 
     /**
-     * Instantiates a new Abstract point.
+     * Instantiates a new Block location.
      *
      * @param world the world
      * @param x     the x
      * @param y     the y
      * @param z     the z
-     * @param yaw   the yaw
-     * @param pitch the pitch
      */
-    protected AbstractPoint(String world, double x, double y, double z, float yaw, float pitch) {
+    public BlockPoint(String world, int x, int y, int z) {
         X = x;
         Y = y;
         Z = z;
-        this.yaw = yaw;
-        this.pitch = pitch;
         this.world = world;
     }
 
-    protected AbstractPoint(String world, double x, double y, double z) {
-        this.world = world;
-        X = x;
-        Y = y;
-        Z = z;
-        this.pitch = 0.0f;
-        this.yaw = 0.0f;
+    /**
+     * Instantiates a new Block location.
+     */
+    public BlockPoint() {
+
+
     }
 
     /**
@@ -99,6 +88,10 @@ public abstract class AbstractPoint implements ExtendedPoint {
         return Z;
     }
 
+    public String getWorld() {
+        return world;
+    }
+
     /**
      * Sets X point
      *
@@ -107,7 +100,7 @@ public abstract class AbstractPoint implements ExtendedPoint {
     @Override
     public void setX(double pointX) {
         Validate.notNull(pointX);
-        this.X = pointX;
+        X = MathUtils.round(pointX);
     }
 
     /**
@@ -118,7 +111,7 @@ public abstract class AbstractPoint implements ExtendedPoint {
     @Override
     public void setY(double pointY) {
         Validate.notNull(pointY);
-        this.Y = pointY;
+        Y = MathUtils.round(pointY);
     }
 
     /**
@@ -129,7 +122,7 @@ public abstract class AbstractPoint implements ExtendedPoint {
     @Override
     public void setZ(double pointZ) {
         Validate.notNull(pointZ);
-        this.Z = pointZ;
+        Z = MathUtils.round(pointZ);
     }
 
     /**
@@ -143,63 +136,30 @@ public abstract class AbstractPoint implements ExtendedPoint {
         this.world = world;
     }
 
-    /**
-     * Get world.
-     *
-     * @return the string name of the world
-     */
-    public String getWorld() {
 
-        return this.world;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BlockPoint that = (BlockPoint) o;
+
+        return X == that.X && Y == that.Y && Z == that.Z && !(world != null ? !world.equals(that.world) : that.world != null);
+
     }
 
-    /**
-     * A String representation of a Minecraft Location.
-     * <p>This should return the suitable data that can be pasted to a Object to be converted to a {@link org.bukkit.Location}
-     *
-     * @return the string representation of a minecraft location.
-     */
-    public abstract String toLocationStr();
-
-    /**
-     * Gets yaw of the point
-     *
-     * @return the yaw
-     */
     @Override
-    public float getYaw() {
-        return yaw;
+    public int hashCode() {
+        int result = X;
+        result = 31 * result + Y;
+        result = 31 * result + Z;
+        result = 31 * result + (world != null ? world.hashCode() : 0);
+        return result;
     }
 
-    /**
-     * Get pitch of the point
-     *
-     * @return the pitch
-     */
     @Override
-    public float getPitch() {
-        return pitch;
-    }
+    public String toString() {
 
-    /**
-     * Set yaw for the point
-     *
-     * @param yaw the yaw the point will be set to
-     */
-    @Override
-    public void setYaw(float yaw) {
-        Validate.notNull(yaw);
-        this.yaw = yaw;
-    }
-
-    /**
-     * Set pitch for the point
-     *
-     * @param pitch the pitch the point will be set to
-     */
-    @Override
-    public void setPitch(float pitch) {
-        Validate.notNull(pitch);
-        this.pitch = pitch;
+        return getWorld() + "," + getX() + "," + getY() + "," + getZ();
     }
 }

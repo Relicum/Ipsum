@@ -82,6 +82,7 @@ public class PlayerManager<T extends JavaPlugin> {
      * Remove void.
      *
      * @param uuid the uuid of the player to remove
+     * @return the true if the element was successfully removed
      * @throws RuntimeException if the player was unable to be removed
      */
     public boolean remove(UUID uuid) throws RuntimeException {

@@ -102,7 +102,8 @@ public class WorldManager {
      * <p>Any world that is marked as enabled will be loaded with a delayed
      * start to make sure everything else has load first.
      *
-     * @param plug the instance of your plugins main class
+     * @param plug          the instance of your plugins main class
+     * @param configManager the configManager
      */
     public WorldManager(Plugin plug, ConfigManager configManager) {
 
@@ -206,7 +207,7 @@ public class WorldManager {
                 c++;
 
             }
-        }.runTaskTimer(getPlugin(),60l,40l);
+        }.runTaskTimer(getPlugin(), 60l, 40l);
 
 
     }

@@ -20,6 +20,8 @@ package com.relicum.ipsum.Game;
 
 import com.relicum.ipsum.Configuration.GameRanks;
 import com.relicum.ipsum.Configuration.RankMap;
+import com.relicum.ipsum.Location.PointsGroup;
+import com.relicum.ipsum.Location.SpawnPoint;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -54,7 +56,7 @@ public class GamerData {
 
     private ArrayList<String> knowAliases = new ArrayList<>();
 
-    private GamePointGroup gamePointGroup = new GamePointGroup();
+    private PointsGroup<String, SpawnPoint> gamePointGroup = new PointsGroup<>();
 
     public GamerData() {
         this.lastSeen = System.currentTimeMillis();
@@ -262,7 +264,7 @@ public class GamerData {
      *
      * @param gamePointGroup New value of gamePointGroup.
      */
-    public void setGamePointGroup(GamePointGroup gamePointGroup) {
+    public void setGamePointGroup(PointsGroup<String, SpawnPoint> gamePointGroup) {
         this.gamePointGroup = gamePointGroup;
     }
 
@@ -271,7 +273,7 @@ public class GamerData {
      *
      * @return Value of gamePointGroup.
      */
-    public GamePointGroup getGamePointGroup() {
+    public PointsGroup<String, SpawnPoint> getGamePointGroup() {
         return gamePointGroup;
     }
 

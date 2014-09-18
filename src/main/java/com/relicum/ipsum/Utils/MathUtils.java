@@ -26,19 +26,23 @@ package com.relicum.ipsum.Utils;
  */
 public final class MathUtils {
 
-    /**
-     * Block coordinate for double, especially important for negative numbers.
-     * (Adapted From Bukkit/NumberConversions.)
-     * <p>
-     * Thanks to asofold for this method.
-     *
-     * @param x {@link java.lang.Double}
-     * @return the Block coordinate for double
-     */
-    public static int floor(final double x) {
 
-        final int floor = (int) x;
-        return (floor == x) ? floor : floor - (int) (Double.doubleToRawLongBits(x) >>> 63);
+    public static int floor(double num) {
+        final int floor = (int) num;
+        return floor == num ? floor : floor - (int) (Double.doubleToRawLongBits(num) >>> 63);
+    }
+
+    public static int ceil(final double num) {
+        final int floor = (int) num;
+        return floor == num ? floor : floor + (int) (~Double.doubleToRawLongBits(num) >>> 63);
+    }
+
+    public static int round(double num) {
+        return floor(num + 0.5d);
+    }
+
+    public static double square(double num) {
+        return num * num;
     }
 
     /**

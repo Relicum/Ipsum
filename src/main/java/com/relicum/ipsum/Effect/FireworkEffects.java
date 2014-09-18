@@ -28,16 +28,19 @@ import java.lang.reflect.Method;
 import java.util.Random;
 
 /**
- * <tt>FireworkEffects</tt> all in one class to play a firework effect at a given location. <p>A pre defined {@link org.bukkit.FireworkEffect} is passed the power of the effect is
- * internal randomised between 0 and 2. <p>FireworkEffects provides a thread-safe and (reasonably) version independent way to instantly explode a FireworkEffect at a given
- * location. You are welcome to use, redistribute, modify and destroy your own copies of this source with the following conditions:
+ * FireworkEffects all in one class to play a firework effect at a given location.
+ * <p>A pre defined {@link org.bukkit.FireworkEffect} is passed the power of the effect is
+ * internal randomised between 0 and 2.
+ * <p>FireworkEffects provides a thread-safe and (reasonably) version independent way to instantly explode a FireworkEffect at a given location. You are welcome to use, redistribute, modify and destroy your own copies of this source
+ * <p>with the following conditions.
  * <p>
- * <p>
- * <ol> <li> No warranty is given or implied. </li> <li> All damage is your own responsibility. </li> <li> The source was based off Codename_B code and you must include him as
- * the original author.
- * </li><li>If you modify this version you must also included Relicum as a contributor to the class</li> </ol>
- * <p>
- * <p><tt>Thanks to Codename_B for allowing this code to be used and modified, modifications by Relicum</tt>
+ * <ol>
+ * <li> No warranty is given or implied.</li>
+ * <li> All damage is your own responsibility.</li>
+ * <li> The source was based off Codename_B code and you must include him as the original author.</li>
+ * <li>If you modify this version you must also included Relicum as a contributor to the class</li>
+ * </ol>
+ * <p> <tt>Thanks to Codename_B for allowing this code to be used and modified, modifications by Relicum</tt>
  *
  * @author Codename_B and Relicum
  */

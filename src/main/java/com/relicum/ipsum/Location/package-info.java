@@ -16,38 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
-
 /**
- * The interface Extended point.
+ * Various Location interfaces and Classes
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface ExtendedPoint extends Point {
-
-    /**
-     * Gets yaw of the point
-     *
-     * @return the yaw
-     */
-    public float getYaw();
-
-    /**
-     * Get pitch of the point
-     *
-     * @return the pitch
-     */
-    public float getPitch();
-
-    /**
-     * Set yaw for the point
-     *
-     * @param yaw the yaw the point will be set to
-     */
-    public void setYaw(float yaw);
-
-    /**
-     * Set pitch for the point
-     *
-     * @param pitch the pitch the point will be set to
-     */
-    public void setPitch(float pitch);
-}
+package com.relicum.ipsum.Location;

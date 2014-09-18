@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
+package com.relicum.ipsum.Location;
 
 /**
  * Point simple interface to define an object that has 3 points to it and the world that it is located in.
