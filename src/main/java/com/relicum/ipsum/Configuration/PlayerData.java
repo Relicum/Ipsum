@@ -32,7 +32,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * PlayerData Stores player data in a separate yml file, used to create a yml database of player data
+ * PlayerData Stores player data in a separate yml file, used to create a yml database of player data.
+ * <p>This is very similar to {@link com.relicum.ipsum.Configuration.PersistentPlayer} except the storage is in yml using Yamler.
  *
  * @author Relicum
  * @version 0.0.1

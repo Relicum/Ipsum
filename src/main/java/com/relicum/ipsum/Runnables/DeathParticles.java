@@ -46,7 +46,7 @@ public class DeathParticles implements Runnable {
     public void run() {
 
         ParticleEffect.ANGRY_VILLAGER.display(entity.getEyeLocation(), 1.0f, 1.0f, 1.0f, 0.1f, 40);
-        //ParticleEffect.RED_DUST.display(entity.getEyeLocation(), 0.6f, 0.6f, 0.6f, 0.40f, 50);
+        ParticleEffect.FLAME.display(entity.getEyeLocation(), 1.5f, 1.5f, 1.5f, 0.1f, 50);
 
     }
 }
