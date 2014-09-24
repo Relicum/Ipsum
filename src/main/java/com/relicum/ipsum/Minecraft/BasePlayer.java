@@ -19,6 +19,7 @@
 package com.relicum.ipsum.Minecraft;
 
 import com.relicum.ipsum.Location.Locateable;
+import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -52,7 +53,7 @@ public interface BasePlayer extends Locateable {
      * @param uuid the uuid
      * @return the {@link org.bukkit.entity.Player}
      */
-    public Player getPlayer(UUID uuid);
+    public Player getPlayer(@NonNull UUID uuid);
 
     /**
      * Get player by {@link String} this should not be used if doing a full lookup {@link org.bukkit.entity.Player} are indexed by {@link java.util.UUID} now
@@ -60,7 +61,16 @@ public interface BasePlayer extends Locateable {
      * @param name the {@link String} name of the player
      * @return the player
      */
-    public Player getPlayer(String name);
+    public Player getPlayer(@NonNull String name);
+
+
+    /**
+     * Get {@link org.bukkit.entity.Player} object using first the stored {@link java.util.UUID} fallback to using player name.
+     *
+     * @return the {@link org.bukkit.entity.Player}
+     */
+    public Player getPlayer();
+
 
     /**
      * Get the current {@link org.bukkit.Location} of the player
@@ -75,5 +85,12 @@ public interface BasePlayer extends Locateable {
      * @return true if they are an server operator false if not.
      */
     public boolean isOp();
+
+    /**
+     * Is {@link org.bukkit.entity.Player} currently online.
+     *
+     * @return true if the player is online, false if they are offline.
+     */
+    public boolean isOnline();
 
 }

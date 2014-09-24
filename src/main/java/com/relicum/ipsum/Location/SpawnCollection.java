@@ -18,8 +18,12 @@
 
 package com.relicum.ipsum.Location;
 
+import lombok.ToString;
+import lombok.Value;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * SpawnCollection stores a Map of {@link com.relicum.ipsum.Location.PointsGroup}
@@ -30,7 +34,8 @@ import java.util.List;
 public class SpawnCollection<K, R, T extends Locateable> {
 
     private HashMap<K, PointsGroup<R, T>> spawnCollection = new HashMap<>();
-
+    private K key;
+    private Map<R, T> map = new HashMap<>();
 
     /**
      * Instantiates a new Spawn collection.
@@ -82,6 +87,14 @@ public class SpawnCollection<K, R, T extends Locateable> {
     public List<T> getGroupAsList(K key) {
 
         return spawnCollection.get(key).getPointsList();
+
+    }
+
+    @ToString(includeFieldNames = true)
+    @Value(staticConstructor = "of")
+    public static class Example<K, R, T extends Locateable> {
+
+        private HashMap<K, PointsGroup<R, T>> spawnCollection = new HashMap<>();
 
     }
 
