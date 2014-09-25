@@ -30,7 +30,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Name: RecipeBuilder.java Created: 25 September 2014
+ * RecipeBuilder is used to create custom recipes with a builder it also is serializable to YML.
+ * <p>Use {@link com.relicum.ipsum.Items.SimpleItemFactory} to make it even quicker to build the recipe result.
+ * The entire object can be saved and load from a yml file as it implements {@link org.bukkit.configuration.serialization.ConfigurationSerializable} .
+ * <p>The builder currently will only make a {@link org.bukkit.inventory.ShapedRecipe} .
  *
  * @author Relicum
  * @version 0.0.1
@@ -42,50 +45,113 @@ public class RecipeBuilder implements ConfigurationSerializable {
     private String[] rows = new String[3];
     private Map<String, ItemStack> ingredients = new HashMap<>();
 
+    /**
+     * Instantiates a new RecipeBuilder with the argument being the recipe result.
+     *
+     * @param result the {@link org.bukkit.inventory.ItemStack} that will be produce after crafting.
+     */
     public RecipeBuilder(ItemStack result) {
 
         this.output = new ItemStack(result);
     }
 
+    /**
+     * Instantiates a new RecipeBuilder.
+     */
     public RecipeBuilder() {
 
     }
 
+    /**
+     * Add the {@link org.bukkit.inventory.ItemStack} that will be produce after crafting.
+     * <p>You only need to use this if you didn't pass it to the constructor.
+     *
+     * @param res the {@link org.bukkit.inventory.ItemStack} that will be produce after crafting.
+     * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
+     */
     public RecipeBuilder addResult(ItemStack res) {
         output = new ItemStack(res);
         return this;
     }
 
+    /**
+     * Add top row of the crafting grid.
+     * <p>This MUST be a string of length of 3, adding any Characters you want to use as part of the recipe.
+     * See {@link org.bukkit.inventory.ShapedRecipe} for more details
+     * <code>
+     * String top = " T ";
+     * </code>
+     * The example above would make the top row, with an item in the middle with nothing either side.
+     *
+     * @param top the top row of the shape
+     * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
+     */
     public RecipeBuilder addTopRow(String top) {
         this.rows[0] = top;
         return this;
 
     }
 
+    /**
+     * Add middle row of the crafting grid.
+     * <p>This MUST be a string of length of 3,adding any Characters you want to use as part of the recipe.
+     * See {@link org.bukkit.inventory.ShapedRecipe} for more details
+     * <code>
+     *     String middle = "S S";
+     * </code>
+     * The example above would make the middle row, with an item either side and nothing in the middle.
+     *
+     * @param middle the middle row of the shape.
+     * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
+     */
     public RecipeBuilder addMiddleRow(String middle) {
         this.rows[1] = middle;
         return this;
 
     }
 
+    /**
+     * Add bottom row of the crafting grid.
+     * <p>This MUST be a string of length of 3,adding any Characters you want to use as part of the recipe.
+     * See {@link org.bukkit.inventory.ShapedRecipe} for more details
+     * <code>
+     *     String bottom = "STS";
+     * </code>
+     * The example above would make the bottom row, with an item either side and a different item in the middle.
+     *
+     * @param bottom the bottom row of the shape.
+     * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
+     */
     public RecipeBuilder addBottomRow(String bottom) {
         this.rows[2] = bottom;
         return this;
 
     }
 
+    /**
+     * Add an ingredient to match the characters used in the rows, Each character used in the row must be included here.
+     * <p>If you have used a character more than once you DO NOT need to add it more than once here. r the blanks in the rows
+     * you do not need to include anything, do not add air blocks for blanks or the player will need air blocks to craft it.
+     *
+     * @param c the {@link java.lang.Character} that matches a character used in the rows.
+     * @param m the {@link org.bukkit.Material} that it represents, which the player will use for crafting.
+     * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
+     */
     public RecipeBuilder addIngredient(Character c, Material m) {
         ingredients.put(String.valueOf(c), new ItemStack(m));
         return this;
 
     }
 
-    public RecipeBuilder addIngredient(Character c, Material m, int a) {
-        ingredients.put(String.valueOf(c), new ItemStack(m, a));
-        return this;
 
-    }
-
+    /**
+     * Gets the {@link org.bukkit.inventory.ShapedRecipe} itself.
+     * <p>Only call this when you are sure you have added everything. The result of this method can be used to add the custom recipe
+     * to the server. {@link org.bukkit.Server#addRecipe(org.bukkit.inventory.Recipe)} for details.
+     *
+     *
+     * @return the instance of {@link org.bukkit.inventory.ShapedRecipe}
+     */
     public ShapedRecipe getRecipe() {
 
         ShapedRecipe recipe = new ShapedRecipe(output);
@@ -98,6 +164,9 @@ public class RecipeBuilder implements ConfigurationSerializable {
 
     }
 
+    /**
+     * Clears all values from the object.
+     */
     public void clear() {
         rows = new String[3];
         ingredients.clear();
@@ -121,6 +190,10 @@ public class RecipeBuilder implements ConfigurationSerializable {
         Object objOut = map.get("output"),
                 objRows = map.get("shape"),
                 objIng = map.get("ingredients");
+        if(objOut == null || objRows == null || objIng == null) {
+            throw new NullPointerException("Unable to deserialize RecipeBuilder due to some of the values being null");
+
+        }
 
         String[] r = ((ArrayList<String>) objRows).toArray(new String[3]);
 
@@ -128,6 +201,9 @@ public class RecipeBuilder implements ConfigurationSerializable {
 
     }
 
+    /**
+     * Instantiates a new RecipeBuilder used internally to deserialize the object.
+     */
     protected RecipeBuilder(ItemStack output, String[] rows, Map<String, ItemStack> ingredients) {
         this.output = new ItemStack(output);
         this.rows = rows;
