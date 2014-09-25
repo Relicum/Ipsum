@@ -27,12 +27,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 /**
- * The type Ipsum.
+ * The type Ipsum this class should NEVER be extended.
  */
 public class Ipsum extends JavaPlugin {
 
     private static Ipsum instance;
-
 
     /**
      * Gets instance.
@@ -42,6 +41,7 @@ public class Ipsum extends JavaPlugin {
     public static Ipsum getInstance() {
 
         return instance;
+
 
     }
 
@@ -57,8 +57,6 @@ public class Ipsum extends JavaPlugin {
     public void onEnable() {
 
         instance = this;
-
-
     }
 
     /**
@@ -67,7 +65,7 @@ public class Ipsum extends JavaPlugin {
     @Override
     public void onDisable() {
 
-
+        getServer().clearRecipes();
     }
 
 
@@ -115,4 +113,5 @@ public class Ipsum extends JavaPlugin {
 
         return new WorldGenerator();
     }
+
 }

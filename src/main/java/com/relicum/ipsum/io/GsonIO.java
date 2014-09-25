@@ -19,7 +19,6 @@
 package com.relicum.ipsum.io;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
@@ -37,8 +36,8 @@ import java.nio.file.Path;
  */
 public class GsonIO {
 
-    private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting().serializeNulls();
-    private static final Gson gson = builder.create();
+    //private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting().serializeNulls();
+    private static final Gson gson = GsonLoader.gson;
 
     /**
      * Return a new {@link com.google.gson.stream.JsonReader} at the specified {@link java.nio.file.Path} location
@@ -91,4 +90,5 @@ public class GsonIO {
         reader.close();
         return clazz;
     }
+
 }
