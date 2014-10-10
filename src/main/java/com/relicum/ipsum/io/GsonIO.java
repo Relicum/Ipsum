@@ -19,9 +19,9 @@
 package com.relicum.ipsum.io;
 
 
-import net.minecraft.util.com.google.gson.Gson;
-import net.minecraft.util.com.google.gson.stream.JsonReader;
-import net.minecraft.util.com.google.gson.stream.JsonWriter;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -41,10 +41,10 @@ public class GsonIO {
     private static final Gson gson = GsonLoader.gson;
 
     /**
-     * Return a new {@link net.minecraft.util.com.google.gson.stream.JsonReader} at the specified {@link java.nio.file.Path} location
+     * Return a new {@link com.google.gson.stream.JsonReader} at the specified {@link java.nio.file.Path} location
      *
      * @param path the location on disk of the file to create the reader from
-     * @return the {@link net.minecraft.util.com.google.gson.stream.JsonReader}
+     * @return the {@link com.google.gson.stream.JsonReader}
      * @throws java.io.IOException if there was an exception while trying to create the reader
      */
     public static JsonReader reader(Path path) throws IOException {

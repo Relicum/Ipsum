@@ -19,9 +19,9 @@
 package com.relicum.ipsum.io;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.relicum.ipsum.io.Adapter.UUIDAdapter;
-import net.minecraft.util.com.google.gson.Gson;
-import net.minecraft.util.com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Modifier;
 import java.util.UUID;

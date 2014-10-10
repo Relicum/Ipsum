@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 
 /**
  * BlockPoint stores an instance of a minecraft block location.
@@ -121,6 +121,7 @@ public class BlockPoint implements Point, Locateable {
      */
     @Override
     public void setZ(double pointZ) {
+
         Validate.notNull(pointZ);
         Z = MathUtils.round(pointZ);
     }
