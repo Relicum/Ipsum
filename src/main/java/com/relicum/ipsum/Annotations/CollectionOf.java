@@ -16,34 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Utils;
+package com.relicum.ipsum.Annotations;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import org.bukkit.configuration.ConfigurationSection;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.ArrayList;
+import java.util.Collection;
 
-/**
- * ConfigSectionBuilder is WIP
- *
- * @author Relicum
- * @version 0.0.1
- */
-public class ConfigSectionBuilder {
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface CollectionOf {
 
-    private ConfigurationSection section;
+    Class<?> value();
 
-    public ConfigSectionBuilder(ConfigurationSection cs) {
-        Validate.notNull(cs);
-        this.section = cs;
+    @SuppressWarnings("rawtypes") Class<? extends Collection> type() default ArrayList.class;
 
-    }
-
-
-    /**
-     * Gets ConfigurationSection
-     *
-     * @return the ConfigurationSection
-     */
-    public ConfigurationSection getSection() {
-        return section;
-    }
 }

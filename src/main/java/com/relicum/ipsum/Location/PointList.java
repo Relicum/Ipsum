@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Location;
 
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  * <p>This is mainly part of a GSON IO system I am working on, but it can be used for any other purpose.
  * This is currently not thread safe.
  *
- *@author Relicum
+ * @author Relicum
  */
 public class PointList<T extends Locateable> {
 

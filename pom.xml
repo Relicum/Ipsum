@@ -2,11 +2,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.relicum</groupId>
+    <parent>
+        <groupId>com.relicum</groupId>
+        <artifactId>Ipsum-Parent</artifactId>
+        <version>1.0.31-SNAPSHOT</version>
+    </parent>
+
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.30-SNAPSHOT</version>
+    <version>1.0.31-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -68,6 +73,10 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <finalName>${project.name}-${project.version}</finalName>
+                    <useBaseVersion>true</useBaseVersion>
+                    <shadedClassifierName/>
+                    <outputDirectory>${project.basedir}</outputDirectory>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -86,6 +95,12 @@
                                 <include>**</include>
                             </includes>
                         </filter>
+                        <filter>
+                            <artifact>com.sk89q:command-framework-bukkit</artifact>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </filter>
                     </filters>
                     <relocations>
                         <relocation>
@@ -94,6 +109,14 @@
                             </pattern>
                             <shadedPattern>
                                 com.relicum.ipsum.jchatter
+                            </shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>
+                                com.sk89q
+                            </pattern>
+                            <shadedPattern>
+                                com.relicum.ipsum.Commands
                             </shadedPattern>
                         </relocation>
                     </relocations>
@@ -129,10 +152,14 @@
     <repositories>
         <repository>
             <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
+            <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
-            <id>org.apache</id>
+            <id>repo.oc.tc</id>
+            <url>https://repo.oc.tc/content/repositories/public/</url>
+        </repository>
+        <repository>
+        <id>org.apache</id>
             <url>http://repository.apache.org/snapshots/</url>
         </repository>
         <repository>
@@ -167,7 +194,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
+            <groupId>com.sk89q</groupId>
+            <artifactId>command-framework-bukkit</artifactId>
+            <version>0.5-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+        <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5-SNAPSHOT</version>
             <scope>compile</scope>
@@ -183,7 +216,9 @@
             <artifactId>bukkit</artifactId>
             <version>1.7.10-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.codemine</groupId>
             <artifactId>BukkitRun</artifactId>
@@ -193,11 +228,17 @@
         <dependency>
             <groupId>org.codemine</groupId>
             <artifactId>jchat</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>1.0.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.7.10-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.4</version>
             <scope>provided</scope>
@@ -229,7 +270,7 @@
                         <version>2.4</version>
                         <configuration>
                             <finalName>${project.name}-${project.version}</finalName>
-                            <outputDirectory>G:\Users\Relicum\IdeaProjects\SuperSky\SuperSkyBros\dist\plugins
+                            <outputDirectory>G:\Users\Relicum\IdeaProjects\Restrict\dist\plugins
                             </outputDirectory>
                         </configuration>
                     </plugin>

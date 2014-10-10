@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Location;
 
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
  * PointInstance a low memory object for holding Minecraft {@link org.bukkit.Location} .

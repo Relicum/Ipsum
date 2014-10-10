@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.30-SNAPSHOT
+Ipsum Gaming Commons 1.0.31-SNAPSHOT
 ====
 
 Providing All you need to create mini games and plugins
@@ -48,7 +48,18 @@ Includes custom display name, custom lore and adding an Enchantment.
 Designed and Built by Relicum
 -----
 
+External Contributors
+===
+This plugin includes the sk89q-command-framework, all copyrights belong @Sk89q and is licensed under GPL3
+---
+```
+The sk89q-command-framework source can be located at https://github.com/OvercastNetwork/sk89q-command-framework 
+```
+
+---
+
+
 `Build for Bukkit and Spigot 1.7.10-R0.1`
 
-``This will be built using the Prototyping method, build them quick and build them often.
-What this means is I will code parts release, play test, listen to feedback and carry on.``
+`This will be built using the Prototyping method, build them quick and build them often.
+What this means is I will code parts release, play test, listen to feedback and carry on.`

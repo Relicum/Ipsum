@@ -48,7 +48,7 @@ public class WorldManager {
 
     private String type = WorldType.FLAT.getName();
 
-    private String generator = "LuckyCrates";
+    private String generator = "";
 
     private Boolean generateStructures = false;
 

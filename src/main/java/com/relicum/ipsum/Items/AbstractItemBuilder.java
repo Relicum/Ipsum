@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Items;
 
 import lombok.ToString;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -49,11 +49,11 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
 
     protected String displayName;
 
-    protected List<String> lore = new ArrayList<String>();
+    protected List<String> lore = new ArrayList<>();
 
     protected MaterialData materialData;
 
-    protected List<Enchant> enchantments = new ArrayList<Enchant>();
+    protected List<Enchant> enchantments = new ArrayList<>();
 
     protected MetaType metaType;
 

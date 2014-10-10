@@ -16,34 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Utils;
+package com.relicum.ipsum.Location;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import org.bukkit.configuration.ConfigurationSection;
+import com.relicum.ipsum.Annotations.CollectionOf;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * ConfigSectionBuilder is WIP
+ * PointCollection wrapped Collection of {@link com.relicum.ipsum.Location.SpawnPoint}
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class ConfigSectionBuilder {
+public class PointCollection {
 
-    private ConfigurationSection section;
 
-    public ConfigSectionBuilder(ConfigurationSection cs) {
-        Validate.notNull(cs);
-        this.section = cs;
+    @CollectionOf(value = SpawnPoint.class, type = ArrayList.class)
+    Collection<SpawnPoint> pointCollection;
+
+    /**
+     * Instantiates a new empty PointCollection.
+     */
+    @SuppressWarnings("unchecked")
+    public PointCollection() {
+        pointCollection = new ArrayList<>();
 
     }
 
-
     /**
-     * Gets ConfigurationSection
+     * Get wrapped Collection of {@link com.relicum.ipsum.Location.SpawnPoint}
      *
-     * @return the ConfigurationSection
+     * @return the wrapped collection
      */
-    public ConfigurationSection getSection() {
-        return section;
+    public Collection<SpawnPoint> getCollection() {
+        return pointCollection;
     }
 }

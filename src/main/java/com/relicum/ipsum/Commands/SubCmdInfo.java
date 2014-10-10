@@ -16,34 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Utils;
+package com.relicum.ipsum.Commands;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import org.bukkit.configuration.ConfigurationSection;
+import java.lang.annotation.*;
 
 /**
- * ConfigSectionBuilder is WIP
+ * SubCmdInfo this needs to be applied to all classes that extend {@link com.relicum.ipsum.Commands.SubCommand}.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class ConfigSectionBuilder {
+@Documented
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface SubCmdInfo {
 
-    private ConfigurationSection section;
+    public String name();
 
-    public ConfigSectionBuilder(ConfigurationSection cs) {
-        Validate.notNull(cs);
-        this.section = cs;
+    public String description();
 
-    }
+    public String usage();
 
+    public String label();
 
-    /**
-     * Gets ConfigurationSection
-     *
-     * @return the ConfigurationSection
-     */
-    public ConfigurationSection getSection() {
-        return section;
-    }
+    public String permission();
+
+    public int minArgs();
+
+    public int maxArgs();
+
+    public boolean playerOnly();
+
+    public boolean subCommand();
+
+    public String subPrefix();
+
 }

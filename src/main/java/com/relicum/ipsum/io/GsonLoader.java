@@ -18,10 +18,13 @@
 
 package com.relicum.ipsum.io;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import com.relicum.ipsum.io.Adapter.UUIDAdapter;
+import net.minecraft.util.com.google.gson.Gson;
+import net.minecraft.util.com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Modifier;
+import java.util.UUID;
 
 /**
  * Name: GsonLoader.java Created: 25 September 2014
@@ -37,9 +40,10 @@ public class GsonLoader {
     public static GsonBuilder getGsonBuilder() {
         return new GsonBuilder()
                 .setPrettyPrinting()
+                .serializeNulls()
                 .disableHtmlEscaping()
-                .excludeFieldsWithModifiers(Modifier.TRANSIENT);
-        // .registerTypeAdapter(UUID.class, UUIDAdapter.get())
+                .excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                .registerTypeAdapter(UUID.class, UUIDAdapter.get());
         // .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get())
         // .registerTypeAdapter(Inventory.class, InventoryAdapter.get())
         //  .registerTypeAdapter(PlayerInventory.class, PlayerInventoryAdapter.get())

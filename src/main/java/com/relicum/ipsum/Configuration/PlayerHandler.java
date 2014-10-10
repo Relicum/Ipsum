@@ -18,11 +18,11 @@
 
 package com.relicum.ipsum.Configuration;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.relicum.ipsum.Game.GamerData;
 import com.relicum.ipsum.io.GsonIO;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.com.google.gson.Gson;
+import net.minecraft.util.com.google.gson.GsonBuilder;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;

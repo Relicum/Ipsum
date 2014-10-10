@@ -23,6 +23,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,15 +43,30 @@ import java.util.Map;
 public class RecipeBuilder implements ConfigurationSerializable {
 
     private ItemStack output;
-    private String[] rows = new String[3];
-    private Map<String, ItemStack> ingredients = new HashMap<>();
+    private String[] rows = null;
+    private Map<String, String> ingredients = new HashMap<>();
 
     /**
-     * Instantiates a new RecipeBuilder with the argument being the recipe result.
+     * Instantiates a new RecipeBuilder to create a shaped recipe.
      *
      * @param result the {@link org.bukkit.inventory.ItemStack} that will be produce after crafting.
      */
     public RecipeBuilder(ItemStack result) {
+        this.rows = new String[3];
+        this.output = new ItemStack(result);
+    }
+
+    /**
+     * Instantiates a new RecipeBuilder to create either a shaped or a shapeless recipe.
+     *
+     * @param result    the result
+     * @param shapeLess set to true if the recipe is shapeless or false for a shaped recipe.
+     */
+    public RecipeBuilder(ItemStack result, Boolean shapeLess) {
+
+        if (!shapeLess) {
+            this.rows = new String[3];
+        }
 
         this.output = new ItemStack(result);
     }
@@ -97,7 +113,7 @@ public class RecipeBuilder implements ConfigurationSerializable {
      * <p>This MUST be a string of length of 3,adding any Characters you want to use as part of the recipe.
      * See {@link org.bukkit.inventory.ShapedRecipe} for more details
      * <code>
-     *     String middle = "S S";
+     * String middle = "S S";
      * </code>
      * The example above would make the middle row, with an item either side and nothing in the middle.
      *
@@ -115,7 +131,7 @@ public class RecipeBuilder implements ConfigurationSerializable {
      * <p>This MUST be a string of length of 3,adding any Characters you want to use as part of the recipe.
      * See {@link org.bukkit.inventory.ShapedRecipe} for more details
      * <code>
-     *     String bottom = "STS";
+     * String bottom = "STS";
      * </code>
      * The example above would make the bottom row, with an item either side and a different item in the middle.
      *
@@ -138,7 +154,7 @@ public class RecipeBuilder implements ConfigurationSerializable {
      * @return an instance of {@link com.relicum.ipsum.Items.Recipes.RecipeBuilder} to allow the chaining of methods.
      */
     public RecipeBuilder addIngredient(Character c, Material m) {
-        ingredients.put(String.valueOf(c), new ItemStack(m));
+        ingredients.put(String.valueOf(c), m.name());
         return this;
 
     }
@@ -149,19 +165,43 @@ public class RecipeBuilder implements ConfigurationSerializable {
      * <p>Only call this when you are sure you have added everything. The result of this method can be used to add the custom recipe
      * to the server. {@link org.bukkit.Server#addRecipe(org.bukkit.inventory.Recipe)} for details.
      *
-     *
      * @return the instance of {@link org.bukkit.inventory.ShapedRecipe}
      */
     public ShapedRecipe getRecipe() {
 
+
         ShapedRecipe recipe = new ShapedRecipe(output);
         recipe.shape(rows);
-        for (Map.Entry<String, ItemStack> entry : ingredients.entrySet()) {
-            recipe.setIngredient(entry.getKey().charAt(0), entry.getValue().getData());
+
+        for (Map.Entry<String, String> entry : ingredients.entrySet()) {
+            recipe.setIngredient(entry.getKey().charAt(0), Material.valueOf(entry.getValue()));
         }
 
         return recipe;
 
+    }
+
+    public ShapelessRecipe getShapeLessRecipe() {
+
+        ShapelessRecipe recipe = new ShapelessRecipe(output);
+
+        for (Map.Entry<String, String> entry : ingredients.entrySet()) {
+            recipe.addIngredient(Integer.valueOf(entry.getKey()), Material.valueOf(entry.getValue()));
+        }
+
+        return recipe;
+
+    }
+
+    public CustomRecipe build() {
+        if (rows != null)
+            return new CustomRecipe(output, ingredients, rows);
+
+        return new CustomRecipe(output, ingredients);
+    }
+
+    public CustomRecipe buildShapeLess() {
+        return null;
     }
 
     /**
@@ -178,7 +218,9 @@ public class RecipeBuilder implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>(3);
         map.put("output", output);
-        map.put("shape", rows);
+        if (rows != null) {
+            map.put("shape", rows);
+        }
         map.put("ingredients", ingredients);
 
         return map;
@@ -186,27 +228,49 @@ public class RecipeBuilder implements ConfigurationSerializable {
 
     @SuppressWarnings("unchecked")
     public static RecipeBuilder deserialize(Map<String, Object> map) {
-
-        Object objOut = map.get("output"),
-                objRows = map.get("shape"),
-                objIng = map.get("ingredients");
-        if(objOut == null || objRows == null || objIng == null) {
+        Object objRows = null;
+        Object objOut = map.get("output");
+        if (map.containsKey("shape")) {
+            objRows = map.get("shape");
+        }
+        Object objIng = map.get("ingredients");
+        if (objOut == null || objIng == null) {
             throw new NullPointerException("Unable to deserialize RecipeBuilder due to some of the values being null");
 
         }
 
-        String[] r = ((ArrayList<String>) objRows).toArray(new String[3]);
+        if (objRows != null) {
 
-        return new RecipeBuilder((ItemStack) objOut, r, (Map<String, ItemStack>) objIng);
+            String[] r = ((ArrayList<String>) objRows).toArray(new String[3]);
 
+            return new RecipeBuilder((ItemStack) objOut, r, (Map<String, String>) objIng);
+        } else
+            return new RecipeBuilder((ItemStack) objOut, (Map<String, String>) objIng);
     }
+
 
     /**
      * Instantiates a new RecipeBuilder used internally to deserialize the object.
+     *
+     * @param output      the output
+     * @param rows        the rows
+     * @param ingredients the ingredients
      */
-    protected RecipeBuilder(ItemStack output, String[] rows, Map<String, ItemStack> ingredients) {
+    protected RecipeBuilder(ItemStack output, String[] rows, Map<String, String> ingredients) {
         this.output = new ItemStack(output);
         this.rows = rows;
+        this.ingredients = ingredients;
+    }
+
+
+    /**
+     * Instantiates a new RecipeBuilder used internally to deserialize the object.
+     *
+     * @param output      the output
+     * @param ingredients the ingredients
+     */
+    protected RecipeBuilder(ItemStack output, Map<String, String> ingredients) {
+        this.output = new ItemStack(output);
         this.ingredients = ingredients;
     }
 

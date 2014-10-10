@@ -16,34 +16,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Utils;
+package com.relicum.ipsum.Items.Recipes;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.Recipe;
 
 /**
- * ConfigSectionBuilder is WIP
+ * Name: Craftable.java Created: 27 September 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class ConfigSectionBuilder {
-
-    private ConfigurationSection section;
-
-    public ConfigSectionBuilder(ConfigurationSection cs) {
-        Validate.notNull(cs);
-        this.section = cs;
-
-    }
-
+public interface CraftAble {
 
     /**
-     * Gets ConfigurationSection
+     * Gets the type Recipe used to craft the required item.
+     * <p>This will either return an instance of ShapedRecipe or ShapelessRecipe.
      *
-     * @return the ConfigurationSection
+     * @return the recipe for the item required see#{@link org.bukkit.inventory.ShapedRecipe} or see#{@link org.bukkit.inventory.ShapelessRecipe} .
      */
-    public ConfigurationSection getSection() {
-        return section;
-    }
+    <T extends Recipe> T getRecipe();
+
+    /**
+     * Returns if the recipe is a shaped or unshaped recipe.
+     *
+     * @return the {@link java.lang.Boolean} true and the recipe is shaped and false if it's shapeless
+     */
+    Boolean isShaped();
 }

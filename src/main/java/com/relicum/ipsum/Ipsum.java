@@ -65,7 +65,7 @@ public class Ipsum extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        getServer().clearRecipes();
+
     }
 
 

@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * An {@link java.util.concurrent.ScheduledThreadPoolExecutor} that can schedule commands to run after a given
  * delay, or to execute periodically.
- * <p>
  * <p>The {@code runAfterDelay} method creates tasks with various delays
  * and return a task object that can be used to cancel or check
  * execution. The {@code runRepeatedly} method create and execute tasks

@@ -20,7 +20,7 @@ package com.relicum.ipsum.Commands;
 
 import com.relicum.ipsum.Configuration.ConfigManager;
 import com.relicum.ipsum.Configuration.Worlds;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;

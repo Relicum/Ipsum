@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Signs;
 
 import lombok.ToString;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 
 /**

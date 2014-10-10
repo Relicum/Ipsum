@@ -20,7 +20,7 @@ package com.relicum.ipsum.Game;
 
 import com.relicum.ipsum.Configuration.GameRanks;
 import com.relicum.ipsum.Configuration.PlayerData;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
