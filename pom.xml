@@ -2,12 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.relicum</groupId>
-        <artifactId>Ipsum-Parent</artifactId>
-        <version>1.0.31-SNAPSHOT</version>
-    </parent>
-
+    <groupId>com.relicum</groupId>
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
@@ -62,6 +57,29 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>aggregate</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <links>
+                        <link>http://jd.bukkit.org/dev/apidocs/overview-summary.html</link>
+                    </links>
+                    <linksource>true</linksource>
+                    <outputDirectory>${project.build.outputDirectory}/apidocs</outputDirectory>
+                    <reportOutputDirectory>${project.reporting.outputDirectory}/apidocs</reportOutputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>2.3</version>
                 <executions>
@@ -73,10 +91,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>${project.name}-${project.version}</finalName>
-                    <useBaseVersion>true</useBaseVersion>
-                    <shadedClassifierName/>
-                    <outputDirectory>${project.basedir}</outputDirectory>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -102,75 +116,66 @@
                             </includes>
                         </filter>
                     </filters>
+                    <finalName>${project.name}-${project.version}</finalName>
+                    <minimizeJar>true</minimizeJar>
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                    <promoteTransitiveDependencies>false</promoteTransitiveDependencies>
                     <relocations>
                         <relocation>
-                            <pattern>
-                                org.codemine.jchatter
-                            </pattern>
-                            <shadedPattern>
-                                com.relicum.ipsum.jchatter
-                            </shadedPattern>
+                            <pattern>org.codemine.jchatter</pattern>
+                            <shadedPattern>com.relicum.ipsum.jchatter</shadedPattern>
                         </relocation>
                         <relocation>
-                            <pattern>
-                                com.sk89q
-                            </pattern>
-                            <shadedPattern>
-                                com.relicum.ipsum.Commands
-                            </shadedPattern>
+                            <pattern>com.sk89q</pattern>
+                            <shadedPattern>com.relicum.ipsum.Commands</shadedPattern>
                         </relocation>
                     </relocations>
-                    <minimizeJar>true</minimizeJar>
-                    <promoteTransitiveDependencies>false</promoteTransitiveDependencies>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>aggregate</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>javadoc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <charset>UTF-8</charset>
-                    <links>
-                        <link>http://jd.bukkit.org/dev/apidocs/overview-summary.html</link>
-                    </links>
-                    <linksource>true</linksource>
-                    <outputDirectory>${project.build.outputDirectory}/apidocs</outputDirectory>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/apidocs</reportOutputDirectory>
+                    <shadedClassifierName/>
+                    <useBaseVersion>true</useBaseVersion>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>env-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>2.4</version>
+                        <configuration>
+                            <finalName>${project.name}-${project.version}</finalName>
+                            <outputDirectory>G:\Users\Relicum\IdeaProjects\Restrict\dist\plugins</outputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <repositories>
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
-            <id>repo.oc.tc</id>
-            <url>https://repo.oc.tc/content/repositories/public/</url>
-        </repository>
-        <repository>
-        <id>org.apache</id>
+            <id>org.apache</id>
             <url>http://repository.apache.org/snapshots/</url>
         </repository>
         <repository>
-        <id>relicum-snapshot</id>
-            <url>http://repository-relicum.forge.cloudbees.com/snapshot/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <id>relicum-snapshot</id>
+            <url>http://repository-relicum.forge.cloudbees.com/snapshot/</url>
+        </repository>
+        <repository>
+            <id>repo.oc.tc</id>
+            <url>https://repo.oc.tc/content/repositories/public/</url>
         </repository>
     </repositories>
     <dependencies>
@@ -188,25 +193,25 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.cubespace</groupId>
-            <artifactId>Yamler-Bukkit</artifactId>
-            <version>2.2.3-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>command-framework-bukkit</artifactId>
             <version>0.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-        <groupId>commons-io</groupId>
+            <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
+            <groupId>net.cubespace</groupId>
+            <artifactId>Yamler-Bukkit</artifactId>
+            <version>2.2.3-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.3.2</version>
             <scope>compile</scope>
@@ -218,7 +223,6 @@
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.codemine</groupId>
             <artifactId>BukkitRun</artifactId>
@@ -232,15 +236,15 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.7.10-R0.1-SNAPSHOT</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.14.4</version>
+        <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.7.10-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -259,24 +263,5 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <profiles>
-        <profile>
-            <id>env-test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <version>2.4</version>
-                        <configuration>
-                            <finalName>${project.name}-${project.version}</finalName>
-                            <outputDirectory>G:\Users\Relicum\IdeaProjects\Restrict\dist\plugins
-                            </outputDirectory>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
 
