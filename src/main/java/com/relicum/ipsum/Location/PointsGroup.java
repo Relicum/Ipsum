@@ -50,7 +50,7 @@ public class PointsGroup<K, V extends Locateable> {
      */
     public PointsGroup() {
 
-
+        spawnGroup = new HashMap<>();
     }
 
     /**
@@ -77,11 +77,12 @@ public class PointsGroup<K, V extends Locateable> {
 
 
     /**
-     * Put if absent.
+     * Add new point to the group only if there is not already a point set with the key.
      *
-     * @param point the point
+     *
      * @param key   the key
-     * @return the boolean
+     * @param point the point
+     * @return true if the point was added, false and the point was not added as there was one already present
      */
     public boolean putIfAbsent(K key, V point) {
         try {
@@ -91,6 +92,17 @@ public class PointsGroup<K, V extends Locateable> {
             return false;
         }
 
+    }
+
+    /**
+     * Add new point to the group if the key is already present it will override the current point.
+     *
+     * @param key   the key
+     * @param point the point
+     */
+    public void put(K key, V point) {
+
+        this.spawnGroup.put(key, point);
     }
 
     /**

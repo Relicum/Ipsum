@@ -19,9 +19,11 @@
 package com.relicum.ipsum.io;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
+import com.relicum.ipsum.io.Adapter.ItemStackAdapter;
+import com.relicum.ipsum.io.Adapter.JsonElementAdapter;
 import com.relicum.ipsum.io.Adapter.UUIDAdapter;
+import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Modifier;
 import java.util.UUID;
@@ -43,8 +45,12 @@ public class GsonLoader {
                 .serializeNulls()
                 .disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
-                .registerTypeAdapter(UUID.class, UUIDAdapter.get());
-        // .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get())
+                .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonObject.class, JsonElementAdapter.get())
+                .registerTypeAdapter(UUID.class, UUIDAdapter.get())
+                .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get());
         // .registerTypeAdapter(Inventory.class, InventoryAdapter.get())
         //  .registerTypeAdapter(PlayerInventory.class, PlayerInventoryAdapter.get())
 

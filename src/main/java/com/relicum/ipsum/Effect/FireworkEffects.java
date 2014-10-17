@@ -33,7 +33,6 @@ import java.util.Random;
  * internal randomised between 0 and 2.
  * <p>FireworkEffects provides a thread-safe and (reasonably) version independent way to instantly explode a FireworkEffect at a given location. You are welcome to use, redistribute, modify and destroy your own copies of this source
  * <p>with the following conditions.
- * <p>
  * <ol>
  * <li> No warranty is given or implied.</li>
  * <li> All damage is your own responsibility.</li>

@@ -34,7 +34,7 @@ import java.util.Map;
  * RecipeBuilder is used to create custom recipes with a builder it also is serializable to YML.
  * <p>Use {@link com.relicum.ipsum.Items.SimpleItemFactory} to make it even quicker to build the recipe result.
  * The entire object can be saved and load from a yml file as it implements {@link org.bukkit.configuration.serialization.ConfigurationSerializable} .
- * <p>The builder currently will only make a {@link org.bukkit.inventory.ShapedRecipe} .
+ * <p>The builder make {@link org.bukkit.inventory.ShapedRecipe} and {@link org.bukkit.inventory.ShapelessRecipe}
  *
  * @author Relicum
  * @version 0.0.1

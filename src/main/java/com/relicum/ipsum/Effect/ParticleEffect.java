@@ -184,7 +184,7 @@ public enum ParticleEffect {
     HAPPY_VILLAGER("happyVillager");
 
     private static final Map<String, com.relicum.ipsum.Effect.ParticleEffect> NAME_MAP = new HashMap<>();
-    private static final double MAX_RANGE = 16;
+    private static final double MAX_RANGE = 32;
     private static Constructor<?> packetPlayOutWorldParticles;
     private static Method getHandle;
     private static Field playerConnection;
@@ -398,8 +398,8 @@ public enum ParticleEffect {
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
      * @param players Receivers of the effect
-     * @see sendPacket
-     * @see instantiateIconCrackPacket
+     * @see #sendPacket
+     * @see #instantiateIconCrackPacket
      */
     public static void displayIconCrack(Location center, int id, float offsetX, float offsetY, float offsetZ, float speed, int amount, Player... players) {
 
@@ -439,7 +439,7 @@ public enum ParticleEffect {
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
-     * @see displayIconCrack(org.bukkit.Location, double, int, float, float, float, float, int)
+     * @see #displayIconCrack(org.bukkit.Location, double, int, float, float, float, float, int)
      */
     public static void displayIconCrack(Location center, int id, float offsetX, float offsetY, float offsetZ, float speed, int amount) {
 
@@ -457,8 +457,8 @@ public enum ParticleEffect {
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param amount  Amount of particles
      * @param players Receivers of the effect
-     * @see sendPacket
-     * @see instantiateBlockCrackPacket
+     * @see #sendPacket
+     * @see #instantiateBlockCrackPacket
      */
     public static void displayBlockCrack(Location center, int id, byte data, float offsetX, float offsetY, float offsetZ, int amount, Player... players) {
 
@@ -477,8 +477,8 @@ public enum ParticleEffect {
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param amount  Amount of particles
      * @throws IllegalArgumentException if the range is higher than 20
-     * @see sendPacket
-     * @see instantiateBlockCrackPacket
+     * @see #sendPacket
+     * @see #instantiateBlockCrackPacket
      */
     public static void displayBlockCrack(Location center, double range, int id, byte data, float offsetX, float offsetY, float offsetZ, int amount) {
 
@@ -498,7 +498,7 @@ public enum ParticleEffect {
      * @param offsetY Maximum distance particles can fly away from the center on the y-axis
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param amount  Amount of particles
-     * @see displayBlockCrack(org.bukkit.Location, double, int, byte, float, float, float, int)
+     * @see #displayBlockCrack(org.bukkit.Location, double, int, byte, float, float, float, int)
      */
     public static void displayBlockCrack(Location center, int id, byte data, float offsetX, float offsetY, float offsetZ, int amount) {
 
@@ -517,8 +517,8 @@ public enum ParticleEffect {
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
      * @param players Receivers of the effect
-     * @see sendPacket
-     * @see instantiateBlockDustPacket
+     * @see #sendPacket
+     * @see #instantiateBlockDustPacket
      */
     public static void displayBlockDust(Location center, int id, byte data, float offsetX, float offsetY, float offsetZ, float speed, int amount, Player... players) {
 
@@ -538,8 +538,8 @@ public enum ParticleEffect {
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
      * @throws IllegalArgumentException if the range is higher than 20
-     * @see sendPacket
-     * @see instantiateBlockDustPacket
+     * @see #sendPacket
+     * @see #instantiateBlockDustPacket
      */
     public static void displayBlockDust(Location center, double range, int id, byte data, float offsetX, float offsetY, float offsetZ, float speed, int amount) {
 
@@ -560,7 +560,7 @@ public enum ParticleEffect {
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
-     * @see displayBlockDust(org.bukkit.Location, double, int, byte, float, float, float, float, int)
+     * @see #displayBlockDust(org.bukkit.Location, double, int, byte, float, float, float, float, int)
      */
     public static void displayBlockDust(Location center, int id, byte data, float offsetX, float offsetY, float offsetZ, float speed, int amount) {
 
@@ -585,8 +585,8 @@ public enum ParticleEffect {
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
      * @param players Receivers of the effect
-     * @see sendPacket
-     * @see instantiatePacket
+     * @see #sendPacket
+     * @see #instantiatePacket
      */
     public void display(Location center, float offsetX, float offsetY, float offsetZ, float speed, int amount, Player... players) {
 
@@ -604,8 +604,8 @@ public enum ParticleEffect {
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
      * @throws IllegalArgumentException if the range is higher than 20
-     * @see sendPacket
-     * @see instantiatePacket
+     * @see #sendPacket
+     * @see #instantiatePacket
      */
     public void display(Location center, double range, float offsetX, float offsetY, float offsetZ, float speed, int amount) {
 
@@ -624,7 +624,7 @@ public enum ParticleEffect {
      * @param offsetZ Maximum distance particles can fly away from the center on the z-axis
      * @param speed   Display speed of the particles
      * @param amount  Amount of particles
-     * @see display(org.bukkit.Location, double, float, float, float, float, int)
+     * @see #display(org.bukkit.Location, double, float, float, float, float, int)
      */
     public void display(Location center, float offsetX, float offsetY, float offsetZ, float speed, int amount) {
 

@@ -28,8 +28,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -316,10 +316,10 @@ public class LocUtils {
      * @return HashSet(Player)
      * credits skore87
      */
-    public static HashSet<Player> getNearbyEntities(Location location, int radius) {
+    public static HashSet<LivingEntity> getNearbyEntities(Location location, int radius) {
 
         int chunkRadius = radius < 16 ? 1 : (radius - (radius % 16)) / 16;
-        HashSet<Player> radiusEntities = new HashSet<>();
+        HashSet<LivingEntity> radiusEntities = new HashSet<>();
 
         for (int chX = 0 - chunkRadius; chX <= chunkRadius; chX++) {
             for (int chZ = 0 - chunkRadius; chZ <= chunkRadius; chZ++) {
@@ -327,9 +327,9 @@ public class LocUtils {
                 for (Entity e : new Location(location.getWorld(), x + (chX * 16), y, z + (chZ * 16)).getChunk().getEntities()) {
                     if (e.getLocation().distance(location) <= radius && e.getLocation().getBlock() != location.getBlock()) {
                         if (e instanceof LivingEntity) {
-                            if (e instanceof Player) {
-                                radiusEntities.add((Player) e);
-                            }
+
+                            radiusEntities.add((LivingEntity) e);
+
 
                         }
                     }
@@ -337,5 +337,60 @@ public class LocUtils {
             }
         }
         return radiusEntities;
+    }
+
+    /**
+     * It will return a specified {@link org.bukkit.entity.LivingEntity} in a radius, from location.
+     *
+     * @param location Initial location
+     * @param radius   distance from the "location" that will return all the entities from each block;
+     * @param entity   the type of entity to get returned
+     * @return HashSet(LivingEntity)
+     * credits skore87
+     */
+    public static HashSet<LivingEntity> getNearByEntities(Location location, int radius, EntityType entity) {
+
+        int chunkRadius = radius < 16 ? 1 : (radius - (radius % 16)) / 16;
+        HashSet<LivingEntity> radiusEntities = new HashSet<>();
+
+        for (int chX = 0 - chunkRadius; chX <= chunkRadius; chX++) {
+            for (int chZ = 0 - chunkRadius; chZ <= chunkRadius; chZ++) {
+                int x = (int) location.getX(), y = (int) location.getY(), z = (int) location.getZ();
+                for (Entity e : new Location(location.getWorld(), x + (chX * 16), y, z + (chZ * 16)).getChunk().getEntities()) {
+                    if (e.getLocation().distance(location) <= radius && e.getLocation().getBlock() != location.getBlock()) {
+                        if (e instanceof LivingEntity) {
+
+                            if (e.getType().equals(entity)) {
+                                radiusEntities.add((LivingEntity) e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return radiusEntities;
+
+    }
+
+    public static HashSet<LivingEntity> getNearByPlayers(Location location, int radius) {
+
+        return getNearByEntities(location, radius, EntityType.PLAYER);
+    }
+
+
+    /**
+     * Apply a basic knockback effect to a {@link org.bukkit.entity.LivingEntity}.
+     * <p>If distance is positive the knockback will be forwards, negative and the player fill be forced backwards.
+     *
+     * @param entity   the type of entity
+     * @param distance the distance
+     * @param offsetY  the offset y
+     */
+    public static void entityKnockBack(LivingEntity entity, float distance, float offsetY) {
+
+        Vector direction = entity.getLocation().getDirection().normalize();
+        direction.multiply(distance);
+        entity.setVelocity(direction.setY(offsetY));
+
     }
 }
