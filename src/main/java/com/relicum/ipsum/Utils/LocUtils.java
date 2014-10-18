@@ -20,7 +20,7 @@ package com.relicum.ipsum.Utils;
 
 import com.relicum.ipsum.Configuration.BlockLoc;
 import com.relicum.ipsum.Configuration.Loc;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

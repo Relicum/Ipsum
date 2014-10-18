@@ -16,34 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Utils;
-
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import org.bukkit.configuration.ConfigurationSection;
-
 /**
- * ConfigSectionBuilder is WIP
+ * Name: package-info.java Created: 18 October 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class ConfigSectionBuilder {
-
-    private ConfigurationSection section;
-
-    public ConfigSectionBuilder(ConfigurationSection cs) {
-        Validate.notNull(cs);
-        this.section = cs;
-
-    }
-
-
-    /**
-     * Gets ConfigurationSection
-     *
-     * @return the ConfigurationSection
-     */
-    public ConfigurationSection getSection() {
-        return section;
-    }
-}
+package com.relicum.ipsum.Chat;

@@ -22,8 +22,8 @@ import com.relicum.ipsum.Configuration.GameRanks;
 import com.relicum.ipsum.Configuration.RankMap;
 import com.relicum.ipsum.Location.PointsGroup;
 import com.relicum.ipsum.Location.SpawnPoint;
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
+import net.minecraft.util.org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 

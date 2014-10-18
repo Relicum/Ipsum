@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Items;
 
 import lombok.ToString;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

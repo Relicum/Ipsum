@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Cooldowns;
 
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
  * Name: Cooldown.java Created: 18 October 2014

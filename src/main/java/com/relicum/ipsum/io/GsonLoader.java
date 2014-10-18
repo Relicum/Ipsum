@@ -19,10 +19,10 @@
 package com.relicum.ipsum.io;
 
 
-import com.google.gson.*;
 import com.relicum.ipsum.io.Adapter.ItemStackAdapter;
 import com.relicum.ipsum.io.Adapter.JsonElementAdapter;
 import com.relicum.ipsum.io.Adapter.UUIDAdapter;
+import net.minecraft.util.com.google.gson.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Modifier;

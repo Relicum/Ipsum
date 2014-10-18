@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
  * BlockPoint stores an instance of a minecraft block location.

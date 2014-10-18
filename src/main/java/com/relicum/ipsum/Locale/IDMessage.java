@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Locale;
 
 
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 import java.util.HashMap;
 import java.util.Map;

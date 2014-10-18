@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.io.Adapter;
 
-import com.google.gson.*;
+import net.minecraft.util.com.google.gson.*;
 
 import java.lang.reflect.Type;
 

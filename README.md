@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.34-SNAPSHOT
+Ipsum Gaming Commons 1.0.35-SNAPSHOT
 ====
 
 Providing All you need to create mini games and plugins
@@ -50,13 +50,15 @@ Designed and Built by Relicum
 
 External Contributors
 ===
-This plugin includes the sk89q-command-framework, all copyrights belong @Sk89q and is licensed under GPL3
----
-```
-The sk89q-command-framework source can be located at https://github.com/OvercastNetwork/sk89q-command-framework 
-```
+**This plugin includes the sk89q-command-framework,
+all copyrights belong @Sk89q and is licensed under GPL3**
+>The sk89q-command-framework source can be located at https://github.com/OvercastNetwork/sk89q-command-framework 
 
----
+
+**MD_5s Chat API is included all copyrights belong to him.
+It has also been enhanced by dmulloy2 and are licensed under GPL3.**
+
+--------
 
 
 `Build for Bukkit and Spigot 1.7.10-R0.1`

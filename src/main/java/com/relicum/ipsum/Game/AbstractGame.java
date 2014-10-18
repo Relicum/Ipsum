@@ -22,8 +22,7 @@ import com.relicum.ipsum.Location.PointsGroup;
 import com.relicum.ipsum.Location.SpawnCollection;
 import com.relicum.ipsum.Location.SpawnPoint;
 import com.relicum.ipsum.Scoreboards.SimpleScoreBoardHandler;
-import com.relicum.ipsum.Utils.CustomSound;
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -199,6 +198,7 @@ public abstract class AbstractGame {
         return this.plugin;
     }
 
+    @SuppressWarnings("all")
     public void runCountdown(String message, String startMessage) {
 
         countDown = new BukkitRunnable() {
@@ -216,8 +216,8 @@ public abstract class AbstractGame {
                 plugin.getServer().broadcastMessage(updateMessage());
                 // plugin.getServer().broadcastMessage(I18N.altFormat(I18N.STRING("game.broadcast.countdown", (total / 20))));
                 if (total < 1) {
+                    // Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), CustomSound.PREPARE_TO_FIGHT.getSound(), 3.0f, 1.0f));
 
-                    Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), CustomSound.PREPARE_TO_FIGHT.getSound(), 3.0f, 1.0f));
                     Bukkit.broadcastMessage(startMessage);
                     updateState(GameState.INGAME);
                     cancel();

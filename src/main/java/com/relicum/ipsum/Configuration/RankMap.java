@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Configuration;
 
-import org.apache.commons.lang.Validate;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 
 import java.util.Collections;

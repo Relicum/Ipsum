@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Commands.Group;
 
-import com.google.common.base.Objects;
+import net.minecraft.util.com.google.common.base.Objects;
 import org.bukkit.ChatColor;
 
 /**
