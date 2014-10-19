@@ -40,7 +40,6 @@ public abstract class AbstractSerializable implements ConfigurationSerializable 
     public AbstractSerializable() {
     }
 
-    ;
 
     public AbstractSerializable(Map<String, Object> args) {
         for (Map.Entry<String, Object> entry : args.entrySet()) {

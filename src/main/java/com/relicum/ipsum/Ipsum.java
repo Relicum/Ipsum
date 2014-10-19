@@ -19,10 +19,13 @@
 package com.relicum.ipsum;
 
 import com.relicum.ipsum.Configuration.ConfigManager;
+import com.relicum.ipsum.Configuration.WorldConfig;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 import com.relicum.ipsum.Permission.PermissionManager;
 import com.relicum.ipsum.Utils.WorldGenerator;
+import com.relicum.ipsum.Utils.WorldHandler;
 import com.relicum.ipsum.Utils.WorldManager;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -52,11 +55,18 @@ public class Ipsum extends JavaPlugin {
     /**
      * On enable.
      */
-
     @Override
     public void onEnable() {
 
+        ConfigurationSerialization.registerClass(WorldConfig.class);
+
         instance = this;
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
+
+        WorldHandler worldHandler = WorldHandler.getHandler(this);
+        worldHandler.getConfig().setHandleWorldChat(true);
+        getLogger().info("List all the worlds " + worldHandler.getConfig().getWorldsEnabled().toString());
     }
 
     /**
@@ -64,7 +74,7 @@ public class Ipsum extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-
+        saveConfig();
 
     }
 

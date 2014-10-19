@@ -21,6 +21,8 @@ package com.relicum.ipsum.Utils;
 import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.util.List;
+
 /**
  * ConfigSectionBuilder is WIP
  *
@@ -31,10 +33,14 @@ public class ConfigSectionBuilder {
 
     private ConfigurationSection section;
 
-    public ConfigSectionBuilder(ConfigurationSection cs) {
+    private ConfigSectionBuilder(ConfigurationSection cs) {
         Validate.notNull(cs);
         this.section = cs;
 
+    }
+
+    public static ConfigSectionBuilder newConfigSectionBuilder(ConfigurationSection cs) {
+        return new ConfigSectionBuilder(cs);
     }
 
 
@@ -44,6 +50,34 @@ public class ConfigSectionBuilder {
      * @return the ConfigurationSection
      */
     public ConfigurationSection getSection() {
+
         return section;
+    }
+
+
+    public void setSection(String path, Object object) {
+
+        section.set(path, object);
+    }
+
+
+    public List<String> getStringList(String path) {
+
+        return section.getStringList(path);
+    }
+
+    public Boolean getBoolean(String path) {
+
+        return section.getBoolean(path);
+    }
+
+    public Integer getInteger(String path) {
+
+        return section.getInt(path);
+    }
+
+    public String getString(String path) {
+
+        return section.getString(path);
     }
 }

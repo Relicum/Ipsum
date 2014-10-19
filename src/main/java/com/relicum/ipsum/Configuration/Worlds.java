@@ -51,9 +51,16 @@ public class Worlds extends Config {
     private ConfigSection world = new ConfigSection();
 
     @Getter
+    @Setter
+    @Comment("The UUID of the world in string format DO NOT CHANGE")
+    @Path("world.uuid")
+    private String uuid = "";
+
+    @Getter
     @Comment("Defaults settings for world creation")
     @Path("world.defaults")
     private HashMap<String, Object> defaults = new HashMap<>();
+
 
     @Getter
     @Setter
@@ -127,7 +134,7 @@ public class Worlds extends Config {
     @Getter
     @Setter
     @Path("general.settings.difficulty")
-    private String difficulty = "HARD";
+    private String difficulty = "NORMAL";
 
     @Getter
     @Setter
@@ -239,6 +246,11 @@ public class Worlds extends Config {
         map.putAll(defaults);
 
         return map;
+
+
+    }
+
+    public void saveWorldData() {
 
 
     }
