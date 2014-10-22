@@ -23,6 +23,8 @@ import com.relicum.ipsum.Items.SimpleItemFactory;
 import com.relicum.ipsum.Permission.PermissionManager;
 import com.relicum.ipsum.Utils.WorldGenerator;
 import com.relicum.ipsum.Utils.WorldManager;
+import com.sk89q.bukkit.util.BukkitCommandsManager;
+import com.sk89q.bukkit.util.CommandsManagerRegistration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -30,7 +32,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * The type Ipsum this class should NEVER be extended.
  */
 public class Ipsum extends JavaPlugin {
-
+    public BukkitCommandsManager commands;
+    public CommandsManagerRegistration cmdRegister;
     private static Ipsum instance;
 
     /**
@@ -57,14 +60,59 @@ public class Ipsum extends JavaPlugin {
 
         instance = this;
 
+
     }
+
+/*    private void setupCommands() {
+
+        this.commands = new BukkitCommandsManager() {
+
+            @Override
+            public boolean hasPermission(CommandSender sender, String perm) {
+                return sender instanceof ConsoleCommandSender || sender.hasPermission(perm);
+            }
+
+        };
+
+
+        cmdRegister = new CommandsManagerRegistration(this, this.commands);
+        cmdRegister.register(MWCommands.ParentCommand.class);
+    }*/
+
+/*    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+        try {
+
+
+            this.commands.execute(cmd.getName(), args, sender,sender);
+        } catch (CommandPermissionsException e) {
+            sender.sendMessage(ChatColor.RED + "You don't have permission.");
+        } catch (MissingNestedCommandException
+                e) {
+            sender.sendMessage(ChatColor.RED + e.getUsage());
+        } catch (CommandUsageException e) {
+            sender.sendMessage(ChatColor.RED + e.getMessage());
+            sender.sendMessage(ChatColor.RED + e.getUsage());
+        } catch (WrappedCommandException e) {
+            if (e.getCause() instanceof NumberFormatException) {
+                sender.sendMessage(ChatColor.RED + "Number expected, string received instead.");
+            } else {
+                sender.sendMessage(ChatColor.RED + "An error has occurred. See console.");
+                e.printStackTrace();
+            }
+        } catch (CommandException e) {
+            sender.sendMessage(ChatColor.RED + e.getMessage());
+        }
+
+        return true;
+    }*/
 
     /**
      * On disable.
      */
     @Override
     public void onDisable() {
-        saveConfig();
+
 
     }
 
