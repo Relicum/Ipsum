@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.36-SNAPSHOT</version>
+    <version>1.0.37-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -34,6 +34,7 @@
                     <include>*.yml</include>
                     <include>*.xml</include>
                     <include>*.properties</include>
+                    <include>*.json</include>
                 </includes>
             </resource>
         </resources>
@@ -111,7 +112,7 @@
                                 com.sk89q
                             </pattern>
                             <shadedPattern>
-                                com.relicum.ipsum.Commands
+                                com.relicum.ipsum.sk89q.Commands
                             </shadedPattern>
                         </relocation>
                     </relocations>

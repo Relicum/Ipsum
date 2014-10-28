@@ -31,6 +31,7 @@ import java.util.Map;
  * @author Relicum
  * @version 0.0.1
  */
+@SuppressWarnings("ALL")
 public class SpawnCollection<K, R, T extends Locateable> {
 
     private HashMap<K, PointsGroup<R, T>> spawnCollection = new HashMap<>();

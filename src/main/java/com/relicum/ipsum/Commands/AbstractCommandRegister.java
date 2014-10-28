@@ -18,21 +18,13 @@
 
 package com.relicum.ipsum.Commands;
 
-import com.relicum.ipsum.Permission.PermissionManager;
-import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Abstract command register.
  * <p>Extend this class to create a new command register.
- *
  */
-public abstract class AbstractCommandRegister<T extends JavaPlugin> {
+public abstract class AbstractCommandRegister {
 
-    public Map<String, SimpleCommand> commandMap = new HashMap<>();
+/*    public Map<String, SimpleCommand> commandMap = new HashMap<>();
 
     public T plugin;
 
@@ -67,6 +59,6 @@ public abstract class AbstractCommandRegister<T extends JavaPlugin> {
     public void clearAllCommands() {
 
         this.commandMap.clear();
-    }
+    }*/
 
 }

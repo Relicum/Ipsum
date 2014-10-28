@@ -152,6 +152,10 @@ public class PointList<T extends Locateable> {
         return this.spawnList.stream();
     }
 
+    public java.util.Iterator<T> getInterator() {
+        return spawnList.iterator();
+    }
+
     /**
      * The number of elements in the list.
      *
