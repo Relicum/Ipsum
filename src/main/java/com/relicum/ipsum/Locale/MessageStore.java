@@ -41,6 +41,7 @@ public class MessageStore implements IDMessage {
      */
     @Override
     public Properties getProperties() {
+
         return properties;
     }
 

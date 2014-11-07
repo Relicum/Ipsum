@@ -16,10 +16,48 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package com.relicum.ipsum.Utils.Tool;
+
 /**
- * The Game Package Contains every thing connected to game creation and management.
+ * Name: ToolAction.java Created: 29 October 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-package com.relicum.ipsum.Game;
+public enum ToolAction {
+
+    LEFT_CLICK_INVENTORY,
+    RIGHT_CLICK_INVENTORY,
+    HOVER_OVER,
+    DROP_TOOL,
+    ADD_TO_INVENTORY,
+    REMOVE_FROM_INVENTORY,
+    HOLD_TOOL,
+    RIGHT_CLICK_BLOCK,
+    SNEAK_RIGHT_CLICK_AIR,
+    SNEAK_LEFT_CLICK_BLOCK,
+    SNEAK_LEFT_CLICK_AIR,
+    SNEAK_RIGHT_CLICK_BLOCK,
+    RIGHT_CLICK_AIR,
+    LEFT_CLICK_BLOCK,
+    LEFT_CLICK_AIR,
+    PRESSURE,
+    RIGHT_CLICK_LIVING,
+    LEFT_CLICK_LIVING,
+    ENCHANT_TOOL,
+    MODIFY_META,
+    INITIAL_ACTION,
+    SEQUENCE_ACTION,
+
+    CHARGEABLE_ACTION,
+    RANDOM_ACTION,
+
+    HEAL_OTHER,
+    HEAL_SELF,
+
+    RANKED_ACTION,
+
+    DAMAGE_OTHER,
+    DAMAGE_SELF,
+
+}

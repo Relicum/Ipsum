@@ -18,10 +18,12 @@
 
 package com.relicum.ipsum.Location;
 
+import com.relicum.ipsum.Configuration.AbstractSerializable;
 import net.minecraft.util.com.google.common.collect.ArrayListMultimap;
 import net.minecraft.util.com.google.common.collect.ListMultimap;
 import net.minecraft.util.com.google.common.collect.Multimap;
-import net.minecraft.util.com.google.common.collect.Multimaps;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 
 import java.util.*;
 
@@ -45,15 +47,17 @@ import java.util.*;
  * @author Relicum
  * @version 0.0.1
  */
-public class LocationListMultimap {
+@SerializableAs("LocationListMultimap")
+public class LocationListMultimap extends AbstractSerializable implements ConfigurationSerializable {
 
-    private ListMultimap<String, SpawnPoint> map = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
+    private transient ListMultimap<String, SpawnPoint> map = ArrayListMultimap.create();
+    private Map<String, Collection<SpawnPoint>> location = map.asMap();
 
     /**
      * Instantiates a new LocationListMultimap.
      */
     public LocationListMultimap() {
-
+        super();
     }
 
 
@@ -63,6 +67,7 @@ public class LocationListMultimap {
      * @param multimap see {@link net.minecraft.util.com.google.common.collect.Multimap}
      */
     public LocationListMultimap(Multimap<? extends String, ? extends SpawnPoint> multimap) {
+
 
         this.map.putAll(multimap);
     }
@@ -75,6 +80,7 @@ public class LocationListMultimap {
      */
     public LocationListMultimap(String key, SpawnPoint point) {
 
+
         this.map.put(key, point);
     }
 
@@ -85,6 +91,7 @@ public class LocationListMultimap {
      * @param points the points
      */
     public LocationListMultimap(String key, Iterable<? extends SpawnPoint> points) {
+        super();
 
         this.map.putAll(key, points);
     }

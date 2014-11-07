@@ -316,7 +316,7 @@ public abstract class BaseComponent {
     /**
      * Returns whether the component has any formatting or events applied to it
      *
-     * @return
+     * @return true if it has formatting
      */
     public boolean hasFormatting() {
         return color != null || bold != null || italic != null || underlined != null || strikethrough != null || obfuscated != null

@@ -16,11 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package com.relicum.ipsum.Utils.Tool;
+
+import lombok.Getter;
+
+import java.util.UUID;
+
 /**
- * This package stores game settings what you can pick and choose from to suit the game.
- *
+ * Name: ToolSession.java Created: 29 October 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-package com.relicum.ipsum.Game.Settings;
+public class ToolSession {
+
+    @Getter
+    private final String sessionID;
+
+    private ToolSession() {
+        this.sessionID = UUID.randomUUID().toString();
+    }
+
+    public static ToolSession createToolSession() {
+        return new ToolSession();
+    }
+
+    public enum State {
+
+        INIT,
+        READY,
+        ACTIVATE,
+        PROCESS,
+        DEACTIVATE,
+        DESTROY
+
+    }
+}

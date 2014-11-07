@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
+package com.relicum.ipsum.Effect.Game;
 
 import com.relicum.ipsum.Configuration.GameRanks;
 import com.relicum.ipsum.Configuration.RankMap;

@@ -16,15 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game.Rules;
+package com.relicum.ipsum.Utils.Tool;
 
 /**
- * Name: BaseRule.java Created: 16 August 2014
+ * Name: BaseTool.java Created: 29 October 2014
  *
  * @author Relicum
  * @version 0.0.1
  */
-public interface BaseRule<T, S> {
+public interface BaseTool {
 
 
 }

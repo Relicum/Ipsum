@@ -19,8 +19,11 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 
-import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * SpawnPoint is a fully working class that represents a single Minecraft {@link org.bukkit.Location} .
@@ -30,7 +33,8 @@ import java.lang.reflect.Type;
  * @author Relicum
  * @version 0.0.1
  */
-public class SpawnPoint extends PointInstance {
+@SerializableAs("SpawnPoint")
+public class SpawnPoint extends PointInstance implements ConfigurationSerializable {
 
 
     /**
@@ -53,10 +57,11 @@ public class SpawnPoint extends PointInstance {
      * @param pitch the pitch
      */
     public SpawnPoint(String world, double x, double y, double z, float yaw, float pitch) {
+        super();
         this.setWorld(world);
-        this.setX(MathUtils.round(x) + 0.5d);
-        this.setY(y);
-        this.setZ(MathUtils.round(z) + 0.5d);
+        this.setX(MathUtils.floor(x) + 0.5d);
+        this.setY(MathUtils.floor(y) + 0.5d);
+        this.setZ(MathUtils.floor(z) + 0.5d);
         this.setYaw(MathUtils.getDirection(yaw));
         this.setPitch(pitch);
     }
@@ -70,21 +75,43 @@ public class SpawnPoint extends PointInstance {
      * @param z     the z
      */
     public SpawnPoint(String world, double x, double y, double z) {
+        super();
         this.setWorld(world);
-        this.setX(MathUtils.round(x));
-        this.setY(MathUtils.round(y));
-        this.setZ(MathUtils.round(z));
-        this.setYaw(0.0f);
-        this.setPitch(0.0f);
+        this.setX(MathUtils.floor(x) + 0.5d);
+        this.setY(MathUtils.floor(y) + 0.5d);
+        this.setZ(MathUtils.floor(z) + 0.5d);
+        this.setYaw(90.0f);
+        this.setPitch(1.4f);
     }
 
-    /**
-     * Get type.
-     *
-     * @return the type
-     */
-    public Type getType() {
 
-        return this.getClass();
+    public static SpawnPoint deserialize(Map<String, Object> map) {
+        Object xObject = map.get("xpos"), yObject = map.get("ypos"), zObject = map.get("zpos"), worldObject = map.get("world"), yawObject = map.get("yawpos"), pitchObject = map.get("pitchpos"), pType = map.get("type");
+        if (xObject == null || yObject == null || zObject == null || worldObject == null || !(xObject instanceof Double) || !(yObject instanceof Double)
+                || !(zObject instanceof Double)) {
+            return null;
+        }
+
+        Double x = (double) xObject, y = (double) yObject, z = (double) zObject;
+        Double yaw = (Double) yawObject, pitch = (Double) pitchObject;
+        String worldString = worldObject.toString();
+
+        return new SpawnPoint(worldString, x, y, z, yaw.floatValue(), pitch.floatValue());
+
     }
+
+
+    @Override
+    public Map<String, Object> serialize() {
+        Map<String, Object> map = new HashMap<>(6);
+        map.put("world", world);
+        map.put("xpos", X);
+        map.put("ypos", Y);
+        map.put("zpos", Z);
+        map.put("yawpos", yaw);
+        map.put("pitchpos", pitch);
+
+        return map;
+    }
+
 }

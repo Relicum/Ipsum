@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Location;
 
+import com.relicum.ipsum.Configuration.AbstractSerializable;
 import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
@@ -29,15 +30,14 @@ import net.minecraft.util.org.apache.commons.lang3.Validate;
  * @author Relicum
  * @version 0.0.1
  */
-public abstract class PointInstance implements ExtendedPoint, Locateable {
+public abstract class PointInstance extends AbstractSerializable implements ExtendedPoint, Locateable {
 
-    private double X;
-    private double Y;
-    private double Z;
-    private float yaw;
-    private float pitch;
-    private String world;
-
+    protected Double X;
+    protected Double Y;
+    protected Double Z;
+    protected Float yaw;
+    protected Float pitch;
+    protected String world;
 
     /**
      * Gets X point
@@ -46,7 +46,7 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
      */
     @Override
     public double getX() {
-        return X;
+        return this.X;
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
      */
     @Override
     public double getY() {
-        return Y;
+        return this.Y;
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
      */
     @Override
     public double getZ() {
-        return Z;
+        return this.Z;
     }
 
     /**
@@ -131,7 +131,7 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
      */
     @Override
     public float getYaw() {
-        return yaw;
+        return this.yaw;
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
      */
     @Override
     public float getPitch() {
-        return pitch;
+        return this.pitch;
     }
 
     /**
@@ -166,38 +166,6 @@ public abstract class PointInstance implements ExtendedPoint, Locateable {
         this.pitch = pitch;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PointInstance that = (PointInstance) o;
-
-        if (Double.compare(that.X, X) != 0) return false;
-        if (Double.compare(that.Y, Y) != 0) return false;
-        if (Double.compare(that.Z, Z) != 0) return false;
-        if (Float.compare(that.pitch, pitch) != 0) return false;
-        if (Float.compare(that.yaw, yaw) != 0) return false;
-        if (world != null ? !world.equals(that.world) : that.world != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(X);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(Y);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(Z);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (yaw != +0.0f ? Float.floatToIntBits(yaw) : 0);
-        result = 31 * result + (pitch != +0.0f ? Float.floatToIntBits(pitch) : 0);
-        result = 31 * result + (world != null ? world.hashCode() : 0);
-        return result;
-    }
 
     @Override
     public String toString() {

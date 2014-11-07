@@ -52,14 +52,14 @@ public abstract class AbstractSerializable implements ConfigurationSerializable 
                         field.setAccessible(accessible);
                     }
                 }
-            } catch (Throwable ex) {
+            } catch (Throwable ignored) {
             }
         }
     }
 
 
     @Override
-    public final Map<String, Object> serialize() {
+    public Map<String, Object> serialize() {
         Map<String, Object> data = new LinkedHashMap<>();
 
         for (Field field : getClass().getDeclaredFields()) {
@@ -95,7 +95,7 @@ public abstract class AbstractSerializable implements ConfigurationSerializable 
                 }
 
                 field.setAccessible(accessible);
-            } catch (Throwable ex) {
+            } catch (Throwable ignored) {
             }
         }
 

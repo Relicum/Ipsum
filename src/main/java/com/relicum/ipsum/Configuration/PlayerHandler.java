@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Configuration;
 
-import com.relicum.ipsum.Game.GamerData;
+import com.relicum.ipsum.Effect.Game.GamerData;
 import com.relicum.ipsum.io.GsonIO;
 import net.minecraft.util.com.google.gson.Gson;
 import net.minecraft.util.com.google.gson.GsonBuilder;

@@ -15,6 +15,7 @@ public class WrappedChatPacket extends WrappedPacket {
     private static final Class<?> chatComponentClass = ReflectionUtil.getNMSClass("IChatBaseComponent");
 
     public WrappedChatPacket(Object chatComponent) throws ReflectionException {
+
         try {
             this.nmsClass = ReflectionUtil.getNMSClass(NMS_CLASS_NAME);
             this.constructor = nmsClass.getConstructor(chatComponentClass);

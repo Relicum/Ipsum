@@ -16,12 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package com.relicum.ipsum.Effect.Game;
+
 /**
- * Contains all the different types of rules that could be applied to a game.
- * <p>This does not include settings eg spawn locations or arena region they will be
- * under the settings package.
+ * GameState holds the state of the current game instance is in.
  *
  * @author Relicum
  * @version 0.0.1
  */
-package com.relicum.ipsum.Game.Rules;
+public enum GameState {
+
+    DISABLED,
+    LOADING,
+    WAITING,
+    INGAME,
+    RESTART,
+    ENDED
+}

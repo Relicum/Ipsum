@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
+package com.relicum.ipsum.Effect.Game;
 
 import com.relicum.ipsum.Location.PointsGroup;
 import com.relicum.ipsum.Location.SpawnCollection;
@@ -65,7 +65,7 @@ public abstract class AbstractGame {
     /**
      * Update the game state this will automatically trigger the relevant method to change the game state itself.
      *
-     * @param state the {@link com.relicum.ipsum.Game.GameState} that the game is to be updated to.
+     * @param state the {@link com.relicum.ipsum.Effect.Game.GameState} that the game is to be updated to.
      */
     public void updateState(GameState state) {
         this.state = state;
@@ -101,16 +101,16 @@ public abstract class AbstractGame {
 
     /**
      * This state is used to setup and load a game, when complete players should be able to join the game.
-     * <p>You should update the {@link com.relicum.ipsum.Game.GameState} to <strong>WAITING</strong> once everything is
-     * loaded using the {@link #updateState(com.relicum.ipsum.Game.GameState)} method.
+     * <p>You should update the {@link com.relicum.ipsum.Effect.Game.GameState} to <strong>WAITING</strong> once everything is
+     * loaded using the {@link #updateState(com.relicum.ipsum.Effect.Game.GameState)} method.
      */
     public abstract void doLoading();
 
     /**
      * While in the waiting state the game should accept players and update any sign displays.
      * <p>When the start condition has been met a countdown should be displayed to the players.
-     * On completion of the countdown the {@link com.relicum.ipsum.Game.GameState} should be updated the
-     * <strong>INGAME</strong> using the {@link #updateState(com.relicum.ipsum.Game.GameState)} method.
+     * On completion of the countdown the {@link com.relicum.ipsum.Effect.Game.GameState} should be updated the
+     * <strong>INGAME</strong> using the {@link #updateState(com.relicum.ipsum.Effect.Game.GameState)} method.
      */
     public abstract void doWaiting();
 
@@ -137,7 +137,7 @@ public abstract class AbstractGame {
     /**
      * Gets the current game state the game is in.
      *
-     * @return the state {@link com.relicum.ipsum.Game.GameState}
+     * @return the state {@link com.relicum.ipsum.Effect.Game.GameState}
      */
     public GameState getState() {
         return this.state;

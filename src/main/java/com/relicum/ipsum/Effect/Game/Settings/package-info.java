@@ -16,20 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
-
 /**
- * GameState holds the state of the current game instance is in.
+ * This package stores game settings what you can pick and choose from to suit the game.
+ *
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum GameState {
-
-    DISABLED,
-    LOADING,
-    WAITING,
-    INGAME,
-    RESTART,
-    ENDED
-}
+package com.relicum.ipsum.Effect.Game.Settings;
