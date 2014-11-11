@@ -1,5 +1,10 @@
-Ipsum Gaming Commons 1.0.40-SNAPSHOT
-====
+Ipsum Gaming Commons 1.0.41-SNAPSHOT
+===
+
+**Built using the best Java IDE around**
+
+[![Image of JetBrains](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)](https://www.jetbrains.com/idea/)
+
 
 Providing All you need to create mini games and plugins
 ----
@@ -65,3 +70,5 @@ It has also been enhanced by dmulloy2 and are licensed under GPL3.**
 
 `This will be built using the Prototyping method, build them quick and build them often.
 What this means is I will code parts release, play test, listen to feedback and carry on.`
+
+
