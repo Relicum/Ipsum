@@ -16,27 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Game;
-
-import com.relicum.ipsum.Configuration.Loc;
+package com.relicum.ipsum.Effect.Game;
 
 /**
- * Name: Arena.java Created: 13 September 2014
+ * ArenaState holds the different type of state an Arena can be in.
+ * <p>All Arenas must always be in a defined state. An arena can never be in one than one state at a time.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public interface ArenaPoints {
+public enum ArenaState {
 
-    public Loc getMaxPoint();
-
-    public Loc getMinPoint();
-
-    public Loc getMainSpawn();
-
-    public Loc getLobbySpawn();
-
-    public Loc getEndSpawn();
-
+    PRE_BUILT,
+    INITIALIZING,
+    PRE_GAME,
+    STARTING,
+    RUNNING,
+    ENDING,
+    COMPLETED,
+    RESETTING,
+    OFFLINE,
+    MAINTENANCE
 
 }

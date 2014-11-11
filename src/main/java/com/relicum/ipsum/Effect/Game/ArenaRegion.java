@@ -71,22 +71,46 @@ public interface ArenaRegion {
      *
      * @return the max {@link org.bukkit.util.Vector}
      */
-    default Vector getMaxVec() {
+    public Vector getMaxVec();
 
-        return getMaxPoint().toLocation().toVector();
-
-
-    }
 
     /**
      * Gets min {@link org.bukkit.util.Vector} of the Arena Region
      *
      * @return the min {@link org.bukkit.util.Vector}
      */
-    default Vector getMinVec() {
+    public Vector getMinVec();
 
-        return getMinPoint().toLocation().toVector();
-    }
+    /**
+     * Sets default spawn.
+     *
+     * @param defaultSpawn the default spawn
+     */
+    public void setDefaultSpawn(SpawnPoint defaultSpawn);
+
+    /**
+     * Gets default spawn.
+     *
+     * @return the default spawn
+     */
+    public SpawnPoint getDefaultSpawn();
+
+    /**
+     * Get Arena state.
+     *
+     * @return the state
+     */
+    public ArenaState getState();
+
+    /**
+     * Update Arena state.
+     *
+     * @param state the state
+     */
+    public void updateState(ArenaState state);
+
+
+
 
 
 }

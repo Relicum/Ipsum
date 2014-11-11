@@ -23,6 +23,7 @@ import com.relicum.ipsum.Location.LocationListMultimap;
 import com.relicum.ipsum.Location.SpawnPoint;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -41,17 +42,29 @@ public class SimpleArena extends AbstractSerializable implements ArenaRegion, Co
 
     private String uniqueId;
     private String arenaName;
+    private ArenaState state;
 
+
+    private SimpleArena(String uniqueId) {
+        super();
+        this.uniqueId = uniqueId;
+
+    }
+
+
+    private SimpleArena(String arenaName, String uniqueId) {
+        super();
+        this.arenaName = arenaName;
+        this.uniqueId = uniqueId;
+    }
 
     /**
      * Instantiates a new Simple arena.
      *
      * @param uniqueId the unique id
      */
-    public SimpleArena(String uniqueId) {
-        super();
-        this.uniqueId = uniqueId;
-
+    public static SimpleArena createSimpleArena(String uniqueId) {
+        return new SimpleArena(uniqueId);
     }
 
     /**
@@ -60,10 +73,8 @@ public class SimpleArena extends AbstractSerializable implements ArenaRegion, Co
      * @param arenaName the arena name
      * @param uniqueId  the unique id
      */
-    public SimpleArena(String arenaName, String uniqueId) {
-        super();
-        this.arenaName = arenaName;
-        this.uniqueId = uniqueId;
+    public static SimpleArena createSimpleArena(String arenaName, String uniqueId) {
+        return new SimpleArena(arenaName, uniqueId);
     }
 
 
@@ -118,42 +129,65 @@ public class SimpleArena extends AbstractSerializable implements ArenaRegion, Co
     }
 
     /**
-     * Sets new minPoint.
+     * Gets max {@link org.bukkit.util.Vector} of the Arena Region
      *
-     * @param minPoint New value of minPoint.
+     * @return the max {@link org.bukkit.util.Vector}
      */
-    public void setMinPoint(SpawnPoint minPoint) {
-        this.locations.put("region", minPoint);
-    }
-
-
-    /**
-     * Sets new maxPoint.
-     *
-     * @param maxPoint New value of maxPoint.
-     */
-    public void setMaxPoint(SpawnPoint maxPoint) {
-        this.locations.put("region", maxPoint);
+    @Override
+    public Vector getMaxVec() {
+        return locations.get("region").get(1).toLocation().toVector();
     }
 
     /**
-     * Set lobby spawn {@link com.relicum.ipsum.Location.SpawnPoint}
+     * Gets min {@link org.bukkit.util.Vector} of the Arena Region
      *
-     * @param lobbySpawn the lobby spawn
+     * @return the min {@link org.bukkit.util.Vector}
      */
-    public void setLobbySpawn(SpawnPoint lobbySpawn) {
-        this.locations.put("lobby", lobbySpawn);
+    @Override
+    public Vector getMinVec() {
+        return locations.get("region").get(0).toLocation().toVector();
     }
 
     /**
-     * Get lobby spawn.
+     * Sets default spawn.
      *
-     * @return the {@link com.relicum.ipsum.Location.SpawnPoint}
+     * @param defaultSpawn the default spawn
      */
-    public SpawnPoint getLobbySpawn() {
-
-        return this.locations.get("lobby").get(0);
+    @Override
+    public void setDefaultSpawn(SpawnPoint defaultSpawn) {
+        locations.put("default-spawn", defaultSpawn);
     }
+
+    /**
+     * Gets default spawn.
+     *
+     * @return the default spawn
+     */
+    @Override
+    public SpawnPoint getDefaultSpawn() {
+        return locations.get("default-spawn").get(0);
+    }
+
+    /**
+     * Get Arena state.
+     *
+     * @return the state
+     */
+    @Override
+    public ArenaState getState() {
+        return state;
+    }
+
+    /**
+     * Update Arena state.
+     *
+     * @param state the state
+     */
+    @Override
+    public void updateState(ArenaState state) {
+        this.state = state;
+    }
+
 
     /**
      * Get List of player {@link com.relicum.ipsum.Location.SpawnPoint}
