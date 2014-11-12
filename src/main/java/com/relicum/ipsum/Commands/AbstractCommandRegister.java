@@ -22,6 +22,7 @@ package com.relicum.ipsum.Commands;
  * Abstract command register.
  * <p>Extend this class to create a new command register.
  */
+@Deprecated
 public abstract class AbstractCommandRegister {
 
 /*    public Map<String, SimpleCommand> commandMap = new HashMap<>();

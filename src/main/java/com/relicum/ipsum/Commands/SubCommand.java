@@ -33,6 +33,7 @@ import java.util.List;
  * @author Relicum
  * @version 0.0.1
  */
+@Deprecated
 @SubCmdInfo(name = "display", description = "Display a list of entities", usage = "/sub %command% [world] [TileEntities]", label = "sub display",
         permission = "display.use", minArgs = 3, maxArgs = 3, playerOnly = false, subCommand = true, subPrefix = "sub")
 public class SubCommand implements BaseCommand, CommandExecutor, PluginIdentifiableCommand {

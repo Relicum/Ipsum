@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Deprecated see {@link com.relicum.ipsum.Commands.AbstractCommand}
  * All commands need to extend this class as well as adding the annotation {@link com.relicum.ipsum.Commands.CmdInfo} to the class.
  * <p>The {@link com.relicum.ipsum.Commands.CmdInfo} annotation has the following values which you must supply values for
  * all of them.</p>
@@ -50,6 +51,7 @@ import java.util.List;
  * @author Relicum
  * @version 0.0.1
  */
+@Deprecated
 public abstract class SimpleCommand implements BaseCommand, TabExecutor, PluginIdentifiableCommand {
     public boolean debug = false;
     public Plugin plugin;

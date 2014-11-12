@@ -30,19 +30,14 @@ import java.util.*;
 /**
  * LocationListMultimap Implementation of Multimap that uses an ArrayList to store the values for a given key. A HashMap associates each key with an ArrayList of values.
  * <p>When iterating through the collections supplied by this class, the ordering of values for a given key agrees with the order in which the values were added.
- * <p>
  * <p>This multimap allows duplicate key-value pairs. After adding a new key-value pair equal to an existing key-value pair, the ArrayListMultimap will contain entries for both the new value and the old value.
- * <p>
  * <p>Keys and values may be null. All optional multimap methods are supported, and all returned views are modifiable.
- * <p>
  * <p>See the Guava User Guide article on <a href="http://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained#Multimap">Multimap</a>
- * <p>
  * <p>This class is specifically designed to allow the storing of a collection of {@link org.bukkit.Location} or {@link com.relicum.ipsum.Location.SpawnPoint} by a single key.
  * This becomes especially useful if when creating mini games that have many different types of {@link com.relicum.ipsum.Location.SpawnPoint} or {@link org.bukkit.Location} but are grouped
  * or stored under different human readable names eg, start spawn, lobby spawn, region, game spawns that have multiple spawns. You can now store all of these in a single object and free to fame each
  * group or object as you like.
- * <p>
- * The internal backing object is Synchronised but you will need to manually synchronise if you wish to iterate over one of the collections.
+ * <p>The internal backing object is Synchronised but you will need to manually synchronise if you wish to iterate over one of the collections.
  *
  * @author Relicum
  * @version 0.0.1
