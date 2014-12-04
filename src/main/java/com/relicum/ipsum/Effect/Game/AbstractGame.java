@@ -22,7 +22,7 @@ import com.relicum.ipsum.Location.PointsGroup;
 import com.relicum.ipsum.Location.SpawnCollection;
 import com.relicum.ipsum.Location.SpawnPoint;
 import com.relicum.ipsum.Scoreboards.SimpleScoreBoardHandler;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;

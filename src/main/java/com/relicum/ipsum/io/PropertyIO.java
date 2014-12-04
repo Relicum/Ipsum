@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.io;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 
 import java.io.File;
 import java.io.FileNotFoundException;

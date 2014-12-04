@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Commands.Group;
 
-import net.minecraft.util.com.google.common.base.Objects;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bukkit.ChatColor;
 
 /**
@@ -96,12 +96,12 @@ public class DefaultMessage {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
-                .add("messageColor", messageColor)
-                .add("errorMessageColor", errorMessageColor)
-                .add("highlighterColor", highlighterColor)
-                .add("adminColor", adminColor)
-                .add("prefix", prefix)
+        return new ToStringBuilder(this)
+                .append("messageColor", messageColor)
+                .append("errorMessageColor", errorMessageColor)
+                .append("highlighterColor", highlighterColor)
+                .append("adminColor", adminColor)
+                .append("prefix", prefix)
                 .toString();
     }
 }

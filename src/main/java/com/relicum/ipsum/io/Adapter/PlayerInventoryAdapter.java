@@ -19,7 +19,7 @@
 package com.relicum.ipsum.io.Adapter;
 
 
-import net.minecraft.util.com.google.gson.*;
+import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Type;

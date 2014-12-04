@@ -20,7 +20,7 @@ package com.relicum.ipsum.io;
 
 
 import com.relicum.ipsum.io.Adapter.*;
-import net.minecraft.util.com.google.gson.*;
+import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;

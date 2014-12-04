@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Commands.Group;
 
-import net.minecraft.util.com.google.common.base.Objects;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bukkit.ChatColor;
 
 /**
@@ -90,19 +90,19 @@ public class Prefix {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
-                .add("leftChars", leftChars)
-                .add("leftColor", leftColor)
-                .add("leftStyle", leftStyle)
-                .add("middleChars", middleChars)
-                .add("altMiddleChar", altMiddleChar)
-                .add("middleColor", middleColor)
-                .add("middleStyle", middleStyle)
-                .add("rightChars", rightChars)
-                .add("rightColor", rightColor)
-                .add("rightStyle", rightStyle)
-                .add("prefix", prefix)
-                .add("altPrefix", altPrefix)
+        return new ToStringBuilder(this)
+                .append("leftChars", leftChars)
+                .append("leftColor", leftColor)
+                .append("leftStyle", leftStyle)
+                .append("middleChars", middleChars)
+                .append("altMiddleChar", altMiddleChar)
+                .append("middleColor", middleColor)
+                .append("middleStyle", middleStyle)
+                .append("rightChars", rightChars)
+                .append("rightColor", rightColor)
+                .append("rightStyle", rightStyle)
+                .append("prefix", prefix)
+                .append("altPrefix", altPrefix)
                 .toString();
     }
 }

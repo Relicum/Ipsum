@@ -7,7 +7,7 @@ import com.relicum.ipsum.Exception.Versioning.Version;
 import com.relicum.ipsum.Reflection.ReflectionUtil;
 import com.relicum.ipsum.Reflection.WrappedChatPacket;
 import com.relicum.ipsum.Reflection.WrappedChatSerializer;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

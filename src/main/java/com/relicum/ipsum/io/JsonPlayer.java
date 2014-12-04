@@ -19,11 +19,11 @@
 package com.relicum.ipsum.io;
 
 import com.relicum.ipsum.Configuration.PersistentPlayer;
-import net.minecraft.util.com.google.gson.Gson;
-import net.minecraft.util.com.google.gson.GsonBuilder;
-import net.minecraft.util.com.google.gson.reflect.TypeToken;
-import net.minecraft.util.com.google.gson.stream.JsonReader;
-import net.minecraft.util.com.google.gson.stream.JsonWriter;
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
+import org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken;
+import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonReader;
+import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;

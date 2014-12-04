@@ -20,9 +20,9 @@ package com.relicum.ipsum.Configuration;
 
 import com.relicum.ipsum.Effect.Game.GamerData;
 import com.relicum.ipsum.io.GsonIO;
-import net.minecraft.util.com.google.gson.Gson;
-import net.minecraft.util.com.google.gson.GsonBuilder;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;

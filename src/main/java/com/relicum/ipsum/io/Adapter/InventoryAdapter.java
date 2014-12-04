@@ -19,7 +19,7 @@
 package com.relicum.ipsum.io.Adapter;
 
 import com.relicum.ipsum.io.GsonLoader;
-import net.minecraft.util.com.google.gson.*;
+import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +31,6 @@ import java.lang.reflect.Type;
  * This is my Gson adapter for Inventories.
  * It handles all inventories as CraftInventoryCustom "Chest"s with size of your choice
  * except for PlayerInventory which it handles pretty darn well!
- * <p>
  * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
  * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
  */

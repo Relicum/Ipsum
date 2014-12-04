@@ -19,9 +19,9 @@
 package com.relicum.ipsum.io;
 
 
-import net.minecraft.util.com.google.gson.Gson;
-import net.minecraft.util.com.google.gson.stream.JsonReader;
-import net.minecraft.util.com.google.gson.stream.JsonWriter;
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonReader;
+import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

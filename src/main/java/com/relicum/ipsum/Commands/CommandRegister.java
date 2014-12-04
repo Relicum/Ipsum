@@ -18,10 +18,10 @@
 
 package com.relicum.ipsum.Commands;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.relicum.ipsum.Utils.Msg;
 import lombok.Getter;
-import net.minecraft.util.com.google.common.collect.ImmutableList;
-import net.minecraft.util.com.google.common.collect.ImmutableMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;

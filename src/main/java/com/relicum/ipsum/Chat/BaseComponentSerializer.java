@@ -15,7 +15,8 @@
  */
 package com.relicum.ipsum.Chat;
 
-import net.minecraft.util.com.google.common.base.Preconditions;
+
+import com.google.common.base.Preconditions;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.libs.com.google.gson.JsonDeserializationContext;
 import org.bukkit.craftbukkit.libs.com.google.gson.JsonObject;

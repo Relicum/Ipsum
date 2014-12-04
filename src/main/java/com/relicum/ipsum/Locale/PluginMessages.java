@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Locale;
 
 import com.relicum.ipsum.io.PropertyIO;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 
 import java.io.IOException;
 import java.nio.file.Path;

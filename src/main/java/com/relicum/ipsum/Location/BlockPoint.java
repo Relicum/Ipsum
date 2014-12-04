@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.util.BlockVector;
 
 /**

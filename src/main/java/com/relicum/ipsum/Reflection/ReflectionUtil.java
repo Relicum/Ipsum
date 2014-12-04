@@ -4,7 +4,7 @@
 package com.relicum.ipsum.Reflection;
 
 import com.relicum.ipsum.Exception.Versioning;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

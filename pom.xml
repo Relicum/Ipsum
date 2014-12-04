@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.44-SNAPSHOT</version>
+    <version>1.0.46-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -163,32 +163,20 @@
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
-            <id>repo.oc.tc</id>
+            <id>md_5-repo</id>
+            <url>http://repo.md-5.net/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>md_5-snapshots</id>
+            <url>http://repo.md-5.net/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+        <id>repo.oc.tc</id>
             <url>https://repo.oc.tc/content/repositories/public/</url>
         </repository>
         <repository>
             <id>org.apache</id>
             <url>http://repository.apache.org/snapshots/</url>
-        </repository>
-        <repository>
-            <id>relicum-snapshot</id>
-            <url>http://repository-relicum.forge.cloudbees.com/snapshot/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>addstar-snapshot-repo</id>
-            <url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
         </repository>
     </repositories>
     <dependencies>
@@ -226,13 +214,13 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.7.10-R0.1-SNAPSHOT</version>
+            <version>1.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.7.10-R0.1-SNAPSHOT</version>
+            <version>1.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -268,7 +256,7 @@
                         <version>2.4</version>
                         <configuration>
                             <finalName>${project.name}-${project.version}</finalName>
-                            <outputDirectory>G:\Users\Relicum\IdeaProjects\Restrict\dist\plugins
+                            <outputDirectory>G:\Users\Relicum\Desktop\MCTest\plugins
                             </outputDirectory>
                         </configuration>
                     </plugin>

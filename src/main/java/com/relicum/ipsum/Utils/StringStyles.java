@@ -18,8 +18,8 @@
 
 package com.relicum.ipsum.Utils;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import net.minecraft.util.org.apache.commons.lang3.text.StrBuilder;
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.text.StrBuilder;
 import org.bukkit.ChatColor;
 
 /**
