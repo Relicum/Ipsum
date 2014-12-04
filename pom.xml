@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.42-SNAPSHOT</version>
+    <version>1.0.43-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -126,22 +126,34 @@
                 <version>2.9.1</version>
                 <executions>
                     <execution>
-                        <id>aggregate</id>
+                        <id>aggregate-jar</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>javadoc</goal>
+                            <goal>aggregate-jar</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
                     <charset>UTF-8</charset>
                     <links>
-                        <link>http://jd.bukkit.org/dev/apidocs/overview-summary.html</link>
+                        <link>http://jd.bukkit.org/dev/apidocs/</link>
                     </links>
                     <linksource>true</linksource>
-                    <outputDirectory>${project.build.outputDirectory}/apidocs</outputDirectory>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/apidocs</reportOutputDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

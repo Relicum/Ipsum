@@ -125,6 +125,11 @@ public abstract class AbstractCommand implements CmdExecutor, PluginIdentifiable
         return getClass().getAnnotation(Command.class);
     }
 
+    /**
+     * Get plugin.
+     *
+     * @return the plugin that is running the command.
+     */
     @Override
     public Plugin getPlugin() {
         return plugin;
@@ -141,6 +146,36 @@ public abstract class AbstractCommand implements CmdExecutor, PluginIdentifiable
     public String formatHelp(String sub, String cm, String mess) {
 
         return ChatColor.GOLD + "/" + sub + " " + cm + ChatColor.GREEN + " : " + mess;
+    }
+
+    /**
+     * Log a message to the log.
+     *
+     * @param text the text to log.
+     */
+    public void log(String text) {
+
+        plugin.getLogger().info(text);
+    }
+
+    /**
+     * Log warning message to the log.
+     *
+     * @param text the warning text to log.
+     */
+    public void logWarning(String text) {
+
+        plugin.getLogger().warning(text);
+    }
+
+    /**
+     * Log serve message to the log.
+     *
+     * @param text the serve text to log.
+     */
+    public void logServe(String text) {
+
+        plugin.getLogger().severe(text);
     }
 
 }

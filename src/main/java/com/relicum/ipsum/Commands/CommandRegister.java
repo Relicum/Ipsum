@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Commands;
 
+import com.relicum.ipsum.Utils.Msg;
 import lombok.Getter;
 import net.minecraft.util.com.google.common.collect.ImmutableList;
 import net.minecraft.util.com.google.common.collect.ImmutableMap;
@@ -50,6 +51,7 @@ public class CommandRegister implements TabExecutor {
 
     private Map<String, AbstractCommand> commands;
 
+    private Msg msg;
 
     private List<String> rootCmd;
 
@@ -182,6 +184,7 @@ public class CommandRegister implements TabExecutor {
 
     }
 
+
     private boolean isRootCmd(String cmd) {
 
         return rootCmd.contains(cmd);
@@ -259,6 +262,7 @@ public class CommandRegister implements TabExecutor {
 
     }
 
+
     /**
      * End registration, you should call this once all commands are registered.
      * <p>It creates Immutable lists and Maps to help of sync and efficiency.
@@ -285,7 +289,7 @@ public class CommandRegister implements TabExecutor {
             c.setAccessible(true);
 
             command = (PluginCommand) c.newInstance(name, plugin);
-            //command = (PluginCommand) c.newInstance(new Object[]{name , plugin});
+
         } catch (SecurityException | IllegalArgumentException | IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }

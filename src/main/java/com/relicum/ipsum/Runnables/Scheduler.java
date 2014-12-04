@@ -18,10 +18,7 @@
 
 package com.relicum.ipsum.Runnables;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * An {@link java.util.concurrent.ScheduledThreadPoolExecutor} that can schedule commands to run after a given
@@ -98,6 +95,40 @@ public class Scheduler {
         return timer.scheduleAtFixedRate(command, initialDelay, period, unit);
     }
 
+    /**
+     * Executes {@code command} with zero required delay.
+     * This has effect equivalent to
+     * {@link java.util.concurrent.ScheduledThreadPoolExecutor#schedule(Runnable, long, TimeUnit)} schedule(command, 0, anyUnit)}.
+     * Note that inspections of the queue and of the list returned by
+     * {@code shutdownNow} will access the zero-delayed
+     * {@link ScheduledFuture}, not the {@code command} itself.
+     * <p>A consequence of the use of {@code ScheduledFuture} objects is
+     * that {@link java.util.concurrent.ThreadPoolExecutor#afterExecute afterExecute} is always
+     * called with a null second {@code Throwable} argument, even if the
+     * {@code command} terminated abruptly.  Instead, the {@code Throwable}
+     * thrown by such a task can be obtained via {@link java.util.concurrent.Future#get}.
+     *
+     * @param command the task to execute.
+     * @throws java.util.concurrent.RejectedExecutionException at discretion of
+     *                                                         {@code RejectedExecutionHandler}, if the task
+     *                                                         cannot be accepted for execution because the
+     *                                                         executor has been shut down
+     * @throws NullPointerException                            from command
+     */
+    public void execute(Runnable command) {
+
+        this.timer.execute(command);
+    }
+
+    public <T> Future<T> submit(Callable<T> task) {
+
+        return timer.submit(task);
+    }
+
+    public java.util.List<Runnable> shutdownNow() {
+
+        return timer.shutdownNow();
+    }
 
     /**
      * Shutdown the Scheduler

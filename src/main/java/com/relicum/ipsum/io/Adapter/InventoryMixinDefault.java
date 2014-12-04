@@ -18,26 +18,34 @@
 
 package com.relicum.ipsum.io.Adapter;
 
-import net.minecraft.util.com.google.gson.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.PlayerInventory;
 
-import java.lang.reflect.Type;
+import java.util.List;
 
 /**
- * JsonElementAdapter
+ * InventoryMixinDefault
  * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
  * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class JsonElementAdapter implements JsonDeserializer<JsonElement>, JsonSerializer<JsonElement> {
+public class InventoryMixinDefault extends InventoryMixinAbstract {
+
     // -------------------------------------------- //
     // INSTANCE & CONSTRUCT
     // -------------------------------------------- //
 
-    private static JsonElementAdapter i = new JsonElementAdapter();
+    private static InventoryMixinDefault i = new InventoryMixinDefault();
 
-    public static JsonElementAdapter get() {
+    public static InventoryMixinDefault get() {
         return i;
     }
 
@@ -46,13 +54,21 @@ public class JsonElementAdapter implements JsonDeserializer<JsonElement>, JsonSe
     // -------------------------------------------- //
 
     @Override
-    public JsonElement serialize(JsonElement src, Type typeOfSrc, JsonSerializationContext context) {
-        return src;
+    public PlayerInventory createPlayerInventory() {
+        List<World> worlds = Bukkit.getWorlds();
+        World world = worlds.get(0);
+
+        Location location = world.getSpawnLocation().clone();
+        location.setY(999);
+
+        Player player = (Player) world.spawnEntity(location, EntityType.PLAYER);
+        PlayerInventory ret = player.getInventory();
+        player.remove();
+        return ret;
     }
 
     @Override
-    public JsonElement deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return json;
+    public Inventory createInventory(InventoryHolder holder, int size, String title) {
+        return Bukkit.createInventory(holder, size, title);
     }
-
 }

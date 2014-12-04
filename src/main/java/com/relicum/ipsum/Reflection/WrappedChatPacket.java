@@ -24,4 +24,5 @@ public class WrappedChatPacket extends WrappedPacket {
             throw ReflectionException.fromThrowable("Constructing wrapped chat packet", ex);
         }
     }
+
 }

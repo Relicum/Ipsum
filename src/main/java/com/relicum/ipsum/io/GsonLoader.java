@@ -19,17 +19,17 @@
 package com.relicum.ipsum.io;
 
 
-import com.relicum.ipsum.io.Adapter.ItemStackAdapter;
-import com.relicum.ipsum.io.Adapter.JsonElementAdapter;
-import com.relicum.ipsum.io.Adapter.UUIDAdapter;
+import com.relicum.ipsum.io.Adapter.*;
 import net.minecraft.util.com.google.gson.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Modifier;
 import java.util.UUID;
 
 /**
- * Name: GsonLoader.java Created: 25 September 2014
+ * GsonLoader returns a pre configured instance of {@link com.google.gson.Gson} with common types already been registered with the object.
  *
  * @author Relicum
  * @version 0.0.1
@@ -38,21 +38,43 @@ public class GsonLoader {
 
 
     public static Gson gson = getGsonBuilder().create();
+    public static Gson gsond = getGsonBuilder2().create();
 
     public static GsonBuilder getGsonBuilder() {
         return new GsonBuilder()
                 .setPrettyPrinting()
+
                 .serializeNulls()
-                .disableHtmlEscaping()
+                        //.disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonObject.class, JsonElementAdapter.get())
                 .registerTypeAdapter(UUID.class, UUIDAdapter.get())
-                .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get());
-        // .registerTypeAdapter(Inventory.class, InventoryAdapter.get())
-        //  .registerTypeAdapter(PlayerInventory.class, PlayerInventoryAdapter.get())
+                .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get())
+                .registerTypeAdapter(Inventory.class, InventoryAdapter.get())
+                .registerTypeAdapter(PlayerInventory.class, PlayerInventoryAdapter.get());
+
+
+    }
+
+    public static GsonBuilder getGsonBuilder2() {
+        return new GsonBuilder()
+                //.setPrettyPrinting()
+
+                .serializeNulls()
+                        //.disableHtmlEscaping()
+                .excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())
+                .registerTypeAdapter(JsonObject.class, JsonElementAdapter.get())
+                .registerTypeAdapter(UUID.class, UUIDAdapter.get())
+                .registerTypeAdapter(ItemStack.class, ItemStackAdapter.get())
+                .registerTypeAdapter(Inventory.class, InventoryAdapter.get())
+                .registerTypeAdapter(PlayerInventory.class, PlayerInventoryAdapter.get());
+
 
     }
 }

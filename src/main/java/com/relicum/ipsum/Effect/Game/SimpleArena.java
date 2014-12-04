@@ -62,6 +62,7 @@ public class SimpleArena extends AbstractSerializable implements ArenaRegion, Co
      * Instantiates a new Simple arena.
      *
      * @param uniqueId the unique id
+     * @return instance of {@link com.relicum.ipsum.Effect.Game.SimpleArena}
      */
     public static SimpleArena createSimpleArena(String uniqueId) {
         return new SimpleArena(uniqueId);
@@ -72,6 +73,7 @@ public class SimpleArena extends AbstractSerializable implements ArenaRegion, Co
      *
      * @param arenaName the arena name
      * @param uniqueId  the unique id
+     * @return instance of {@link com.relicum.ipsum.Effect.Game.SimpleArena}
      */
     public static SimpleArena createSimpleArena(String arenaName, String uniqueId) {
         return new SimpleArena(arenaName, uniqueId);

@@ -24,6 +24,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 /**
@@ -48,11 +49,30 @@ public final class InventoryFactory {
         return Base64Coder.encodeString(configuration.saveToString());
     }
 
+    public static String[] playerInventoryToBase64(PlayerInventory playerInventory) {
+
+        String content = toString(playerInventory);
+        String armor = itemStackArrayToBase64(playerInventory.getArmorContents());
+
+        return new String[]{content, armor};
+    }
+
+    public static String itemStackArrayToBase64(ItemStack[] items) throws IllegalStateException {
+        YamlConfiguration configuration = new YamlConfiguration();
+        for (int i = 0; i < items.length; i++) {
+            configuration.set("armor." + String.valueOf(i), items[i]);
+        }
+
+        return Base64Coder.encodeString(configuration.saveToString());
+    }
+
+
     public static Inventory fromString(String s) {
         YamlConfiguration configuration = new YamlConfiguration();
         try {
             configuration.loadFromString(Base64Coder.decodeString(s));
             Inventory i = Bukkit.createInventory(null, configuration.getInt("Size"), configuration.getString("Title"));
+
             ConfigurationSection contents = configuration.getConfigurationSection("Contents");
             for (String index : contents.getKeys(false))
                 i.setItem(Integer.parseInt(index), contents.getItemStack(index));
@@ -60,5 +80,20 @@ public final class InventoryFactory {
         } catch (InvalidConfigurationException e) {
             return null;
         }
+    }
+
+    public static ItemStack[] itemStackArrayFromBase64(String data) {
+        YamlConfiguration configuration = new YamlConfiguration();
+        try {
+            configuration.loadFromString(Base64Coder.decodeString(data));
+            ConfigurationSection contents = configuration.getConfigurationSection("armor");
+            ItemStack[] items = new ItemStack[contents.getKeys(false).size()];
+            for (String index : contents.getKeys(false))
+                items[Integer.parseInt(index)] = contents.getItemStack(index);
+            return items;
+        } catch (InvalidConfigurationException e) {
+            return null;
+        }
+
     }
 }

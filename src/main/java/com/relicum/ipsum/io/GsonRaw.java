@@ -30,15 +30,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * GsonIO Contain static methods for read and writing to Json files.
+ * GsonRaw Contain static methods for read and writing to Json files but with no pretty printing or line indents.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class GsonIO {
+public class GsonRaw {
 
     //private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting().serializeNulls();
-    private static final Gson gson = GsonLoader.gson;
+    private static final Gson gson = GsonLoader.gsond;
 
     /**
      * Return a new {@link com.google.gson.stream.JsonReader} at the specified {@link java.nio.file.Path} location
@@ -58,7 +58,7 @@ public class GsonIO {
      *
      * @param path the location on disk of the file to write to
      * @return the {@link com.google.gson.stream.JsonWriter}
-     * @throws IOException if there was an exception while trying to create the writer
+     * @throws java.io.IOException if there was an exception while trying to create the writer
      */
     public static JsonWriter writer(Path path) throws IOException {
 
@@ -68,7 +68,6 @@ public class GsonIO {
     public static void writeToFile(Path path, Object src, Type typeOfSrc) throws IOException {
 
         JsonWriter writer = writer(path);
-        writer.setIndent("    ");
 
         gson.toJson(src, typeOfSrc, writer);
         writer.flush();
@@ -83,7 +82,7 @@ public class GsonIO {
      * @param typeOfSrc the type of src
      * @param clazz     the clazz
      * @return the t
-     * @throws IOException the iO exception
+     * @throws java.io.IOException the iO exception
      */
     public static <T> T readFromFile(Path path, Type typeOfSrc, T clazz) throws IOException {
 

@@ -41,6 +41,10 @@ public class Enchant {
      */
     private boolean force;
 
+    public static Enchant get(Enchantment enchantment, int level, boolean force) {
+        return new Enchant(enchantment, level, force);
+    }
+
     /**
      * Enchantment enchantment.
      *
@@ -66,6 +70,12 @@ public class Enchant {
      */
     public boolean force() {
         return this.force;
+    }
+
+    private Enchant(Enchantment enchantment, int level, boolean force) {
+        this.enchantment = enchantment;
+        this.level = level;
+        this.force = force;
     }
 
     /**

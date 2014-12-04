@@ -18,26 +18,29 @@
 
 package com.relicum.ipsum.io.Adapter;
 
+
 import net.minecraft.util.com.google.gson.*;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Type;
 
 /**
- * JsonElementAdapter
+ * PlayerInventoryAdapter used to serialize and deserialize instances of {@link org.bukkit.inventory.PlayerInventory}
  * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
  * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
  *
- * @author Relicum
+ * @author MassiveCraft
  * @version 0.0.1
  */
-public class JsonElementAdapter implements JsonDeserializer<JsonElement>, JsonSerializer<JsonElement> {
+public class PlayerInventoryAdapter implements JsonDeserializer<PlayerInventory>, JsonSerializer<PlayerInventory> {
+
     // -------------------------------------------- //
     // INSTANCE & CONSTRUCT
     // -------------------------------------------- //
 
-    private static JsonElementAdapter i = new JsonElementAdapter();
+    private static PlayerInventoryAdapter i = new PlayerInventoryAdapter();
 
-    public static JsonElementAdapter get() {
+    public static PlayerInventoryAdapter get() {
         return i;
     }
 
@@ -46,13 +49,12 @@ public class JsonElementAdapter implements JsonDeserializer<JsonElement>, JsonSe
     // -------------------------------------------- //
 
     @Override
-    public JsonElement serialize(JsonElement src, Type typeOfSrc, JsonSerializationContext context) {
-        return src;
+    public JsonElement serialize(PlayerInventory src, Type typeOfSrc, JsonSerializationContext context) {
+        return InventoryAdapter.toJson(src);
     }
 
     @Override
-    public JsonElement deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return json;
+    public PlayerInventory deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return (PlayerInventory) InventoryAdapter.fromJson(json);
     }
-
 }

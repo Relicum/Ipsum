@@ -20,6 +20,7 @@ package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
 import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.bukkit.util.BlockVector;
 
 /**
  * BlockPoint stores an instance of a minecraft block location.
@@ -33,6 +34,7 @@ public class BlockPoint implements Point, Locateable {
     private int Y;
     private int Z;
     private String world;
+    private transient BlockVector blockVector;
 
 
     /**
@@ -56,6 +58,12 @@ public class BlockPoint implements Point, Locateable {
     public BlockPoint() {
 
 
+    }
+
+    public BlockVector toBlockVector() {
+        if (blockVector == null)
+            blockVector = new BlockVector(X, Y, Z);
+        return blockVector;
     }
 
     /**

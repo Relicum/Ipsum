@@ -18,10 +18,12 @@
 
 package com.relicum.ipsum.Effect.Game;
 
+import com.relicum.ipsum.Location.BlockPoint;
 import net.minecraft.util.com.google.gson.Gson;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.util.BlockVector;
+import org.bukkit.util.Vector;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -35,8 +37,10 @@ import java.util.Map;
 @SerializableAs("Region")
 public class Region implements ConfigurationSerializable {
 
-    private BlockVector minBlock;
-    private BlockVector maxBlock;
+    private transient BlockVector minBlock;
+    private transient BlockVector maxBlock;
+    private BlockPoint minPoint;
+    private BlockPoint maxPoint;
     private String world;
 
     public Region() {
@@ -51,8 +55,8 @@ public class Region implements ConfigurationSerializable {
      * @param world the world name as a string the 2 points are in.
      */
     public Region(BlockVector min, BlockVector max, String world) {
-        this.minBlock = min;
-        this.maxBlock = max;
+        this.minPoint = new BlockPoint(world, min.getBlockX(), min.getBlockY(), min.getBlockZ());
+        this.maxPoint = new BlockPoint(world, max.getBlockX(), max.getBlockY(), max.getBlockZ());
         this.world = world;
     }
 
@@ -67,16 +71,43 @@ public class Region implements ConfigurationSerializable {
         return gson.toJson(this, Region.class);
     }
 
+
+    /**
+     * Check to see if a given location is in this region.
+     *
+     * @param vector the location to check
+     * @return true if the location is in the region, false if not.
+     */
+    public boolean isRegion(Vector vector) {
+        if (minBlock == null)
+            minBlock = new BlockVector(minPoint.toBlockVector());
+        if (maxBlock == null)
+            maxBlock = new BlockVector(maxPoint.toBlockVector());
+
+        return vector.isInAABB(minBlock, maxBlock);
+    }
+
     /**
      * Get min point as a {@link org.bukkit.util.BlockVector}
      *
      * @return the block vector
      */
     public BlockVector getMin() {
-
-        return new BlockVector(minBlock);
+        if (minBlock == null)
+            minBlock = minPoint.toBlockVector();
+        return minBlock;
     }
 
+    /**
+     * Get max point as a {@link org.bukkit.util.BlockVector}
+     *
+     * @return the block vector of the max point
+     */
+    public BlockVector getMax() {
+        if (maxBlock == null)
+            maxBlock = maxPoint.toBlockVector();
+        return maxBlock;
+    }
 
     /**
      * Sets max point.
@@ -95,17 +126,6 @@ public class Region implements ConfigurationSerializable {
     public void setMinBlock(BlockVector minBlock) {
         this.minBlock = minBlock;
     }
-
-    /**
-     * Get max point as a {@link org.bukkit.util.BlockVector}
-     *
-     * @return the block vector of the max point
-     */
-    public BlockVector getMax() {
-
-        return new BlockVector(maxBlock);
-    }
-
 
     /**
      * Gets world.
@@ -128,9 +148,10 @@ public class Region implements ConfigurationSerializable {
 
 
     /**
-     * Instantiates a new Region data used to deserialize the object
+     * Instantiates a new Region data used to deserialize the object.
      *
-     * @param map the map to be deserialize
+     * @param map the map
+     * @return new instance of {@link com.relicum.ipsum.Effect.Game.Region}
      */
     public static Region deserialize(Map<String, Object> map) {
 
@@ -141,8 +162,8 @@ public class Region implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new LinkedHashMap<>(3);
-        map.put("minBlock", minBlock);
-        map.put("maxBlock", maxBlock);
+        map.put("minBlock", minPoint.toBlockVector());
+        map.put("maxBlock", maxPoint.toBlockVector());
         map.put("world", world);
 
         return map;

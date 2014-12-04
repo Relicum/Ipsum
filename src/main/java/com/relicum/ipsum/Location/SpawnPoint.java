@@ -114,4 +114,5 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
         return map;
     }
 
+
 }
