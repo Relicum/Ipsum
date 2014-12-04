@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.43-SNAPSHOT
+Ipsum Gaming Commons 1.0.44-SNAPSHOT
 ===
 
 **Built using the best Java IDE around**
@@ -59,6 +59,10 @@ External Contributors
 all copyrights belong @Sk89q and is licensed under GPL3**
 >The sk89q-command-framework source can be located at https://github.com/OvercastNetwork/sk89q-command-framework 
 
+**MassiveCraft development**
+Some of the massiveCore inventory serialisation is included
+Many thank to them details on them can be found at
+>www.MassiveCraft.com
 
 **MD_5s Chat API is included all copyrights belong to him.
 It has also been enhanced by dmulloy2 and are licensed under GPL3.**

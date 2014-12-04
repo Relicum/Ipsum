@@ -23,9 +23,10 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
 
 /**
- * Name: InventoryMixin.java Created: 21 November 2014
+ * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
+ * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
  *
- * @author Relicum
+ * @author MassiveCraft
  * @version 0.0.1
  */
 public interface InventoryMixin {

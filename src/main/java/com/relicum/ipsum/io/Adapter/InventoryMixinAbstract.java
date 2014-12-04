@@ -19,9 +19,10 @@
 package com.relicum.ipsum.io.Adapter;
 
 /**
- * Name: InventoryMixinAbstract.java Created: 21 November 2014
+ * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
+ * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
  *
- * @author Relicum
+ * @author Massivecraft
  * @version 0.0.1
  */
 public abstract class InventoryMixinAbstract implements InventoryMixin {
