@@ -70,7 +70,7 @@ It has also been enhanced by dmulloy2 and are licensed under GPL3.**
 --------
 
 
-`Build for Bukkit and Spigot 1.7.10-R0.1`
+`Build for Bukkit and Spigot 1.8`
 
 `This will be built using the Prototyping method, build them quick and build them often.
 What this means is I will code parts release, play test, listen to feedback and carry on.`
