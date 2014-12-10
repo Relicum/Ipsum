@@ -144,7 +144,7 @@ public class Msg implements ConsoleColors {
      */
     public void broadcast(String text) {
 
-        Bukkit.broadcastMessage(prefix + colorize(text));
+        Bukkit.broadcastMessage(colorize(prefix + text));
     }
 
     /**
