@@ -39,15 +39,16 @@ public class BlockPoint implements Point, Locateable {
 
     /**
      * Instantiates a new Block location.
-     *  @param world the world
+     *
+     * @param world the world
      * @param x     the x
      * @param y     the y
      * @param z     the z
      */
     public BlockPoint(String world, double x, double y, double z) {
-        X = MathUtils.floor(x) + 0.5d;
-        Y = y;
-        Z = z;
+        setX(x);
+        setY(y);
+        setZ(z);
         this.world = world;
     }
 
