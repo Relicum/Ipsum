@@ -30,23 +30,22 @@ import org.bukkit.util.BlockVector;
  */
 public class BlockPoint implements Point, Locateable {
 
-    private int X;
-    private int Y;
-    private int Z;
+    private double X;
+    private double Y;
+    private double Z;
     private String world;
     private transient BlockVector blockVector;
 
 
     /**
      * Instantiates a new Block location.
-     *
-     * @param world the world
+     *  @param world the world
      * @param x     the x
      * @param y     the y
      * @param z     the z
      */
-    public BlockPoint(String world, int x, int y, int z) {
-        X = x;
+    public BlockPoint(String world, double x, double y, double z) {
+        X = MathUtils.floor(x) + 0.5d;
         Y = y;
         Z = z;
         this.world = world;
@@ -157,12 +156,18 @@ public class BlockPoint implements Point, Locateable {
 
     }
 
+
     @Override
     public int hashCode() {
-        int result = X;
-        result = 31 * result + Y;
-        result = 31 * result + Z;
-        result = 31 * result + (world != null ? world.hashCode() : 0);
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(X);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(Y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(Z);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + world.hashCode();
         return result;
     }
 
