@@ -30,6 +30,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -372,11 +373,35 @@ public class LocUtils {
 
     }
 
-    public static HashSet<LivingEntity> getNearByPlayers(Location location, int radius) {
+    /**
+     * It will return a specified {@link org.bukkit.entity.Player} in a radius, from location.
+     *
+     * @param location Initial location
+     * @param radius   distance from the "location" that will return all the entities from each block;
+     * @return List(Player)
+     * credits skore87
+     */
+    public static List<Player> getNearByPlayers(Location location, int radius) {
 
-        return getNearByEntities(location, radius, EntityType.PLAYER);
+        int chunkRadius = radius < 16 ? 1 : (radius - (radius % 16)) / 16;
+        List<Player> radiusEntities = new ArrayList<>();
+
+        for (int chX = 0 - chunkRadius; chX <= chunkRadius; chX++) {
+            for (int chZ = 0 - chunkRadius; chZ <= chunkRadius; chZ++) {
+                int x = (int) location.getX(), y = (int) location.getY(), z = (int) location.getZ();
+                for (Entity e : new Location(location.getWorld(), x + (chX * 16), y, z + (chZ * 16)).getChunk().getEntities()) {
+                    if (e.getLocation().distance(location) <= radius && e.getLocation().getBlock() != location.getBlock()) {
+                        if (e instanceof Player) {
+
+                            radiusEntities.add((Player) e);
+                        }
+                    }
+                }
+            }
+        }
+        return radiusEntities;
+
     }
-
 
     /**
      * Apply a basic knockback effect to a {@link org.bukkit.entity.LivingEntity}.
