@@ -87,5 +87,10 @@ public @interface Command {
      */
     String parent() default "";
 
-
+    /**
+     * Set to true if Tab Complete is required
+     *
+     * @return set true to use tab complete, default is false not to use it.
+     */
+    boolean useTab() default false;
 }

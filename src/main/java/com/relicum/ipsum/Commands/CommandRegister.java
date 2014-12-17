@@ -29,6 +29,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.StringUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -57,6 +58,8 @@ public class CommandRegister implements TabExecutor {
 
     private List<String> LEVEL1;
 
+    private List<String> USE_TAB;
+
     /**
      * Instantiates a new Command register.
      *
@@ -67,6 +70,7 @@ public class CommandRegister implements TabExecutor {
         this.plugin = plugin;
         rootCmd = new ArrayList<>(3);
         this.commands = new HashMap<>();
+        this.USE_TAB = new ArrayList<>();
     }
 
 
@@ -195,6 +199,11 @@ public class CommandRegister implements TabExecutor {
         return LEVEL1.contains(cmd);
     }
 
+    private boolean useTabComplete(String cmd) {
+
+        return USE_TAB.contains(cmd);
+    }
+
     protected boolean registerCommand(String name, AbstractCommand cmd) {
 
         if (!isRootCmd(cmd.getParent().toLowerCase())) {
@@ -205,6 +214,11 @@ public class CommandRegister implements TabExecutor {
         if (!inLevel1(name.toLowerCase())) {
 
             LEVEL1.add(name.toLowerCase());
+        }
+
+        if (cmd.useTab) {
+
+            USE_TAB.add(name.toLowerCase());
         }
 
         String[] ps = cmd.getPermission().split("\\.");
@@ -237,7 +251,7 @@ public class CommandRegister implements TabExecutor {
         }
         cd.setExecutor(this);
         cd.setPermission(cmd.getPermission());
-        cd.setTabCompleter(plugin);
+        cd.setTabCompleter(this);
 
         if (cmp.register(lab, "mc", cd)) {
 
@@ -324,6 +338,28 @@ public class CommandRegister implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        return null;
+        if (strings.length == 1) {
+            return StringUtil.copyPartialMatches(strings[0], LEVEL1, new ArrayList<>(LEVEL1.size()));
+        }
+        if (strings.length == 2) {
+
+            if (!useTabComplete(strings[0])) {
+
+                return Collections.emptyList();
+
+
+            } else {
+
+                List<String> list = commands.get(strings[0]).tabComp(2);
+                if (list.size() == 0)
+                    return Collections.emptyList();
+
+                return StringUtil.copyPartialMatches(strings[1], list, new ArrayList<>(list.size()));
+
+            }
+
+        }
+
+        return Collections.emptyList();
     }
 }

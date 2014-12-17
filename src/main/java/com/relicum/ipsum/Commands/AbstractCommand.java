@@ -60,6 +60,8 @@ public abstract class AbstractCommand implements CmdExecutor, PluginIdentifiable
     protected boolean sub;
     @Getter
     protected String parent;
+    @Getter
+    protected boolean useTab;
     @Setter
     @Getter
     protected String help;
@@ -94,6 +96,7 @@ public abstract class AbstractCommand implements CmdExecutor, PluginIdentifiable
         sub = getCommand().isSub();
         parent = getCommand().parent();
         usage = getCommand().usage();
+        useTab = getCommand().useTab();
         List<String> tmp = Arrays.asList(getCommand().aliases());
         if (tmp.size() == 1) {
 
@@ -177,5 +180,19 @@ public abstract class AbstractCommand implements CmdExecutor, PluginIdentifiable
 
         plugin.getLogger().severe(text);
     }
+
+    /**
+     * Tab comp. Override this if you want to use tab Complete.
+     * <p>The first argument you can complete is when length is set to 2 as 1 is the sub command which will auto complete it for you.
+     *
+     * @param length the current command argument position
+     * @return the list of available options for Tab complete.
+     */
+    public List<String> tabComp(int length) {
+        return Collections.emptyList();
+    }
+
+
+
 
 }

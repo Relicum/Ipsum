@@ -109,7 +109,7 @@ public class RandomFireWorks extends BukkitRunnable {
         Firework firework = (Firework) loc.getWorld().spawn(l, Firework.class);
         FireworkMeta data = firework.getFireworkMeta();
 
-        data.addEffects(new FireworkEffect[]{builder.build()});
+        data.addEffects(builder.build());
 
         data.setPower(random.nextInt(2));
 
