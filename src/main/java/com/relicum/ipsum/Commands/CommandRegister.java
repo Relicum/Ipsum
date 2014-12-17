@@ -341,7 +341,7 @@ public class CommandRegister implements TabExecutor {
         if (strings.length == 1) {
             return StringUtil.copyPartialMatches(strings[0], LEVEL1, new ArrayList<>(LEVEL1.size()));
         }
-        if (strings.length == 2) {
+        if (strings.length > 1 && strings.length < 6) {
 
             if (!useTabComplete(strings[0])) {
 
@@ -350,11 +350,11 @@ public class CommandRegister implements TabExecutor {
 
             } else {
 
-                List<String> list = commands.get(strings[0]).tabComp(2);
+                List<String> list = commands.get(strings[0]).tabComp(strings.length);
                 if (list.size() == 0)
                     return Collections.emptyList();
 
-                return StringUtil.copyPartialMatches(strings[1], list, new ArrayList<>(list.size()));
+                return StringUtil.copyPartialMatches(strings[strings.length - 1], list, new ArrayList<>(list.size()));
 
             }
 
@@ -362,4 +362,5 @@ public class CommandRegister implements TabExecutor {
 
         return Collections.emptyList();
     }
+
 }
