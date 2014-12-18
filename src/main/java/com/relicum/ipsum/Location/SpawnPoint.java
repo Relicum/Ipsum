@@ -59,9 +59,9 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
     public SpawnPoint(String world, double x, double y, double z, float yaw, float pitch) {
         super();
         this.setWorld(world);
-        this.setX(MathUtils.floor(x) + 0.5d);
-        this.setY(MathUtils.floor(y) + 0.5d);
-        this.setZ(MathUtils.floor(z) + 0.5d);
+        this.setX(Math.round(x) + 0.5d);
+        this.setY(Math.round(y) + 0.5d);
+        this.setZ(Math.round(z) + 0.5d);
         this.setYaw(MathUtils.getDirection(yaw));
         this.setPitch(pitch);
     }
@@ -77,9 +77,9 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
     public SpawnPoint(String world, double x, double y, double z) {
         super();
         this.setWorld(world);
-        this.setX(MathUtils.floor(x) + 0.5d);
-        this.setY(MathUtils.floor(y) + 0.5d);
-        this.setZ(MathUtils.floor(z) + 0.5d);
+        this.setX(Math.round(x) + 0.5d);
+        this.setY(Math.round(y) + 0.5d);
+        this.setZ(Math.round(z) + 0.5d);
         this.setYaw(90.0f);
         this.setPitch(1.4f);
     }

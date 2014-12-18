@@ -168,6 +168,30 @@ public abstract class PointInstance extends AbstractSerializable implements Exte
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PointInstance)) return false;
+
+        PointInstance that = (PointInstance) o;
+
+        if (!X.equals(that.X)) return false;
+        if (!Y.equals(that.Y)) return false;
+        if (!Z.equals(that.Z)) return false;
+        if (!world.equals(that.world)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = X.hashCode();
+        result = 31 * result + Y.hashCode();
+        result = 31 * result + Z.hashCode();
+        result = 31 * result + world.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
 
         return getWorld() + "," + getX() + "," + getY() + "," + getZ() + "," + getYaw() + "," + getPitch();

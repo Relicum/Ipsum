@@ -38,7 +38,7 @@ public final class MathUtils {
     }
 
     public static int round(double num) {
-        return floor(num + 0.5d);
+        return (int) Math.round(num);
     }
 
     public static double square(double num) {
