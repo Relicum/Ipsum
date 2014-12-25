@@ -85,11 +85,19 @@ public class CommandRegister implements TabExecutor {
             return true;
         }
 
+
         if (rootCmd.contains(cmd.getName().toLowerCase()) && args.length == 0) { //Deal with main sub command
 
             sender.sendMessage(ChatColor.AQUA + "Main Cmd help section");
             return true;
         }
+
+        if ((rootCmd.contains(cmd.getName().toLowerCase()) && args.length == 1) && !commands.containsKey(args[0].toLowerCase())) { //Deal with main sub command
+
+            sender.sendMessage(ChatColor.RED + "Error command not found");
+            return true;
+        }
+
         AbstractCommand sub;
         if (args.length == 0) {
             sub = commands.get(cmd.getName().toLowerCase());
@@ -231,7 +239,7 @@ public class CommandRegister implements TabExecutor {
 
         plugin.getServer().getPluginManager().addPermission(per);
 
-        System.out.println("New Permission registered " + per.getName());
+        //System.out.println("New Permission registered " + per.getName());
 
         CommandMap cmp = getCommandMap();
         PluginCommand cd = getCommand(name.toLowerCase());
@@ -244,10 +252,10 @@ public class CommandRegister implements TabExecutor {
         String lab;
         if (cmd.isSub()) {
             lab = cmd.getParent().toLowerCase() + " " + name.toLowerCase();
-            System.out.println("Sub is true");
+            //System.out.println("Sub is true");
         } else {
             lab = name.toLowerCase();
-            System.out.println("sub is false");
+            //System.out.println("sub is false");
         }
         cd.setExecutor(this);
         cd.setPermission(cmd.getPermission());
@@ -255,7 +263,7 @@ public class CommandRegister implements TabExecutor {
 
         if (cmp.register(lab, "mc", cd)) {
 
-            System.out.println("Command: /" + cd.getLabel() + " has successfully been registered");
+            //System.out.println("Command: /" + cd.getLabel() + " has successfully been registered");
             return true;
         }
         System.out.println("Command: /" + cd.getLabel() + " has FAILED to be registered");

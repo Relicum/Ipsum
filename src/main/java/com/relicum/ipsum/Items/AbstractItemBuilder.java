@@ -89,6 +89,25 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
 
     }
 
+    /**
+     * Instantiates a new Item Builder
+     *
+     * @param mat        the {@link org.bukkit.Material} of the Item
+     * @param amount     the amount of items in the stack
+     * @param durability used to set things like wool and clay types
+     * @param type       the Meta type of the item {@link com.relicum.ipsum.Items.MetaType} provides the options.
+     */
+    public AbstractItemBuilder(Material mat, int amount, byte durability, MetaType type) {
+        Validate.notNull(mat, "Item material can not be null");
+        Validate.notNull(amount, "Item amount can not be null");
+
+        this.metaType = type;
+        this.material = mat;
+        this.amount = amount;
+        this.durability = durability;
+
+    }
+
 
     /**
      * Sets item meta that this item will use
