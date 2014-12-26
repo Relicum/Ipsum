@@ -25,5 +25,5 @@ package com.relicum.ipsum.Items.Inventory;
  * @version 0.0.1
  */
 @SuppressWarnings("WeakerAccess")
-public class MenuBase {
+public class Menu {
 }

@@ -18,19 +18,11 @@
 
 package com.relicum.ipsum.io.Adapter;
 
-import net.minecraft.util.com.google.gson.*;
+import org.bukkit.craftbukkit.libs.com.google.gson.*;
 
 import java.lang.reflect.Type;
 import java.util.UUID;
 
-/**
- * UUIDAdapter automatically detail with UUID in any objects.
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author MassiveCraft
- * @version 0.0.1
- */
 public class UUIDAdapter implements JsonSerializer<UUID>, JsonDeserializer<UUID> {
 
 

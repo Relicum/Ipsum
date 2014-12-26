@@ -18,24 +18,16 @@
 
 package com.relicum.ipsum.io.Adapter;
 
-import net.minecraft.util.com.google.gson.JsonArray;
-import net.minecraft.util.com.google.gson.JsonElement;
-import net.minecraft.util.com.google.gson.JsonObject;
-import net.minecraft.util.com.google.gson.JsonPrimitive;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.craftbukkit.libs.com.google.gson.JsonArray;
+import org.bukkit.craftbukkit.libs.com.google.gson.JsonElement;
+import org.bukkit.craftbukkit.libs.com.google.gson.JsonObject;
+import org.bukkit.craftbukkit.libs.com.google.gson.JsonPrimitive;
 
 import java.util.*;
 
-/**
- * FireworkEffectAdapter
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author MassiveCraft
- * @version 0.0.1
- */
 public class FireworkEffectAdapter {
 
     // -------------------------------------------- //

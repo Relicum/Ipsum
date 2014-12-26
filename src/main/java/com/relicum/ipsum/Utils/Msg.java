@@ -138,6 +138,16 @@ public class Msg implements ConsoleColors {
     }
 
     /**
+     * Broadcast a message to entire server
+     *
+     * @param text the to broadcast.
+     */
+    public void broadcast(String text) {
+
+        Bukkit.broadcastMessage(colorize(prefix + text));
+    }
+
+    /**
      * Send message block header.
      *
      * @param player the player

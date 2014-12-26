@@ -45,7 +45,7 @@ public class DeathParticles implements Runnable {
     @Override
     public void run() {
 
-        ParticleEffect.ANGRY_VILLAGER.display(1.0f, 1.0f, 1.0f, 0.1f, 40, entity.getEyeLocation(), 16.0d);
+        ParticleEffect.VILLAGER_ANGRY.display(1.0f, 1.0f, 1.0f, 0.1f, 40, entity.getEyeLocation(), 16.0d);
         ParticleEffect.FLAME.display(1.5f, 1.5f, 1.5f, 0.1f, 50, entity.getEyeLocation(), 16.0d);
 
     }

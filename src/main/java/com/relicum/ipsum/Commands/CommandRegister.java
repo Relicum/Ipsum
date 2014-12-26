@@ -18,10 +18,10 @@
 
 package com.relicum.ipsum.Commands;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.relicum.ipsum.Utils.Msg;
 import lombok.Getter;
-import net.minecraft.util.com.google.common.collect.ImmutableList;
-import net.minecraft.util.com.google.common.collect.ImmutableMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -29,6 +29,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.StringUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -57,6 +58,8 @@ public class CommandRegister implements TabExecutor {
 
     private List<String> LEVEL1;
 
+    private List<String> USE_TAB;
+
     /**
      * Instantiates a new Command register.
      *
@@ -67,6 +70,7 @@ public class CommandRegister implements TabExecutor {
         this.plugin = plugin;
         rootCmd = new ArrayList<>(3);
         this.commands = new HashMap<>();
+        this.USE_TAB = new ArrayList<>();
     }
 
 
@@ -81,11 +85,19 @@ public class CommandRegister implements TabExecutor {
             return true;
         }
 
+
         if (rootCmd.contains(cmd.getName().toLowerCase()) && args.length == 0) { //Deal with main sub command
 
             sender.sendMessage(ChatColor.AQUA + "Main Cmd help section");
             return true;
         }
+
+        if ((rootCmd.contains(cmd.getName().toLowerCase()) && args.length == 1) && !commands.containsKey(args[0].toLowerCase())) { //Deal with main sub command
+
+            sender.sendMessage(ChatColor.RED + "Error command not found");
+            return true;
+        }
+
         AbstractCommand sub;
         if (args.length == 0) {
             sub = commands.get(cmd.getName().toLowerCase());
@@ -195,6 +207,11 @@ public class CommandRegister implements TabExecutor {
         return LEVEL1.contains(cmd);
     }
 
+    private boolean useTabComplete(String cmd) {
+
+        return USE_TAB.contains(cmd);
+    }
+
     protected boolean registerCommand(String name, AbstractCommand cmd) {
 
         if (!isRootCmd(cmd.getParent().toLowerCase())) {
@@ -207,6 +224,11 @@ public class CommandRegister implements TabExecutor {
             LEVEL1.add(name.toLowerCase());
         }
 
+        if (cmd.useTab) {
+
+            USE_TAB.add(name.toLowerCase());
+        }
+
         String[] ps = cmd.getPermission().split("\\.");
         String ubPerm = ps[0] + "." + ps[1];
 
@@ -217,7 +239,7 @@ public class CommandRegister implements TabExecutor {
 
         plugin.getServer().getPluginManager().addPermission(per);
 
-        System.out.println("New Permission registered " + per.getName());
+        //System.out.println("New Permission registered " + per.getName());
 
         CommandMap cmp = getCommandMap();
         PluginCommand cd = getCommand(name.toLowerCase());
@@ -230,18 +252,18 @@ public class CommandRegister implements TabExecutor {
         String lab;
         if (cmd.isSub()) {
             lab = cmd.getParent().toLowerCase() + " " + name.toLowerCase();
-            System.out.println("Sub is true");
+            //System.out.println("Sub is true");
         } else {
             lab = name.toLowerCase();
-            System.out.println("sub is false");
+            //System.out.println("sub is false");
         }
         cd.setExecutor(this);
         cd.setPermission(cmd.getPermission());
-        cd.setTabCompleter(plugin);
+        cd.setTabCompleter(this);
 
         if (cmp.register(lab, "mc", cd)) {
 
-            System.out.println("Command: /" + cd.getLabel() + " has successfully been registered");
+            //System.out.println("Command: /" + cd.getLabel() + " has successfully been registered");
             return true;
         }
         System.out.println("Command: /" + cd.getLabel() + " has FAILED to be registered");
@@ -324,6 +346,29 @@ public class CommandRegister implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        return null;
+        if (strings.length == 1) {
+            return StringUtil.copyPartialMatches(strings[0], LEVEL1, new ArrayList<>(LEVEL1.size()));
+        }
+        if (strings.length > 1 && strings.length < 6) {
+
+            if (!useTabComplete(strings[0])) {
+
+                return Collections.emptyList();
+
+
+            } else {
+
+                List<String> list = commands.get(strings[0]).tabComp(strings.length);
+                if (list.size() == 0)
+                    return Collections.emptyList();
+
+                return StringUtil.copyPartialMatches(strings[strings.length - 1], list, new ArrayList<>(list.size()));
+
+            }
+
+        }
+
+        return Collections.emptyList();
     }
+
 }

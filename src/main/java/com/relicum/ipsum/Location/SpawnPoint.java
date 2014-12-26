@@ -19,6 +19,7 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
+import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
@@ -59,9 +60,9 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
     public SpawnPoint(String world, double x, double y, double z, float yaw, float pitch) {
         super();
         this.setWorld(world);
-        this.setX(MathUtils.floor(x) + 0.5d);
-        this.setY(MathUtils.floor(y) + 0.5d);
-        this.setZ(MathUtils.floor(z) + 0.5d);
+        this.setX(Math.round(x) + 0.5d);
+        this.setY(Math.round(y) + 0.5d);
+        this.setZ(Math.round(z) + 0.5d);
         this.setYaw(MathUtils.getDirection(yaw));
         this.setPitch(pitch);
     }
@@ -77,11 +78,27 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
     public SpawnPoint(String world, double x, double y, double z) {
         super();
         this.setWorld(world);
-        this.setX(MathUtils.floor(x) + 0.5d);
-        this.setY(MathUtils.floor(y) + 0.5d);
-        this.setZ(MathUtils.floor(z) + 0.5d);
+        this.setX(Math.round(x) + 0.5d);
+        this.setY(Math.round(y) + 0.5d);
+        this.setZ(Math.round(z) + 0.5d);
         this.setYaw(90.0f);
         this.setPitch(1.4f);
+    }
+
+    /**
+     * Instantiates a new Spawn point.
+     *
+     * @param location the {@link org.bukkit.Location}
+     */
+    public SpawnPoint(Location location) {
+        super();
+        this.setWorld(location.getWorld().getName());
+        this.setX(Math.round(location.getX()) + 0.5d);
+        this.setY(Math.round(location.getBlockY()) + 0.5d);
+        this.setZ(Math.round(location.getZ()) + 0.5d);
+        this.setYaw(MathUtils.getDirection(location.getYaw()));
+        this.setPitch(location.getPitch());
+
     }
 
 

@@ -18,10 +18,10 @@
 
 package com.relicum.ipsum.io.Adapter;
 
-import net.minecraft.util.com.google.gson.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
@@ -30,14 +30,6 @@ import org.bukkit.potion.PotionEffect;
 import java.lang.reflect.Type;
 import java.util.*;
 
-/**
- * ItemStackAdapter GSON serializer/deserializer for the Bukkit ItemStack.
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author Relicum Massivecraft
- * @version 0.0.1
- */
 @SuppressWarnings("deprecation")
 public class ItemStackAdapter implements JsonDeserializer<ItemStack>, JsonSerializer<ItemStack> {
 

@@ -19,9 +19,9 @@
 package com.relicum.ipsum.Effect.Game;
 
 import com.relicum.ipsum.Location.BlockPoint;
-import net.minecraft.util.com.google.gson.Gson;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 

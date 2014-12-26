@@ -52,6 +52,20 @@ public class SimpleItemFactory {
     }
 
     /**
+     * Gets item builder.
+     *
+     * @param material   the material that the item is made from
+     * @param amount     the amount of items in the stack
+     * @param durability used to set things like wool and clay types.
+     * @param type       the {@link com.relicum.ipsum.Items.MetaType} of the item
+     * @return the {@link com.relicum.ipsum.Items.ItemBuilder} used to build standard items.
+     */
+    public ItemBuilder getItemBuilder(Material material, int amount, byte durability, MetaType type) {
+
+        return new ItemBuilder(material, amount, durability, type);
+    }
+
+    /**
      * Gets SkullBuilder.
      *
      * @param amount the amount of items in the stack.

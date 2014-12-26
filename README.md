@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.44-SNAPSHOT
+Ipsum Gaming Commons 1.0.58-SNAPSHOT
 ===
 
 **Built using the best Java IDE around**
@@ -10,6 +10,7 @@ Providing All you need to create mini games and plugins
 ----
 
 ```
+Must be used with the latest 1.8 Spigot
 Compiled in Java 1.8 to make use of all the new features.
 This means it will only work if you compile any plugins made using Ipsum with Java 1.8
 ```
@@ -70,7 +71,7 @@ It has also been enhanced by dmulloy2 and are licensed under GPL3.**
 --------
 
 
-`Build for Bukkit and Spigot 1.7.10-R0.1`
+`Build for Bukkit and Spigot 1.8`
 
 `This will be built using the Prototyping method, build them quick and build them often.
 What this means is I will code parts release, play test, listen to feedback and carry on.`

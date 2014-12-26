@@ -44,8 +44,9 @@ public class DirectExecutor implements Executor {
 
     /**
      * Executes the given command at some time in the future.  The command
-     * may execute in a new thread, in a pooled thread, or in the calling
-     * thread, at the discretion of the {@code Executor} implementation.
+     * will execute in the calling thread, at the discretion of the {@code Executor} implementation.
+     * Ideal to quick runnables that need to run on the main mc thread, without having to start a new thread each time.
+     * Also includes a small queue. THIS IS NOT THREAD SAFE.
      *
      * @param command the runnable task
      * @throws java.util.concurrent.RejectedExecutionException if this task cannot be

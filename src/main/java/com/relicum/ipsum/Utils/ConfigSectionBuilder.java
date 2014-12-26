@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Utils;
 
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;

@@ -47,6 +47,19 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
     /**
      * Instantiates a new Item builder.
      *
+     * @param material   the {@link org.bukkit.Material} the item is made from.
+     * @param amount     the amount of items in the final ItemStack
+     * @param durability used to set things like wool and clay types
+     * @param type       the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
+     */
+    public ItemBuilder(Material material, int amount, byte durability, MetaType type) {
+        super(material, amount, durability, type);
+        setItemMeta();
+    }
+
+    /**
+     * Instantiates a new Item builder.
+     *
      * @param material the {@link org.bukkit.Material} the item is made from.
      * @param type     the {@link com.relicum.ipsum.Items.MetaType} type of meta data the item requires
      */
@@ -70,7 +83,10 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
      */
     @Override
     public ItemStack build() {
+        if ((Short) getDurability() != null) {
 
+            setStack(new ItemStack(getMaterial(), getAmount(), getDurability()));
+        } else
         setStack(new ItemStack(getMaterial(), getAmount()));
 
         if ((Short) getDurability() != null) {

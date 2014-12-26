@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Locale;
 
 import lombok.extern.java.Log;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 
 import java.io.*;
 import java.nio.file.Files;

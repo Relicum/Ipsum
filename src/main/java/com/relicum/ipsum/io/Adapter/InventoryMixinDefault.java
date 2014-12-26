@@ -29,14 +29,6 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.List;
 
-/**
- * InventoryMixinDefault
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author MassiveCraft
- * @version 0.0.1
- */
 public class InventoryMixinDefault extends InventoryMixinAbstract {
 
     // -------------------------------------------- //

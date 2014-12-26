@@ -18,10 +18,10 @@
 
 package com.relicum.ipsum.Location;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 import com.relicum.ipsum.Configuration.AbstractSerializable;
-import net.minecraft.util.com.google.common.collect.ArrayListMultimap;
-import net.minecraft.util.com.google.common.collect.ListMultimap;
-import net.minecraft.util.com.google.common.collect.Multimap;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
@@ -59,7 +59,7 @@ public class LocationListMultimap extends AbstractSerializable implements Config
     /**
      * Instantiates a new LocationListMultimap.
      *
-     * @param multimap see {@link net.minecraft.util.com.google.common.collect.Multimap}
+     * @param multimap see {@link com.google.common.collect.Multimap}
      */
     public LocationListMultimap(Multimap<? extends String, ? extends SpawnPoint> multimap) {
 

@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Items;
 
 import lombok.ToString;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -86,6 +86,25 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
         this.metaType = type;
         this.material = mat;
         this.amount = amount;
+
+    }
+
+    /**
+     * Instantiates a new Item Builder
+     *
+     * @param mat        the {@link org.bukkit.Material} of the Item
+     * @param amount     the amount of items in the stack
+     * @param durability used to set things like wool and clay types
+     * @param type       the Meta type of the item {@link com.relicum.ipsum.Items.MetaType} provides the options.
+     */
+    public AbstractItemBuilder(Material mat, int amount, byte durability, MetaType type) {
+        Validate.notNull(mat, "Item material can not be null");
+        Validate.notNull(amount, "Item amount can not be null");
+
+        this.metaType = type;
+        this.material = mat;
+        this.amount = amount;
+        this.durability = durability;
 
     }
 

@@ -22,8 +22,8 @@ import com.relicum.ipsum.Configuration.GameRanks;
 import com.relicum.ipsum.Configuration.RankMap;
 import com.relicum.ipsum.Location.PointsGroup;
 import com.relicum.ipsum.Location.SpawnPoint;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
-import net.minecraft.util.org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 
@@ -243,22 +243,6 @@ public class GamerData {
     }
 
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("uniqueId", uniqueId)
-                .append("name", name)
-                .append("lastName", lastName)
-                .append("rank", rank)
-                .append("rankColor", rankColor)
-                .append("displayName", displayName)
-                .append("playerListName", playerListName)
-                .append("lastSeen", lastSeen)
-                .append("firstSeen", firstSeen)
-                .append("knowAliases", knowAliases)
-                .toString();
-    }
-
     /**
      * Sets new gamePointGroup.
      *
@@ -293,5 +277,22 @@ public class GamerData {
      */
     public String getUniqueId() {
         return uniqueId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("uniqueId", uniqueId)
+                .append("name", name)
+                .append("lastName", lastName)
+                .append("rank", rank)
+                .append("rankColor", rankColor)
+                .append("displayName", displayName)
+                .append("playerListName", playerListName)
+                .append("lastSeen", lastSeen)
+                .append("firstSeen", firstSeen)
+                .append("knowAliases", knowAliases)
+                .append("gamePointGroup", gamePointGroup)
+                .toString();
     }
 }

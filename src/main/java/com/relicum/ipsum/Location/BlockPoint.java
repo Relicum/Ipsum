@@ -19,7 +19,8 @@
 package com.relicum.ipsum.Location;
 
 import com.relicum.ipsum.Utils.MathUtils;
-import net.minecraft.util.org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
+import org.bukkit.block.Block;
 import org.bukkit.util.BlockVector;
 
 /**
@@ -30,9 +31,9 @@ import org.bukkit.util.BlockVector;
  */
 public class BlockPoint implements Point, Locateable {
 
-    private int X;
-    private int Y;
-    private int Z;
+    private double X;
+    private double Y;
+    private double Z;
     private String world;
     private transient BlockVector blockVector;
 
@@ -45,10 +46,10 @@ public class BlockPoint implements Point, Locateable {
      * @param y     the y
      * @param z     the z
      */
-    public BlockPoint(String world, int x, int y, int z) {
-        X = x;
-        Y = y;
-        Z = z;
+    public BlockPoint(String world, double x, double y, double z) {
+        setX(x);
+        setY(y);
+        setZ(z);
         this.world = world;
     }
 
@@ -57,6 +58,20 @@ public class BlockPoint implements Point, Locateable {
      */
     public BlockPoint() {
 
+
+    }
+
+    /**
+     * Instantiates a new Block point.
+     *
+     * @param block the block
+     */
+    public BlockPoint(Block block) {
+
+        this.world = block.getWorld().getName();
+        X = block.getX();
+        Y = block.getY();
+        Z = block.getZ();
 
     }
 
@@ -108,7 +123,7 @@ public class BlockPoint implements Point, Locateable {
     @Override
     public void setX(double pointX) {
         Validate.notNull(pointX);
-        X = MathUtils.round(pointX);
+        X = MathUtils.ceil(pointX);
     }
 
     /**
@@ -119,7 +134,7 @@ public class BlockPoint implements Point, Locateable {
     @Override
     public void setY(double pointY) {
         Validate.notNull(pointY);
-        Y = MathUtils.round(pointY);
+        Y = MathUtils.ceil(pointY);
     }
 
     /**
@@ -131,7 +146,7 @@ public class BlockPoint implements Point, Locateable {
     public void setZ(double pointZ) {
 
         Validate.notNull(pointZ);
-        Z = MathUtils.round(pointZ);
+        Z = MathUtils.ceil(pointZ);
     }
 
     /**
@@ -149,20 +164,29 @@ public class BlockPoint implements Point, Locateable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BlockPoint)) return false;
 
         BlockPoint that = (BlockPoint) o;
 
-        return X == that.X && Y == that.Y && Z == that.Z && !(world != null ? !world.equals(that.world) : that.world != null);
+        if (Double.compare(that.X, X) != 0) return false;
+        if (Double.compare(that.Y, Y) != 0) return false;
+        if (Double.compare(that.Z, Z) != 0) return false;
+        if (!world.equals(that.world)) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = X;
-        result = 31 * result + Y;
-        result = 31 * result + Z;
-        result = 31 * result + (world != null ? world.hashCode() : 0);
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(X);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(Y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(Z);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + world.hashCode();
         return result;
     }
 
