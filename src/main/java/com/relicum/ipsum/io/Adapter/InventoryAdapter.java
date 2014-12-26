@@ -27,13 +27,6 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Type;
 
-/**
- * This is my Gson adapter for Inventories.
- * It handles all inventories as CraftInventoryCustom "Chest"s with size of your choice
- * except for PlayerInventory which it handles pretty darn well!
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- */
 public class InventoryAdapter implements JsonDeserializer<Inventory>, JsonSerializer<Inventory> {
 
     // FIELD NAME CONSTANTS

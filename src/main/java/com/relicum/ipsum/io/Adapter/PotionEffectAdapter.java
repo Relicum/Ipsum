@@ -23,13 +23,6 @@ import org.bukkit.craftbukkit.libs.com.google.gson.JsonObject;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-/**
- * PotionEffectAdapter json serializer.
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @version 0.0.1
- */
 @SuppressWarnings("deprecation")
 public class PotionEffectAdapter {
 
