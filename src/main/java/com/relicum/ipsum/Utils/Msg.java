@@ -18,7 +18,7 @@
 
 package com.relicum.ipsum.Utils;
 
-import com.relicum.ipsum.Locale.ConsoleColors;
+import com.relicum.ipsum.Locale.consoleColors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * @author Relicum
  * @version 0.0.1
  */
-public class Msg implements ConsoleColors {
+public class Msg implements consoleColors {
 
     private final char COLOR_CHAR = '\u00A7';
     private final char SAFE_CHAR = '&';
