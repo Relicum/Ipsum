@@ -22,14 +22,6 @@ import org.bukkit.craftbukkit.libs.com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-/**
- * JsonElementAdapter
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author Relicum
- * @version 0.0.1
- */
 public class JsonElementAdapter implements JsonDeserializer<JsonElement>, JsonSerializer<JsonElement> {
     // -------------------------------------------- //
     // INSTANCE & CONSTRUCT

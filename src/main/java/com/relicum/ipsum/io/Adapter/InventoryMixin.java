@@ -22,13 +22,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
 
-/**
- * <p>Class designed by the MassiveCraft development team, more details on them can be found at www.MassiveCraft.com.
- * <p>The copyright belongs to MassiveCraft and is licensed for public use under GPLv3.
- *
- * @author MassiveCraft
- * @version 0.0.1
- */
 public interface InventoryMixin {
 
     // Create a Player Inventory without a Player
