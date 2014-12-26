@@ -4,8 +4,6 @@ package com.relicum.ipsum.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 /**
  * This class is part of the ParticleEffect library and follows the same usage conditions
  *
@@ -31,12 +29,12 @@ public class BlockCrackData extends ParticleEffectData {
 
     @Override
     public void displayEffect(Location center, Player... players) {
-        ParticleEffect.displayBlockCrack(id, data, offsetX, offsetY, offsetZ, amount, center, Arrays.asList(players));
+        // ParticleEffect.BLOCK_CRACK.display(id, data, offsetX, offsetY, offsetZ, amount, center, Arrays.asList(players));
     }
 
     @Override
     public void displayEffect(Location center, double range) {
-        ParticleEffect.displayBlockCrack(id, data, offsetX, offsetY, offsetZ, amount, center, range);
+        // ParticleEffect.displayBlockCrack(id, data, offsetX, offsetY, offsetZ, amount, center, range);
     }
 
     public int getId() {

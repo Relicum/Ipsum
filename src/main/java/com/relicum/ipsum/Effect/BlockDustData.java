@@ -3,8 +3,6 @@ package com.relicum.ipsum.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 /**
  * This class is part of the ParticleEffect library and follows the same usage conditions
  *
@@ -32,12 +30,12 @@ public class BlockDustData extends ParticleEffectData {
 
     @Override
     public void displayEffect(Location center, Player... players) {
-        ParticleEffect.displayBlockDust(id, data, offsetX, offsetY, offsetZ, speed, amount, center, Arrays.asList(players));
+        //   ParticleEffect.displayBlockDust(id, data, offsetX, offsetY, offsetZ, speed, amount, center, Arrays.asList(players));
     }
 
     @Override
     public void displayEffect(Location center, double range) {
-        ParticleEffect.displayBlockDust(id, data, offsetX, offsetY, offsetZ, speed, amount, center, range);
+        //  ParticleEffect.displayBlockDust(id, data, offsetX, offsetY, offsetZ, speed, amount, center, range);
     }
 
     public int getId() {
