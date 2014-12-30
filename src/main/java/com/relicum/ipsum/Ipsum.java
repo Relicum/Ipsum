@@ -38,6 +38,7 @@ public class Ipsum extends JavaPlugin {
     public Ipsum() {
         instance = this;
     }
+
     /**
      * Gets instance.
      *

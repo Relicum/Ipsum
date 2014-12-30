@@ -144,6 +144,11 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
             }
         }
 
+        if (isUnbreaking()) {
+
+            meta.spigot().setUnbreakable(true);
+        }
+
         getStack().setItemMeta(meta);
 
         return getStack();

@@ -18,6 +18,13 @@
 
 package com.relicum.ipsum.Items.Inventory;
 
+import com.relicum.ipsum.Utils.TextProcessor;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang.Validate;
+
+import java.util.EnumMap;
+
 /**
  * Name: MenuBase.java Created: 17 August 2014
  *
@@ -25,5 +32,56 @@ package com.relicum.ipsum.Items.Inventory;
  * @version 0.0.1
  */
 @SuppressWarnings("WeakerAccess")
-public class Menu {
+public abstract class Menu {
+
+    @Getter
+    @Setter
+    protected boolean closeOutside;
+    @Getter
+    @Setter
+    protected boolean guiLock = false;
+    @Getter
+    @Setter
+    protected boolean fullLock = false;
+    @Getter
+    @Setter
+    protected int size;
+    @Getter
+    @Setter
+    protected String title;
+    @Getter
+    protected EnumMap<MenuIconType, MenuItem> iconMap = new EnumMap<>(MenuIconType.class);
+
+
+    public Menu(int size, String title) {
+        Validate.notNull(size);
+        Validate.notNull(title);
+        this.size = size;
+        this.title = TextProcessor.colorize(title);
+    }
+
+    public Menu addIcon(MenuIconType iconType, MenuItem item) {
+        Validate.notNull(iconType);
+        Validate.notNull(item);
+
+        this.iconMap.putIfAbsent(iconType, item);
+
+        return this;
+    }
+
+    public abstract Menu addItem(MenuItem item);
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Menu{");
+        sb.append("closeOutside=").append(closeOutside);
+        sb.append(", guiLock=").append(guiLock);
+        sb.append(", fullLock=").append(fullLock);
+        sb.append(", size=").append(size);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", iconMap=").append(iconMap);
+        sb.append('}');
+        return sb.toString();
+    }
 }

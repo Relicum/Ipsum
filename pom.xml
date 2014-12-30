@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.58-SNAPSHOT</version>
+    <version>1.0.61-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -83,6 +83,13 @@
                                 <exclude>META-INF/*.DSA</exclude>
                                 <exclude>META-INF/*.RSA</exclude>
                                 <exclude>about.html</exclude>
+                                <exclude>org.bukkit.*</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>org.bukkit:bukkit</artifact>
+                            <excludes>
+                                <exclude>**</exclude>
                             </excludes>
                         </filter>
                         <filter>
@@ -180,12 +187,6 @@
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>

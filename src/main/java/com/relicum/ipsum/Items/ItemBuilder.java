@@ -107,6 +107,11 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder> {
             }
         }
 
+        if (isUnbreaking()) {
+
+            meta.spigot().setUnbreakable(true);
+        }
+
 
         getStack().setItemMeta(meta);
 

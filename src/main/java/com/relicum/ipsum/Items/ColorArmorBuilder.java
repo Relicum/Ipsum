@@ -111,6 +111,11 @@ public class ColorArmorBuilder extends AbstractItemBuilder<ColorArmorBuilder> {
             }
         }
 
+        if (isUnbreaking()) {
+
+            meta.spigot().setUnbreakable(true);
+        }
+
 
         getStack().setItemMeta(meta);
 

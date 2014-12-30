@@ -55,6 +55,8 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
 
     protected List<Enchant> enchantments = new ArrayList<>();
 
+    protected boolean unbreaking = false;
+
     protected MetaType metaType;
 
 
@@ -242,6 +244,18 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
         return (T) this;
     }
 
+    /**
+     * Sets the item to be unbreaking.
+     *
+     * @param breaking set true for the item to be unbreaking.
+     * @return the instance of itself so methods can be chained
+     */
+    @Override
+    public T setUnBreaking(boolean breaking) {
+        this.unbreaking = breaking;
+        return (T) this;
+    }
+
 
     public MetaType getMetaType() {
         return metaType;
@@ -338,6 +352,15 @@ public abstract class AbstractItemBuilder<T extends AbstractItemBuilder<T>> impl
      */
     public void setMetaType(MetaType metaType) {
         this.metaType = metaType;
+    }
+
+    /**
+     * Is unbreaking.
+     *
+     * @return true and the item will be set to unbreaking, default to false.
+     */
+    public boolean isUnbreaking() {
+        return this.unbreaking;
     }
 
 }

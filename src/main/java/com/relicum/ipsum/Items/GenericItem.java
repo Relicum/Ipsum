@@ -104,4 +104,12 @@ public interface GenericItem {
      */
     public GenericItem addUnsafeEnchantment(Enchant enchant);
 
+    /**
+     * Sets the item to be unbreaking.
+     *
+     * @param breaking set true for the item to be unbreaking.
+     * @return the instance of itself so methods can be chained
+     */
+    public GenericItem setUnBreaking(boolean breaking);
+
 }
