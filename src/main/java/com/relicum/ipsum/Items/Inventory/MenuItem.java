@@ -40,7 +40,7 @@ import java.util.List;
 public class MenuItem {
 
     @Getter
-    private OnClickAction onClickAction;
+    private MenuClickAction menuClickAction;
 
     @Getter
     private String displayName;
@@ -136,9 +136,9 @@ public class MenuItem {
         return this;
     }
 
-    public MenuItem setOnClickAction(OnClickAction onClickAction) {
-        Validate.notNull(onClickAction);
-        this.onClickAction = onClickAction;
+    public MenuItem setMenuClickAction(MenuClickAction menuClickAction) {
+        Validate.notNull(menuClickAction);
+        this.menuClickAction = menuClickAction;
         return this;
     }
 
@@ -158,7 +158,7 @@ public class MenuItem {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("MenuItem{");
-        sb.append("onClickAction=").append(onClickAction);
+        sb.append("onClickAction=").append(menuClickAction);
         sb.append(", displayName='").append(displayName).append('\'');
         sb.append(", lore=").append(lore);
         sb.append(", itemMaterial=").append(itemMaterial);

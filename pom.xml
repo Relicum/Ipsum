@@ -6,7 +6,7 @@
     <artifactId>Ipsum</artifactId>
     <packaging>jar</packaging>
     <name>Ipsum</name>
-    <version>1.0.61-SNAPSHOT</version>
+    <version>1.0.62-SNAPSHOT</version>
     <description>Simple Extension to the Bukkit API to provide all the extra API's need to create mini games within
         Minecraft
     </description>
@@ -263,7 +263,7 @@
                         <version>2.4</version>
                         <configuration>
                             <finalName>${project.name}-${project.version}</finalName>
-                            <outputDirectory>G:\Users\Relicum\Desktop\MCTest\plugins
+                            <outputDirectory>G:\Users\Relicum\Desktop\MCTest2\plugins
                             </outputDirectory>
                         </configuration>
                     </plugin>

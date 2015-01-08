@@ -1,6 +1,6 @@
 /*
  * Ipsum is a rapid development API for Minecraft, developer by Relicum
- * Copyright (C) 2014.  Chris Lutte
+ * Copyright (C) 2015.  Chris Lutte
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,29 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Items.Inventory;
+package com.relicum.ipsum.Menus;
 
 /**
- * Name: MenuClickAction.java Created: 26 December 2014
+ * Name: MenuType.java Created: 08 January 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum OnClickAction {
+public enum MenuType {
 
-    CLOSE_INVENTORY,
-    CANCEL_EVENT,
-    OUTSIDE_CLOSE,
-    OPEN_NEXT,
-    OPEN_PREVIOUS,
-    CHANGE_INVENTORY,
-    NEXT_STAGE,
-    CONFIRM_YES,
-    CONFIRM_NO,
-    RETURN_HUB,
-    DISPLAY_HEADS,
-    DISPLAY_TEXT,
-    SWITCH_SERVER,
+    BUNGEE,
+    COMMAND,
     WARP,
-    RUN_COMMAND,
+    CATEGORY,
+    HEADS,
+    INFO,
+    GENERAL
 }
