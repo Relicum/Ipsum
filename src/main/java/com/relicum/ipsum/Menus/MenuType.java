@@ -19,7 +19,7 @@
 package com.relicum.ipsum.Menus;
 
 /**
- * Name: MenuType.java Created: 08 January 2015
+ * MenuType various pre defined menu types.
  *
  * @author Relicum
  * @version 0.0.1

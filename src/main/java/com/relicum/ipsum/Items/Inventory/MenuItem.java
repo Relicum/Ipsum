@@ -37,7 +37,7 @@ import java.util.List;
  * @author Relicum
  * @version 0.0.1
  */
-public class MenuItem {
+public abstract class MenuItem {
 
     @Getter
     private MenuClickAction menuClickAction;

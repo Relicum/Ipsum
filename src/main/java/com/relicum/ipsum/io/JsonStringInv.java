@@ -16,49 +16,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.io;
 
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.inventory.Inventory;
 
 /**
- * The interface Generic menu is the base for all custom Menus.
+ * JsonStringInv Temporary class to serialise and deserialize custom inventories using JSON.
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-public interface GenericMenu {
+public class JsonStringInv {
+
+    public final static Gson gson = GsonLoader.gsond;
 
     /**
-     * Gets size, the total number of slots the Inventory can have.
+     * Convert an Inventory to a JSON String
      *
-     * @return number of slots.
+     * @param inventory the inventory
+     * @return the serialised JSON String
      */
-    public int getSize();
+    public static String convertToJson(Inventory inventory) {
+
+        return gson.toJson(inventory, Inventory.class);
+    }
 
     /**
-     * Sets number of slots in inventory. Multiples of 9 only.
+     * Convert from JSON String to custom Inventory.
      *
-     * @param size the number of Slots
+     * @param json the json string to deserialize.
+     * @return the inventory
      */
-    public void setSize(int size);
+    public static Inventory convertFromString(String json) {
 
-    /**
-     * Gets menu title.
-     *
-     * @return the menu title
-     */
-    public String getMenuTitle();
-
-    /**
-     * Sets menu title. Max 16 Characters.
-     *
-     * @param menuTitle the menu title
-     */
-    public void setMenuTitle(String menuTitle);
-
-    /**
-     * Gets a new instance of the inventory.
-     *
-     * @return the inventory, depending on implementation this may or may not of had the items added to it
-     */
-    public Inventory getInventory();
-
+        return gson.fromJson(json, Inventory.class);
+    }
 
 }

@@ -26,7 +26,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Name: BungeeMenuItem.java Created: 08 January 2015
+ * BungeeMenuItem item used in a Bungee menu WIP.
  *
  * @author Relicum
  * @version 0.0.1
@@ -36,14 +36,33 @@ public class BungeeMenuItem extends AbstractMenuItem {
 
     private String serverName;
 
+    /**
+     * Instantiates a new Bungee menu item.
+     */
     public BungeeMenuItem() {
         super();
     }
 
+
+    /**
+     * Instantiates a new Bungee menu item.
+     *
+     * @param itemMaterial the item material
+     * @param dataBit      the data bit
+     * @param itemAmount   the item amount
+     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     */
     public BungeeMenuItem(Material itemMaterial, byte dataBit, int itemAmount, MetaType metaType) {
         super(itemMaterial, dataBit, itemAmount, metaType);
     }
 
+    /**
+     * Instantiates a new Bungee menu item.
+     *
+     * @param itemMaterial the item material
+     * @param itemAmount   the item amount
+     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     */
     public BungeeMenuItem(Material itemMaterial, int itemAmount, MetaType metaType) {
         super(itemMaterial, itemAmount, metaType);
     }
@@ -67,6 +86,9 @@ public class BungeeMenuItem extends AbstractMenuItem {
         return this.cost;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ItemStack getItem() {
         if (dataBit == -1)

@@ -63,7 +63,7 @@ public class GsonLoader {
         return new GsonBuilder()
                 //.setPrettyPrinting()
 
-                .serializeNulls()
+                //.serializeNulls()
                         //.disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())

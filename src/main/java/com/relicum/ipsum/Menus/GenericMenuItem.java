@@ -26,7 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 /**
- * The interface Generic menu item.
+ * The interface Generic menu item representsents the properties and attributes all menu items have in common.
  */
 public interface GenericMenuItem {
 

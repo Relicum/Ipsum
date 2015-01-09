@@ -29,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name: AbstractMenuItem.java Created: 08 January 2015
+ * AbstractMenuItem implements most of the {@link com.relicum.ipsum.Menus.GenericMenuItem} methods.
+ * <p>But some still need to be defined. All menu items should extend off this class.
  *
  * @author Relicum
  * @version 0.0.1
@@ -57,10 +58,21 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
 
     protected MetaType metaType;
 
+    /**
+     * Instantiates a new Abstract menu item.
+     */
     public AbstractMenuItem() {
         this.lore = new ArrayList<>();
     }
 
+    /**
+     * Instantiates a new Abstract menu item.
+     *
+     * @param itemMaterial the item material
+     * @param dataBit      the data bit or durability
+     * @param itemAmount   the item amount
+     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     */
     public AbstractMenuItem(Material itemMaterial, byte dataBit, int itemAmount, MetaType metaType) {
         this.itemMaterial = itemMaterial;
         this.dataBit = dataBit;
@@ -70,6 +82,13 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
 
     }
 
+    /**
+     * Instantiates a new Abstract menu item.
+     *
+     * @param itemMaterial the item material
+     * @param itemAmount   the item amount
+     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     */
     public AbstractMenuItem(Material itemMaterial, int itemAmount, MetaType metaType) {
         this.itemMaterial = itemMaterial;
 
