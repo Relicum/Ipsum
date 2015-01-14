@@ -93,9 +93,9 @@ public class SpawnPoint extends PointInstance implements ConfigurationSerializab
     public SpawnPoint(Location location) {
         super();
         this.setWorld(location.getWorld().getName());
-        this.setX(Math.round(location.getX()) + 0.5d);
-        this.setY(Math.round(location.getBlockY()) + 0.5d);
-        this.setZ(Math.round(location.getZ()) + 0.5d);
+        this.setX(location.getBlockX() + 0.5d);
+        this.setY(location.getBlockY() + 0.5d);
+        this.setZ(location.getBlockZ() + 0.5d);
         this.setYaw(MathUtils.getDirection(location.getYaw()));
         this.setPitch(location.getPitch());
 
