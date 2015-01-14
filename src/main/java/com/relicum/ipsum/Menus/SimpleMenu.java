@@ -1,6 +1,6 @@
 /*
  * Ipsum is a rapid development API for Minecraft, developer by Relicum
- * Copyright (C) 2014.  Chris Lutte
+ * Copyright (C) 2015.  Chris Lutte
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,87 +18,61 @@
 
 package com.relicum.ipsum.Menus;
 
-import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.io.JsonStringInv;
-import lombok.ToString;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Server to Server Menu for switching players on a Bungee Network WIP.
+ * Name: SimpleMenu.java Created: 14 January 2015
+ *
+ * @author Relicum
+ * @version 0.0.1
  */
-@ToString(callSuper = true)
-public class BungeeBar extends AbstractMenu {
+public class SimpleMenu extends AbstractMenu {
 
-    /**
-     * The Items.
-     */
-    private List<BungeeMenuItem> items;
+    private List<MenuItem> items;
 
-    private Slot slot;
-
-    /**
-     * The Json inventory.
-     */
     private String jsonInventory;
 
-    /**
-     * Instantiates a new Bungee bar.
-     *
-     * @param size  the size
-     * @param title the title
-     */
-    public BungeeBar(int size, String title) {
-        super(title, size);
-        this.items = new ArrayList<>();
-
+    public SimpleMenu() {
     }
 
-    /**
-     * Instantiates a new Bungee bar.
-     */
-    public BungeeBar() {
-        super();
+    public SimpleMenu(String menuTitle, int size) {
+        super(menuTitle, size);
         this.items = new ArrayList<>();
     }
 
-    /**
-     * Add a new {@link com.relicum.ipsum.Menus.BungeeMenuItem} to the menu.
-     *
-     * @param item the item {@link com.relicum.ipsum.Menus.BungeeMenuItem}
-     */
-    public void addItem(BungeeMenuItem item) {
+    public void addItem(MenuItem item) {
         Validate.notNull(item);
+
         this.items.add(item);
     }
-
 
     /**
      * Gets items.
      *
      * @return the items
      */
-    public List<BungeeMenuItem> getItems() {
+    public List<MenuItem> getItems() {
         return items;
     }
 
-    /**
-     * Gets item by slot.
-     *
-     * @param slot the slot
-     * @return the {@link com.relicum.ipsum.Menus.BungeeMenuItem}
-     */
-    public BungeeMenuItem getItemBySlot(Slot slot) {
 
-        List<BungeeMenuItem> res = items.stream().filter(p -> p.getItemSlot().equals(slot)).limit(1).collect(Collectors.toList());
-        return res.get(0);
+    @Override
+    public Inventory getInventory() {
+
+        Inventory inventory = Bukkit.createInventory(null, getSize(), getMenuTitle());
+
+        for (MenuItem item : items) {
+            inventory.setItem(item.getSlot(), item.getItem());
+        }
+
+        return inventory;
     }
-
 
     /**
      * Serialize the current Inventory to a json String.
@@ -117,21 +91,5 @@ public class BungeeBar extends AbstractMenu {
     public Inventory loadJsonInventory() {
 
         return JsonStringInv.convertFromString(jsonInventory);
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Inventory getInventory() {
-
-        Inventory inventory = Bukkit.createInventory(null, getSize(), getMenuTitle());
-
-        for (BungeeMenuItem item : items) {
-            inventory.setItem(item.getItemSlot().ordinal(), item.getItem());
-        }
-
-        return inventory;
     }
 }

@@ -19,7 +19,6 @@
 package com.relicum.ipsum.Menus;
 
 import com.relicum.ipsum.Items.Inventory.MenuClickAction;
-import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Utils.TextProcessor;
 import lombok.NonNull;
@@ -53,8 +52,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
     protected String permission;
 
     protected float cost = 0.0f;
-
-    protected Slot slot;
 
     protected MetaType metaType;
 
@@ -161,14 +158,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
 
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Slot getItemSlot() {
-        return this.slot;
-    }
-
-    /**
      * Sets new itemMaterial.
      *
      * @param itemMaterial New value of itemMaterial.
@@ -187,14 +176,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         this.menuClickAction = menuClickAction;
     }
 
-    /**
-     * Sets new slot.
-     *
-     * @param slot New value of slot.
-     */
-    public void setSlot(@NonNull Slot slot) {
-        this.slot = slot;
-    }
 
     /**
      * Sets new displayName.
@@ -268,7 +249,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         sb.append(", menuClickAction=").append(menuClickAction);
         sb.append(", metaType=").append(metaType);
         sb.append(", permission='").append(permission).append('\'');
-        sb.append(", slot=").append(slot);
         sb.append('}');
         return sb.toString();
     }

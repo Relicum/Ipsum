@@ -19,7 +19,6 @@
 package com.relicum.ipsum.Menus;
 
 import com.relicum.ipsum.Items.Inventory.MenuClickAction;
-import com.relicum.ipsum.Items.Inventory.Slot;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -87,12 +86,6 @@ public interface GenericMenuItem {
      */
     public float getCostPerUse();
 
-    /**
-     * Gets item slot.
-     *
-     * @return the item slot
-     */
-    public Slot getItemSlot();
 
     /**
      * Gets item.

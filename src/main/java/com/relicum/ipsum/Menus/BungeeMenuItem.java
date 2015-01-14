@@ -18,10 +18,12 @@
 
 package com.relicum.ipsum.Menus;
 
+import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 import lombok.NonNull;
 import lombok.ToString;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,6 +37,8 @@ import org.bukkit.inventory.ItemStack;
 public class BungeeMenuItem extends AbstractMenuItem {
 
     private String serverName;
+
+    private Slot slot;
 
     /**
      * Instantiates a new Bungee menu item.
@@ -84,6 +88,16 @@ public class BungeeMenuItem extends AbstractMenuItem {
     @Override
     public float getCostPerUse() {
         return this.cost;
+    }
+
+    public void setSlot(Slot slot) {
+        Validate.notNull(slot);
+        this.slot = slot;
+    }
+
+
+    public Slot getItemSlot() {
+        return slot;
     }
 
     /**
