@@ -19,13 +19,17 @@
 package com.relicum.ipsum.io;
 
 
+import com.relicum.ipsum.Items.Inventory.Slot;
+import com.relicum.ipsum.Menus.BungeeMenuItem;
 import com.relicum.ipsum.io.Adapter.*;
 import org.bukkit.craftbukkit.libs.com.google.gson.*;
+import org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Modifier;
+import java.util.EnumMap;
 import java.util.UUID;
 
 /**
@@ -47,6 +51,8 @@ public class GsonLoader {
                 .serializeNulls()
                         //.disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                .registerTypeAdapter(new TypeToken<EnumMap<Slot, BungeeMenuItem>>() {
+                }.getType(), new EnumMapInstanceCreator<Slot, BungeeMenuItem>(Slot.class))
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())
@@ -66,6 +72,8 @@ public class GsonLoader {
                 //.serializeNulls()
                         //.disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                .registerTypeAdapter(new TypeToken<EnumMap<Slot, BungeeMenuItem>>() {
+                }.getType(), new EnumMapInstanceCreator<Slot, BungeeMenuItem>(Slot.class))
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())

@@ -90,6 +90,7 @@ public class BungeeMenuItem extends AbstractMenuItem {
         return this.cost;
     }
 
+
     public void setSlot(Slot slot) {
         Validate.notNull(slot);
         this.slot = slot;

@@ -20,8 +20,6 @@ package com.relicum.ipsum.Menus;
 
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -34,13 +32,6 @@ import org.bukkit.inventory.ItemStack;
  */
 public class MenuItem extends AbstractMenuItem {
 
-    @Getter
-    @Setter
-    private String uuid;
-
-    @Setter
-    @Getter
-    private int slot;
 
     public MenuItem() {
     }
@@ -64,6 +55,7 @@ public class MenuItem extends AbstractMenuItem {
     public float getCostPerUse() {
         return cost;
     }
+
 
     @Override
     public ItemStack getItem() {

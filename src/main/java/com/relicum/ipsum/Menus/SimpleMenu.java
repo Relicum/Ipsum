@@ -41,6 +41,7 @@ public class SimpleMenu extends AbstractMenu {
     public SimpleMenu() {
     }
 
+
     public SimpleMenu(String menuTitle, int size) {
         super(menuTitle, size);
         this.items = new ArrayList<>();
@@ -68,7 +69,7 @@ public class SimpleMenu extends AbstractMenu {
         Inventory inventory = Bukkit.createInventory(null, getSize(), getMenuTitle());
 
         for (MenuItem item : items) {
-            inventory.setItem(item.getSlot(), item.getItem());
+            inventory.setItem(item.getISlot(), item.getItem());
         }
 
         return inventory;

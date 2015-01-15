@@ -19,6 +19,8 @@
 package com.relicum.ipsum.Menus;
 
 import com.relicum.ipsum.Utils.TextProcessor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -30,6 +32,9 @@ import org.apache.commons.lang.Validate;
  */
 public abstract class AbstractMenu implements GenericMenu {
 
+    @Getter
+    @Setter
+    protected String mobUUID;
 
     protected String menuTitle;
 
@@ -42,6 +47,7 @@ public abstract class AbstractMenu implements GenericMenu {
 
     public AbstractMenu() {
     }
+
 
     /**
      * {@inheritDoc}

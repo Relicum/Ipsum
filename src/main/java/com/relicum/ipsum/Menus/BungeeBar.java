@@ -18,14 +18,18 @@
 
 package com.relicum.ipsum.Menus;
 
+import com.relicum.ipsum.Items.Inventory.MenuClickAction;
 import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.io.JsonStringInv;
 import lombok.ToString;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,12 +44,12 @@ public class BungeeBar extends AbstractMenu {
      */
     private List<BungeeMenuItem> items;
 
-    private Slot slot;
+    private EnumMap<Slot, BungeeMenuItem> eItems;
 
     /**
      * The Json inventory.
      */
-    private String jsonInventory;
+    private transient String jsonInventory;
 
     /**
      * Instantiates a new Bungee bar.
@@ -56,7 +60,7 @@ public class BungeeBar extends AbstractMenu {
     public BungeeBar(int size, String title) {
         super(title, size);
         this.items = new ArrayList<>();
-
+        this.eItems = new EnumMap<>(Slot.class);
     }
 
     /**
@@ -65,6 +69,25 @@ public class BungeeBar extends AbstractMenu {
     public BungeeBar() {
         super();
         this.items = new ArrayList<>();
+        this.eItems = new EnumMap<>(Slot.class);
+    }
+
+
+    public MenuClickAction rightClick(Player player, Slot slot) {
+
+        BungeeMenuItem bi = eItems.get(slot);
+
+        if (bi.permissionRequired) {
+            if (!player.hasPermission(bi.getPermission()) || !player.isOp()) {
+                player.sendMessage(ChatColor.RED + "Error: You do not have permission to do that");
+                return MenuClickAction.UNKNOWN;
+            }
+        }
+
+        player.sendMessage(ChatColor.GREEN + "This is a click inventory: " + bi.getOnClickAction().name());
+
+        return bi.getOnClickAction();
+
     }
 
     /**
@@ -75,6 +98,7 @@ public class BungeeBar extends AbstractMenu {
     public void addItem(BungeeMenuItem item) {
         Validate.notNull(item);
         this.items.add(item);
+        eItems.put(item.getItemSlot(), item);
     }
 
 
@@ -84,7 +108,7 @@ public class BungeeBar extends AbstractMenu {
      * @return the items
      */
     public List<BungeeMenuItem> getItems() {
-        return items;
+        return eItems.values().stream().collect(Collectors.toList());
     }
 
     /**
@@ -94,9 +118,9 @@ public class BungeeBar extends AbstractMenu {
      * @return the {@link com.relicum.ipsum.Menus.BungeeMenuItem}
      */
     public BungeeMenuItem getItemBySlot(Slot slot) {
-
-        List<BungeeMenuItem> res = items.stream().filter(p -> p.getItemSlot().equals(slot)).limit(1).collect(Collectors.toList());
-        return res.get(0);
+        return eItems.get(slot);
+        //List<BungeeMenuItem> res = items.stream().filter(p -> p.getItemSlot().equals(slot)).limit(1).collect(Collectors.toList());
+        //return res.get(0);
     }
 
 
@@ -128,7 +152,7 @@ public class BungeeBar extends AbstractMenu {
 
         Inventory inventory = Bukkit.createInventory(null, getSize(), getMenuTitle());
 
-        for (BungeeMenuItem item : items) {
+        for (BungeeMenuItem item : eItems.values()) {
             inventory.setItem(item.getItemSlot().ordinal(), item.getItem());
         }
 

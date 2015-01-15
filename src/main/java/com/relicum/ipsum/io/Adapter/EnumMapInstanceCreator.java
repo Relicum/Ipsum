@@ -1,6 +1,6 @@
 /*
  * Ipsum is a rapid development API for Minecraft, developer by Relicum
- * Copyright (C) 2014.  Chris Lutte
+ * Copyright (C) 2015.  Chris Lutte
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,32 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Items.Inventory;
+package com.relicum.ipsum.io.Adapter;
+
+import org.bukkit.craftbukkit.libs.com.google.gson.InstanceCreator;
+
+import java.lang.reflect.Type;
+import java.util.EnumMap;
 
 /**
- * Name: MenuClickAction.java Created: 26 December 2014
+ * Name: EnumMapInstanceCreator.java Created: 15 January 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum MenuClickAction {
+public class EnumMapInstanceCreator<K extends Enum<K>, V> implements InstanceCreator<EnumMap<K, V>> {
+    private final Class<K> enumClazz;
 
-    CLOSE_INVENTORY,
-    CANCEL_EVENT,
-    OUTSIDE_CLOSE,
-    OPEN_NEXT,
-    OPEN_PREVIOUS,
-    CHANGE_INVENTORY,
-    NEXT_STAGE,
-    CONFIRM_YES,
-    CONFIRM_NO,
-    RETURN_HUB,
-    DISPLAY_HEADS,
-    DISPLAY_TEXT,
-    SWITCH_SERVER,
-    WARP,
-    RUN_COMMAND,
-    EDIT,
-    DELETE,
-    UNKNOWN,
+    public EnumMapInstanceCreator(final Class<K> enumClazz) {
+        super();
+        this.enumClazz = enumClazz;
+    }
+
+    @Override
+    public EnumMap<K, V> createInstance(final Type type) {
+        return new EnumMap<>(enumClazz);
+    }
 }

@@ -21,11 +21,16 @@ package com.relicum.ipsum.Menus;
 import com.relicum.ipsum.Items.Inventory.MenuClickAction;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Utils.TextProcessor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * AbstractMenuItem implements most of the {@link com.relicum.ipsum.Menus.GenericMenuItem} methods.
@@ -34,8 +39,16 @@ import java.util.List;
  * @author Relicum
  * @version 0.0.1
  */
+@ToString
 public abstract class AbstractMenuItem implements GenericMenuItem {
 
+    @Getter
+    @Setter
+    protected String uuid;
+
+    @Setter
+    @Getter
+    protected int iSlot;
 
     protected MenuClickAction menuClickAction;
 
@@ -50,16 +63,22 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
     protected byte dataBit = (byte) -1;
 
     protected String permission;
+    @Getter
+    @Setter
+    protected boolean permissionRequired = true;
 
     protected float cost = 0.0f;
 
     protected MetaType metaType;
+
+    protected Map<String, String> store;
 
     /**
      * Instantiates a new Abstract menu item.
      */
     public AbstractMenuItem() {
         this.lore = new ArrayList<>();
+        this.store = new HashMap<>(16);
     }
 
     /**
@@ -76,6 +95,7 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         this.itemAmount = itemAmount;
         this.metaType = metaType;
         this.lore = new ArrayList<>();
+        this.store = new HashMap<>(16);
 
     }
 
@@ -92,7 +112,18 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         this.itemAmount = itemAmount;
         this.metaType = metaType;
         this.lore = new ArrayList<>();
+        this.store = new HashMap<>(16);
 
+    }
+
+    public void addToStore(String key, String value) {
+
+        this.store.put(key, value);
+    }
+
+    public String getFromStore(String key) {
+
+        return this.store.get(key);
     }
 
     /**
@@ -237,19 +268,4 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
     public abstract void setPermission(String permission);
 
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("AbstractMenuItem{");
-        sb.append("cost=").append(cost);
-        sb.append(", dataBit=").append(dataBit);
-        sb.append(", displayName='").append(displayName).append('\'');
-        sb.append(", itemAmount=").append(itemAmount);
-        sb.append(", itemMaterial=").append(itemMaterial);
-        sb.append(", lore=").append(lore);
-        sb.append(", menuClickAction=").append(menuClickAction);
-        sb.append(", metaType=").append(metaType);
-        sb.append(", permission='").append(permission).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }
