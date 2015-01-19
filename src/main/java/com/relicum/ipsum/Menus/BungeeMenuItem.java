@@ -38,7 +38,6 @@ public class BungeeMenuItem extends AbstractMenuItem {
 
     private String serverName;
 
-    private Slot slot;
 
     /**
      * Instantiates a new Bungee menu item.

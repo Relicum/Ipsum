@@ -1,6 +1,6 @@
 /*
  * Ipsum is a rapid development API for Minecraft, developer by Relicum
- * Copyright (C) 2014.  Chris Lutte
+ * Copyright (C) 2015.  Chris Lutte
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,45 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Items.Inventory;
+package com.relicum.ipsum.Menus;
 
 /**
- * Name: Slot.java Created: 27 December 2014
+ * Name: EditOptions.java Created: 19 January 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum Slot {
+public enum EditOptions {
 
-    ZERO,
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    ELEVEN,
-    TWELVE,
-    THIRTEEN,
-    FOURTEEN,
-    FIFTEEN,
-    SIXTEEN,
-    SEVENTEEN,
-    EIGHTEEN,
-    NINETEEN,
-    TWENTY,
-    TWENTY_ONE,
-    TWENTY_TWO,
-    TWENTY_THREE,
-    TWENTY_FOUR,
-    TWENTY_FIVE,
-    TWENTY_SIX,
-    TWENTY_SEVEN,
-    TWENTY_EIGHT,
-
-
+    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD,
 }

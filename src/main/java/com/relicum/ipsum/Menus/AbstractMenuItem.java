@@ -19,12 +19,14 @@
 package com.relicum.ipsum.Menus;
 
 import com.relicum.ipsum.Items.Inventory.MenuClickAction;
+import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Utils.TextProcessor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -50,6 +52,9 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
     @Getter
     protected int iSlot;
 
+    @Getter
+    protected Slot slot;
+
     protected MenuClickAction menuClickAction;
 
     protected String displayName;
@@ -71,6 +76,10 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
 
     protected MetaType metaType;
 
+    @Getter
+    @Setter
+    private EditOptions option;
+
     protected Map<String, String> store;
 
     /**
@@ -78,7 +87,7 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
      */
     public AbstractMenuItem() {
         this.lore = new ArrayList<>();
-        this.store = new HashMap<>(16);
+        this.store = new HashMap<>(8);
     }
 
     /**
@@ -267,5 +276,13 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
      */
     public abstract void setPermission(String permission);
 
+    public void setSlot(Slot slot) {
+        Validate.notNull(slot);
+        this.slot = slot;
+    }
 
+
+    public Slot getItemSlot() {
+        return slot;
+    }
 }

@@ -21,6 +21,7 @@ package com.relicum.ipsum.io;
 
 import com.relicum.ipsum.Items.Inventory.Slot;
 import com.relicum.ipsum.Menus.BungeeMenuItem;
+import com.relicum.ipsum.Menus.MenuItem;
 import com.relicum.ipsum.io.Adapter.*;
 import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken;
@@ -53,6 +54,8 @@ public class GsonLoader {
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                 .registerTypeAdapter(new TypeToken<EnumMap<Slot, BungeeMenuItem>>() {
                 }.getType(), new EnumMapInstanceCreator<Slot, BungeeMenuItem>(Slot.class))
+                .registerTypeAdapter(new TypeToken<EnumMap<Slot, MenuItem>>() {
+                }.getType(), new EnumMapInstanceCreator<Slot, MenuItem>(Slot.class))
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())
@@ -70,10 +73,12 @@ public class GsonLoader {
                 //.setPrettyPrinting()
 
                 //.serializeNulls()
-                        //.disableHtmlEscaping()
+                //.disableHtmlEscaping()
                 .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                 .registerTypeAdapter(new TypeToken<EnumMap<Slot, BungeeMenuItem>>() {
                 }.getType(), new EnumMapInstanceCreator<Slot, BungeeMenuItem>(Slot.class))
+                .registerTypeAdapter(new TypeToken<EnumMap<Slot, MenuItem>>() {
+                }.getType(), new EnumMapInstanceCreator<Slot, MenuItem>(Slot.class))
                 .registerTypeAdapter(JsonNull.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonPrimitive.class, JsonElementAdapter.get())
                 .registerTypeAdapter(JsonArray.class, JsonElementAdapter.get())

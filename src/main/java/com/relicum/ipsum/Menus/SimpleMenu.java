@@ -18,13 +18,16 @@
 
 package com.relicum.ipsum.Menus;
 
+import com.relicum.ipsum.Items.Inventory.Slot;
+import com.relicum.ipsum.Items.Inventory.SlotLookup;
 import com.relicum.ipsum.io.JsonStringInv;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
-import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Name: SimpleMenu.java Created: 14 January 2015
@@ -34,9 +37,9 @@ import java.util.List;
  */
 public class SimpleMenu extends AbstractMenu {
 
-    private List<MenuItem> items;
+    private EnumMap<Slot, MenuItem> items;
 
-    private String jsonInventory;
+    private transient String jsonInventory;
 
     public SimpleMenu() {
     }
@@ -44,14 +47,26 @@ public class SimpleMenu extends AbstractMenu {
 
     public SimpleMenu(String menuTitle, int size) {
         super(menuTitle, size);
-        this.items = new ArrayList<>();
+        this.items = new EnumMap<>(Slot.class);
     }
 
     public void addItem(MenuItem item) {
         Validate.notNull(item);
 
-        this.items.add(item);
+        this.items.put(item.getSlot(), item);
     }
+
+    public MenuItem getItemBySlot(Slot slot) {
+
+        return items.get(slot);
+    }
+
+    public MenuItem getItemBySlotId(int slot) {
+
+        return getItemBySlot(SlotLookup.lookup(slot));
+    }
+
+
 
     /**
      * Gets items.
@@ -59,7 +74,7 @@ public class SimpleMenu extends AbstractMenu {
      * @return the items
      */
     public List<MenuItem> getItems() {
-        return items;
+        return items.values().stream().collect(Collectors.toList());
     }
 
 
@@ -68,11 +83,16 @@ public class SimpleMenu extends AbstractMenu {
 
         Inventory inventory = Bukkit.createInventory(null, getSize(), getMenuTitle());
 
-        for (MenuItem item : items) {
-            inventory.setItem(item.getISlot(), item.getItem());
+        for (MenuItem item : items.values()) {
+            inventory.setItem(item.getItemSlot().ordinal(), item.getItem());
         }
 
         return inventory;
+    }
+
+    public int nextSlot() {
+
+        return items.size();
     }
 
     /**
