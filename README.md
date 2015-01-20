@@ -1,4 +1,4 @@
-Ipsum Gaming Commons 1.0.68-SNAPSHOT
+Ipsum Gaming Commons 1.0.69-SNAPSHOT
 ===
 
 **Built using the best Java IDE around**

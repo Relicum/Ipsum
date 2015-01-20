@@ -18,14 +18,17 @@
 
 package com.relicum.ipsum.Menus;
 
-import com.relicum.ipsum.Utils.TextProcessor;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang.Validate;
+import com.relicum.ipsum.Utils.TextProcessor;
 
 /**
- * AbstractMenu impliments the {@link com.relicum.ipsum.Menus.GenericMenu} methods.
- * <p>All Menus should extend directly off this class adding in any specific code there.
+ * AbstractMenu impliments the {@link com.relicum.ipsum.Menus.GenericMenu}
+ * methods.
+ * <p>
+ * All Menus should extend directly off this class adding in any specific code
+ * there.
  *
  * @author Relicum
  * @version 0.0.1
@@ -40,14 +43,34 @@ public abstract class AbstractMenu implements GenericMenu {
 
     protected int size;
 
+    protected String menuName;
+
+    /**
+     * Instantiates a new Abstract menu.
+     *
+     * @param menuTitle the menu title
+     * @param size the size
+     */
     public AbstractMenu(String menuTitle, int size) {
         this.menuTitle = menuTitle;
         this.size = size;
     }
 
-    public AbstractMenu() {
+    /**
+     * Instantiates a new Abstract menu.
+     *
+     * @param menuTitle the menu title
+     * @param size the size
+     * @param uniqueName the unique name
+     */
+    public AbstractMenu(String menuTitle, int size, String uniqueName) {
+        this.menuTitle = menuTitle;
+        this.size = size;
+        setUniqueName(uniqueName);
     }
 
+    public AbstractMenu() {
+    }
 
     /**
      * {@inheritDoc}
@@ -90,12 +113,37 @@ public abstract class AbstractMenu implements GenericMenu {
             this.menuTitle = TextProcessor.colorize(menuTitle);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getUniqueName() {
+
+        return this.menuName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setUniqueName(String name) {
+        Validate.notNull(name);
+        name = TextProcessor.stripColor(name);
+        name = name.replaceAll(" ", "");
+        if (name.length() > 15)
+            name = name.substring(0, 15);
+
+        this.menuName = name;
+
+    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AbstractMenu{");
-        sb.append("menuTitle='").append(menuTitle).append('\'');
+        sb.append("mobUUID='").append(mobUUID).append('\'');
+        sb.append(", menuTitle='").append(menuTitle).append('\'');
         sb.append(", size=").append(size);
+        sb.append(", menuName='").append(menuName).append('\'');
         sb.append('}');
         return sb.toString();
     }

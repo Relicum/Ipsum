@@ -56,9 +56,23 @@ public interface GenericMenu {
     /**
      * Gets a new instance of the inventory.
      *
-     * @return the inventory, depending on implementation this may or may not of had the items added to it
+     * @return the inventory, depending on implementation this may or may not of
+     *         had the items added to it
      */
     public Inventory getInventory();
 
+    /**
+     * Gets unique name, human readable identifying name for the menu.
+     *
+     * @return the unique name
+     */
+    public String getUniqueName();
+
+    /**
+     * Sets unique name, human readable identifying name for the menu.
+     *
+     * @param name the unique name max chars 16 NO color
+     */
+    public void setUniqueName(String name);
 
 }

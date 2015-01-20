@@ -18,25 +18,27 @@
 
 package com.relicum.ipsum.Menus;
 
-import com.relicum.ipsum.Items.Inventory.MenuClickAction;
-import com.relicum.ipsum.Items.Inventory.Slot;
-import com.relicum.ipsum.Items.MetaType;
-import com.relicum.ipsum.Utils.TextProcessor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.relicum.ipsum.Items.Inventory.MenuClickAction;
+import com.relicum.ipsum.Items.Inventory.Slot;
+import com.relicum.ipsum.Items.MetaType;
+import com.relicum.ipsum.Utils.TextProcessor;
 
 /**
- * AbstractMenuItem implements most of the {@link com.relicum.ipsum.Menus.GenericMenuItem} methods.
- * <p>But some still need to be defined. All menu items should extend off this class.
+ * AbstractMenuItem implements most of the
+ * {@link com.relicum.ipsum.Menus.GenericMenuItem} methods.
+ * <p>
+ * But some still need to be defined. All menu items should extend off this
+ * class.
  *
  * @author Relicum
  * @version 0.0.1
@@ -94,9 +96,9 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
      * Instantiates a new Abstract menu item.
      *
      * @param itemMaterial the item material
-     * @param dataBit      the data bit or durability
-     * @param itemAmount   the item amount
-     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     * @param dataBit the data bit or durability
+     * @param itemAmount the item amount
+     * @param metaType the {@link com.relicum.ipsum.Items.MetaType}
      */
     public AbstractMenuItem(Material itemMaterial, byte dataBit, int itemAmount, MetaType metaType) {
         this.itemMaterial = itemMaterial;
@@ -104,7 +106,7 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         this.itemAmount = itemAmount;
         this.metaType = metaType;
         this.lore = new ArrayList<>();
-        this.store = new HashMap<>(16);
+        this.store = new HashMap<>(8);
 
     }
 
@@ -112,8 +114,8 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
      * Instantiates a new Abstract menu item.
      *
      * @param itemMaterial the item material
-     * @param itemAmount   the item amount
-     * @param metaType     the {@link com.relicum.ipsum.Items.MetaType}
+     * @param itemAmount the item amount
+     * @param metaType the {@link com.relicum.ipsum.Items.MetaType}
      */
     public AbstractMenuItem(Material itemMaterial, int itemAmount, MetaType metaType) {
         this.itemMaterial = itemMaterial;
@@ -121,7 +123,7 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         this.itemAmount = itemAmount;
         this.metaType = metaType;
         this.lore = new ArrayList<>();
-        this.store = new HashMap<>(16);
+        this.store = new HashMap<>(8);
 
     }
 
@@ -146,7 +148,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
      */
     @Override
     public abstract float getCostPerUse();
-
 
     /**
      * {@inheritDoc}
@@ -196,7 +197,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         return this.itemAmount;
     }
 
-
     /**
      * Sets new itemMaterial.
      *
@@ -215,7 +215,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
     public void setMenuClickAction(@NonNull MenuClickAction menuClickAction) {
         this.menuClickAction = menuClickAction;
     }
-
 
     /**
      * Sets new displayName.
@@ -250,7 +249,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
             this.lore.add(TextProcessor.colorize(s));
         }
 
-
     }
 
     /**
@@ -280,7 +278,6 @@ public abstract class AbstractMenuItem implements GenericMenuItem {
         Validate.notNull(slot);
         this.slot = slot;
     }
-
 
     public Slot getItemSlot() {
         return slot;

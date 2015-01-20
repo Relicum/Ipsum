@@ -18,16 +18,15 @@
 
 package com.relicum.ipsum.Menus;
 
-import com.relicum.ipsum.Items.Inventory.Slot;
-import com.relicum.ipsum.Items.Inventory.SlotLookup;
-import com.relicum.ipsum.io.JsonStringInv;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
-
 import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+import com.relicum.ipsum.Items.Inventory.Slot;
+import com.relicum.ipsum.Items.Inventory.SlotLookup;
+import com.relicum.ipsum.io.JsonStringInv;
 
 /**
  * Name: SimpleMenu.java Created: 14 January 2015
@@ -44,7 +43,24 @@ public class SimpleMenu extends AbstractMenu {
     public SimpleMenu() {
     }
 
+    /**
+     * Instantiates a new Simple menu.
+     *
+     * @param menuTitle the menu title
+     * @param size the size
+     * @param uniqueName the unique name
+     */
+    public SimpleMenu(String menuTitle, int size, String uniqueName) {
+        super(menuTitle, size, uniqueName);
+        this.items = new EnumMap<>(Slot.class);
+    }
 
+    /**
+     * Instantiates a new Simple menu.
+     *
+     * @param menuTitle the menu title
+     * @param size the size
+     */
     public SimpleMenu(String menuTitle, int size) {
         super(menuTitle, size);
         this.items = new EnumMap<>(Slot.class);
@@ -66,8 +82,6 @@ public class SimpleMenu extends AbstractMenu {
         return getItemBySlot(SlotLookup.lookup(slot));
     }
 
-
-
     /**
      * Gets items.
      *
@@ -76,7 +90,6 @@ public class SimpleMenu extends AbstractMenu {
     public List<MenuItem> getItems() {
         return items.values().stream().collect(Collectors.toList());
     }
-
 
     @Override
     public Inventory getInventory() {
@@ -97,7 +110,8 @@ public class SimpleMenu extends AbstractMenu {
 
     /**
      * Serialize the current Inventory to a json String.
-     * <p>This is stored and saved internally to help efficiency.
+     * <p>
+     * This is stored and saved internally to help efficiency.
      */
     public void saveJsonInventory() {
 
@@ -105,7 +119,8 @@ public class SimpleMenu extends AbstractMenu {
     }
 
     /**
-     * Deserialize the Inventory from a JSON string back to a {@link org.bukkit.inventory.Inventory}
+     * Deserialize the Inventory from a JSON string back to a
+     * {@link org.bukkit.inventory.Inventory}
      *
      * @return the {@link org.bukkit.inventory.Inventory}
      */

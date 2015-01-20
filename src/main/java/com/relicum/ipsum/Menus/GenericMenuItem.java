@@ -18,17 +18,16 @@
 
 package com.relicum.ipsum.Menus;
 
-import com.relicum.ipsum.Items.Inventory.MenuClickAction;
+import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.List;
+import com.relicum.ipsum.Items.Inventory.MenuClickAction;
 
 /**
- * The interface Generic menu item representsents the properties and attributes all menu items have in common.
+ * The interface Generic menu item representsents the properties and attributes
+ * all menu items have in common.
  */
 public interface GenericMenuItem {
-
 
     /**
      * Gets on click action.
@@ -85,7 +84,6 @@ public interface GenericMenuItem {
      * @return the cost per use
      */
     public float getCostPerUse();
-
 
     /**
      * Gets item.
