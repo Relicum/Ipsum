@@ -16,15 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Events;
 
-/**
- * Name: EditOptions.java Created: 19 January 2015
- *
- * @author Relicum
- * @version 0.0.1
- */
-public enum EditOptions {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.bukkit.event.EventPriority;
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ java.lang.annotation.ElementType.METHOD })
+public @interface IpsumEvent {
+
+    public abstract EventPriority priority();
+
 }

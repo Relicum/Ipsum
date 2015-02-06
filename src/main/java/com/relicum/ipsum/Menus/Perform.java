@@ -18,13 +18,24 @@
 
 package com.relicum.ipsum.Menus;
 
+import java.util.List;
+import com.relicum.ipsum.Conversations.MMPlayer;
+
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * Name: Perform.java Created: 21 January 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+public interface Perform {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    public void perform();
+
+    public void addPlayer(MMPlayer player);
+
+    public void addCommand(String cmd);
+
+    public List<String> getCommands();
+
+    public void setUseConsole(boolean use);
 }

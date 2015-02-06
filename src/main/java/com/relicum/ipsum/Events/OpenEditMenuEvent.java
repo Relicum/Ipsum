@@ -16,15 +16,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Events;
+
+import org.bukkit.entity.Player;
+import com.relicum.ipsum.Menus.ActionType;
+import com.relicum.ipsum.Menus.GUIMenu;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * Name: OpenEditMenuEvent.java Created: 05 February 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+public class OpenEditMenuEvent extends CancelablePlayerEvent {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    private final GUIMenu menu;
+    private final ActionType result;
+
+    public OpenEditMenuEvent(Player player, GUIMenu menu, ActionType result) {
+        super(player);
+        this.menu = menu;
+        this.result = result;
+
+    }
+
+    /**
+     * Gets result.
+     *
+     * @return Value of result.
+     */
+    public ActionType getResult() {
+        return result;
+    }
+
+    /**
+     * Gets menu.
+     *
+     * @return Value of menu.
+     */
+    public GUIMenu getMenu() {
+        return menu;
+    }
 }

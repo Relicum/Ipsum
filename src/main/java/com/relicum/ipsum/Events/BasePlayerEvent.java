@@ -16,15 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Events;
+
+import org.bukkit.entity.Player;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * BasePlayerEvent
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+abstract class BasePlayerEvent extends BaseEvent {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    private final Player player;
+
+    public BasePlayerEvent(Player player) {
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

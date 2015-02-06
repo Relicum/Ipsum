@@ -18,32 +18,33 @@
 
 package com.relicum.ipsum.Menus;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.UUID;
 import org.apache.commons.lang.Validate;
+import org.bukkit.inventory.InventoryHolder;
 import com.relicum.ipsum.Utils.TextProcessor;
 
 /**
  * AbstractMenu impliments the {@link com.relicum.ipsum.Menus.GenericMenu}
  * methods.
- * <p>
  * All Menus should extend directly off this class adding in any specific code
  * there.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public abstract class AbstractMenu implements GenericMenu {
+public abstract class AbstractMenu implements InventoryHolder, GenericMenu {
 
-    @Getter
-    @Setter
-    protected String mobUUID;
+    protected MenuState state;
+
+    private UUID menuUUID;
 
     protected String menuTitle;
 
     protected int size;
 
     protected String menuName;
+
+    protected boolean closeOnOutsideClick = true;
 
     /**
      * Instantiates a new Abstract menu.
@@ -54,6 +55,8 @@ public abstract class AbstractMenu implements GenericMenu {
     public AbstractMenu(String menuTitle, int size) {
         this.menuTitle = menuTitle;
         this.size = size;
+        this.state = MenuState.EDIT;
+        this.menuUUID = UUID.randomUUID();
     }
 
     /**
@@ -67,6 +70,8 @@ public abstract class AbstractMenu implements GenericMenu {
         this.menuTitle = menuTitle;
         this.size = size;
         setUniqueName(uniqueName);
+        this.state = MenuState.EDIT;
+        this.menuUUID = UUID.randomUUID();
     }
 
     public AbstractMenu() {
@@ -107,8 +112,8 @@ public abstract class AbstractMenu implements GenericMenu {
     @Override
     public void setMenuTitle(String menuTitle) {
         Validate.notNull(menuTitle);
-        if (menuTitle.length() > 15) {
-            this.menuTitle = TextProcessor.colorize(menuTitle.substring(0, 15));
+        if (menuTitle.length() > 31) {
+            this.menuTitle = TextProcessor.colorize(menuTitle.substring(0, 31));
         } else
             this.menuTitle = TextProcessor.colorize(menuTitle);
     }
@@ -137,10 +142,59 @@ public abstract class AbstractMenu implements GenericMenu {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean willCloseOnOutsideClick() {
+        return this.closeOnOutsideClick;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UUID getMenuUUID() {
+        return this.menuUUID;
+    }
+
+    /**
+     * Set if the menu is to be closed If the player clicks outside the menu.
+     * <p>
+     * Defaults to true meaning any outside clicks will auto close the menu
+     *
+     * @param click the click
+     */
+    public void setCloseOnOutsideClick(boolean click) {
+        Validate.notNull(click);
+        this.closeOnOutsideClick = click;
+    }
+
+    /**
+     * Sets new menu state {@link com.relicum.ipsum.Menus.MenuState}.
+     *
+     * @param state the {@link MenuState} to set the menu to.
+     */
+    public void setState(MenuState state) {
+        Validate.notNull(state);
+        this.state = state;
+    }
+
+    /**
+     * Gets the current {@link MenuState} of the menu.
+     *
+     * @return the state the menu is in.
+     */
+    public MenuState getState() {
+        return state;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AbstractMenu{");
-        sb.append("mobUUID='").append(mobUUID).append('\'');
+        sb.append("closeOnOutsideClick=").append(closeOnOutsideClick);
+        sb.append(", state=").append(state);
+        sb.append(", menuUUID=").append(menuUUID);
         sb.append(", menuTitle='").append(menuTitle).append('\'');
         sb.append(", size=").append(size);
         sb.append(", menuName='").append(menuName).append('\'');

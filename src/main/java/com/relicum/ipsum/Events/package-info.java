@@ -16,15 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
-
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * Ipsum Events Package provides a very simple custom events system.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+package com.relicum.ipsum.Events;
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
-}

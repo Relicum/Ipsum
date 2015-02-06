@@ -19,12 +19,20 @@
 package com.relicum.ipsum.Menus;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * MenuState holds the different states a menu can be in.
+ *
+ * <p>
+ * ENABLED and the menu is active and available for use.
+ * <p>
+ * DISABLED and the menu is not avaiable for use or modification.
+ * <p>
+ * EDIT and the menu is not avaiable for player usage but can be opened and
+ * edited by players with the permissions to do so.
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+public enum MenuState {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    ENABLED, DISABLED, EDIT
 }

@@ -19,12 +19,12 @@
 package com.relicum.ipsum.Menus;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * Name: ActionType.java Created: 05 February 2015
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+public enum ActionType {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    BUNGEE, COMMAND, WARP, GUI, INFO, RUN
 }

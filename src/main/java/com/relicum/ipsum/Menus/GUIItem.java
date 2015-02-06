@@ -29,41 +29,44 @@ import com.relicum.ipsum.Items.MetaType;
 import com.relicum.ipsum.Items.SimpleItemFactory;
 
 /**
- * MenuItem
+ * GUIItem an item that is contained in a
+ * {@link com.relicum.ipsum.Menus.GUIMenu}
  *
  * @author Relicum
  * @version 0.0.1
  */
-public class MenuItem extends AbstractMenuItem {
+public class GUIItem extends AbstractGUIItem {
 
     private Map<Integer, String> commands;
 
-    public MenuItem() {
+    public GUIItem() {
     }
 
     /**
-     * Instantiates a new Menu item.
+     * Instantiates a new GUIItem.
      *
      * @param itemMaterial the item material
      * @param dataBit the data or damage bit
      * @param itemAmount the item amount
      * @param metaType the meta type
      */
-    public MenuItem(Material itemMaterial, byte dataBit, int itemAmount, MetaType metaType) {
+    public GUIItem(Material itemMaterial, byte dataBit, int itemAmount, MetaType metaType) {
         super(itemMaterial, dataBit, itemAmount, metaType);
         this.commands = new HashMap<>(10);
+
     }
 
     /**
-     * Instantiates a new Menu item.
+     * Instantiates a new GUIItem.
      *
      * @param itemMaterial the item material
      * @param itemAmount the item amount
      * @param metaType the meta type
      */
-    public MenuItem(Material itemMaterial, int itemAmount, MetaType metaType) {
+    public GUIItem(Material itemMaterial, int itemAmount, MetaType metaType) {
         super(itemMaterial, itemAmount, metaType);
         this.commands = new HashMap<>(10);
+
     }
 
     /**

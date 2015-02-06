@@ -27,8 +27,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
- * SkullBuilder is used to build all types of Skulls.
- * This should be called using the {@link com.relicum.ipsum.Items.SimpleItemFactory#getSkullBuilder}
+ * SkullBuilder is used to build all types of Skulls. This should be called
+ * using the {@link com.relicum.ipsum.Items.SimpleItemFactory#getSkullBuilder}
  *
  * @author Relicum
  * @version 0.0.1
@@ -42,14 +42,13 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
      * Instantiates a new SkullBuilder
      *
      * @param material the {@link org.bukkit.Material} the item is made from.
-     * @param amount   the amount of items in the final ItemStack
-     * @param type     the type of skull {@link org.bukkit.SkullType}
+     * @param amount the amount of items in the final ItemStack
+     * @param type the type of skull {@link org.bukkit.SkullType}
      */
     public SkullBuilder(Material material, int amount, SkullType type) {
         super(material, amount, MetaType.SKULL_ITEM);
         skullType = type;
         this.setItemMeta();
-
 
     }
 
@@ -57,14 +56,13 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
      * Instantiates a new SkullBuilder
      *
      * @param material the {@link org.bukkit.Material} the item is made from.
-     * @param type     the type of skull {@link org.bukkit.SkullType}
+     * @param type the type of skull {@link org.bukkit.SkullType}
      */
     public SkullBuilder(Material material, SkullType type) {
         super(material, MetaType.SKULL_ITEM);
         skullType = type;
         this.setItemMeta();
     }
-
 
     /**
      * Sets item meta to {@link org.bukkit.inventory.meta.SkullMeta}
@@ -74,9 +72,8 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
         meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.SKULL_ITEM);
     }
 
-
     /**
-     * Gets  skull item meta.
+     * Gets skull item meta.
      *
      * @return the item meta as {@link org.bukkit.inventory.meta.SkullMeta}
      */
@@ -84,7 +81,6 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
 
         return this.meta;
     }
-
 
     /**
      * Gets skull owner.
@@ -127,7 +123,6 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
     @Override
     public ItemStack build() {
 
-
         setStack(new ItemStack(getMaterial(), getAmount(), (byte) skullType.ordinal()));
 
         if (getDisplayName() != null)
@@ -153,7 +148,6 @@ public class SkullBuilder extends AbstractItemBuilder<SkullBuilder> {
 
         return getStack();
     }
-
 
     /**
      * Gets skullType.

@@ -16,15 +16,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Events;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * CancelableBaseEvent
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+abstract class CancelableBaseEvent extends BaseEvent {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    protected boolean canceled;
+
+    public CancelableBaseEvent() {
+        this.canceled = false;
+    }
+
+    public boolean isCancelled() {
+        return this.canceled;
+    }
+
+    public void setCancelled(boolean cancel) {
+        this.canceled = cancel;
+    }
 }

@@ -16,15 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Conversations;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * VaildAnswer simple interface to validate the reponse from a prompt in the
+ * {@link org.bukkit.conversations.ConversationFactory}
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+public abstract interface ValidAnswer {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    /**
+     * Represents a response answer from a player to a defined prompt this
+     * method should determine if the answer given is valid
+     *
+     * @param paramString the response answer from the player that needs
+     *        validating.
+     * @return true if the answer is valid, false if not.
+     */
+    public abstract boolean onAnswer(String paramString);
 }

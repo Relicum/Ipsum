@@ -47,7 +47,7 @@ public class Item extends Config {
     public String option = "";
 
     @Comment("Is there a cost involved")
-    public Float cost = 0.0F;
+    public Double cost = 0.0D;
 
     @Comment("Is a permission needed")
     public Boolean permissionRequired = false;

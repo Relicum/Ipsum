@@ -18,6 +18,7 @@
 
 package com.relicum.ipsum.Menus;
 
+import java.util.UUID;
 import org.bukkit.inventory.Inventory;
 
 /**
@@ -47,7 +48,7 @@ public interface GenericMenu {
     public String getMenuTitle();
 
     /**
-     * Sets menu title. Max 16 Characters.
+     * Sets menu title. Max 32 Characters.
      *
      * @param menuTitle the menu title
      */
@@ -74,5 +75,22 @@ public interface GenericMenu {
      * @param name the unique name max chars 16 NO color
      */
     public void setUniqueName(String name);
+
+    /**
+     * If the player clicks outside the menu is the menu closed.
+     * <p>
+     * Defaults to true meaning any outside clicks will auto close the menu
+     *
+     * @return true and the menu will close on outside clicks, false and it
+     *         should be left open.
+     */
+    public boolean willCloseOnOutsideClick();
+
+    /**
+     * Gets the menus UUID.
+     *
+     * @return the menu {@link java.util.UUID}
+     */
+    public UUID getMenuUUID();
 
 }

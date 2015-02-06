@@ -16,15 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.relicum.ipsum.Menus;
+package com.relicum.ipsum.Events;
+
+import org.bukkit.entity.Player;
 
 /**
- * Name: EditOptions.java Created: 19 January 2015
+ * CancelablePlayerEvent
  *
  * @author Relicum
  * @version 0.0.1
  */
-public enum EditOptions {
+abstract class CancelablePlayerEvent extends BasePlayerEvent {
 
-    DELETE, DISABLE, ENABLE, MOVE, COPY, CLOSE, ADD, TOGGLE_STATUS, RELOAD, ACTION_TYPE, SILENT, RENAME, ATTACH_MENU
+    protected boolean cancelled;
+
+    public CancelablePlayerEvent(Player player) {
+        super(player);
+        this.cancelled = false;
+    }
+
+    /**
+     * Gets cancelled.
+     *
+     * @return Value of cancelled.
+     */
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    /**
+     * Sets new cancelled.
+     *
+     * @param cancelled New value of cancelled.
+     */
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
 }

@@ -29,7 +29,7 @@ import com.relicum.ipsum.Items.Inventory.SlotLookup;
 import com.relicum.ipsum.io.JsonStringInv;
 
 /**
- * Name: SimpleMenu.java Created: 14 January 2015
+ * SimpleMenu
  *
  * @author Relicum
  * @version 0.0.1
@@ -53,6 +53,7 @@ public class SimpleMenu extends AbstractMenu {
     public SimpleMenu(String menuTitle, int size, String uniqueName) {
         super(menuTitle, size, uniqueName);
         this.items = new EnumMap<>(Slot.class);
+
     }
 
     /**
@@ -64,6 +65,7 @@ public class SimpleMenu extends AbstractMenu {
     public SimpleMenu(String menuTitle, int size) {
         super(menuTitle, size);
         this.items = new EnumMap<>(Slot.class);
+
     }
 
     public void addItem(MenuItem item) {
